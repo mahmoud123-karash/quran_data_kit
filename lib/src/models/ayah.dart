@@ -1,3 +1,5 @@
+import '../data/sajdah_verses.dart';
+
 /// A model class representing a single Ayah (verse) of the Holy Quran.
 ///
 /// Contains all necessary metadata for displaying and managing the Ayah,
@@ -153,7 +155,9 @@ class Ayah {
       surahNameAr: json['sora_name_ar'] ?? '',
       ayah: parseText(json['aya_text']),
       ayahText: json['aya_text_emlaey'] ?? '',
-      sajda: false, // Defaulting to false if not provided in JSON
+      sajda:
+          sajdahVerses[json['sora'] ?? 0]?.contains(json['aya_no'] ?? 0) ??
+          false,
       centered: json['centered'] ?? false,
       othmanicAyah: parseText(json['aya_text_othmanic']),
       qcfData: parseText(json['qcfData']),
@@ -188,7 +192,7 @@ class Ayah {
     qcfData: qcfData,
     ayah: aya,
     ayahText: ayaText,
-    sajda: false,
+    sajda: ayah.sajda,
     centered: centered,
   );
 }

@@ -1,15 +1,3 @@
-/// A list of well-known Quran reciters with their identifiers, names, and
-/// audio format metadata. Each entry is used to construct audio stream URLs
-/// via the islamic.network CDN.
-///
-/// Each map contains:
-/// - `identifier`: Unique reciter code used in API/audio URLs.
-/// - `language`: Language of the recitation (always 'ar').
-/// - `name`: Arabic name of the reciter.
-/// - `englishName`: English transliteration of the reciter's name.
-/// - `format`: Audio format ('audio').
-/// - `type`: Playback style ('versebyverse' or 'translation').
-/// - `direction`: Text direction (null for RTL-default Arabic).
 const List<Map<String, dynamic>> reciters = [
   {
     "identifier": "ar.abdulbasitmurattal",

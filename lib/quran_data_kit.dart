@@ -1,15 +1,3 @@
-/// **quran_data_kit** — A comprehensive, offline Flutter package for the Holy Quran.
-///
-/// This library provides:
-/// - **QCF Tajweed font rendering** via [QuranPageView] and related widgets.
-/// - **Rich metadata** — Surah names (Arabic/English), Juz, page, verse lookups,
-///   Hizb/quarter markers, place of revelation, and sajdah verse detection.
-/// - **Bundled translations** in 16 languages via [getVerseTranslation].
-/// - **Audio stream URLs** for verse and Surah recitations.
-/// - **Reciter list** compatible with the Islamic Network CDN.
-/// - **Arabic text utilities** — normalisation, diacritic removal, and text search.
-/// - **Font management** — lazy loading, disk caching, and dark/tajweed variants
-///   via [QcfFontLoader].
 library;
 
 // ---------------------------------------------------------------------------
@@ -19,6 +7,7 @@ import 'package:quran_data_kit/src/data/juzs.dart';
 import 'package:quran_data_kit/src/data/page_data.dart';
 import 'package:quran_data_kit/src/data/quarters.dart';
 import 'package:quran_data_kit/src/data/quran_data.dart';
+import 'package:quran_data_kit/src/data/sajdah_verses.dart';
 import 'package:quran_data_kit/src/data/suwar.dart';
 import 'package:quran_data_kit/src/models/ayah.dart';
 import 'package:quran_data_kit/src/models/quran_page.dart';
@@ -53,6 +42,7 @@ export 'src/data/quarters.dart';
 export 'src/data/juzs.dart';
 export 'src/data/page_data.dart';
 export 'src/data/suwar.dart';
+export 'src/data/sajdah_verses.dart';
 
 // ---------------------------------------------------------------------------
 // 4. Services & Utilities
@@ -711,4 +701,18 @@ void _validateSurah(int surahNumber) {
   if (surahNumber < 1 || surahNumber > 114) {
     throw 'No Surah found with given surahNumber ($surahNumber).';
   }
+}
+
+/// Returns all 15 Sajdah (prostration of recitation) verses of the Holy Quran
+/// in sequential Mushaf order.
+List<Ayah> getSajdahVerses() {
+  final List<Ayah> sajdahAyahs = [];
+  for (final entry in sajdahVerses.entries) {
+    final surah = surahs.firstWhere((s) => s.surahNumber == entry.key);
+    for (final verseNumber in entry.value) {
+      final ayah = surah.ayahs.firstWhere((a) => a.ayahNumber == verseNumber);
+      sajdahAyahs.add(ayah);
+    }
+  }
+  return sajdahAyahs;
 }

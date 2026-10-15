@@ -75,7 +75,7 @@ String getVerseEndSymbol(int verseNumber, {bool arabicNumeral = true}) {
 /// Returns `true` if the Ayah at [surahNumber]/[verseNumber] requires a
 /// prostration of recitation (Sajdah Tilawah).
 bool isSajdahVerse(int surahNumber, int verseNumber) =>
-    sajdahVerses[surahNumber] == verseNumber;
+    sajdahVerses[surahNumber]?.contains(verseNumber) ?? false;
 
 // ---------------------------------------------------------------------------
 // Reciters

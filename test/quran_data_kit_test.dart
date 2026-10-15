@@ -88,8 +88,28 @@ void main() {
   group('Sajdah Detection Tests', () {
     test('Known Sajdah verses are detected', () {
       expect(isSajdahVerse(32, 15), isTrue); // As-Sajdah 15
+      expect(isSajdahVerse(22, 18), isTrue); // Al-Hajj 18
+      expect(isSajdahVerse(22, 77), isTrue); // Al-Hajj 77
       expect(isSajdahVerse(1, 1), isFalse);
       expect(isSajdahVerse(2, 255), isFalse);
+      expect(isSajdahVerse(22, 1), isFalse);
+    });
+
+    test('getSajdahVerses returns all 15 sajdahs in sequential order', () {
+      final sajdahs = getSajdahVerses();
+      expect(sajdahs.length, 15);
+
+      // Verify Surah Al-Hajj contains both sajdahs
+      final hajjSajdahs =
+          sajdahs.where((a) => a.surahNumber == 22).toList();
+      expect(hajjSajdahs.length, 2);
+      expect(hajjSajdahs[0].ayahNumber, 18);
+      expect(hajjSajdahs[1].ayahNumber, 77);
+
+      // Verify each ayah in the list has sajda == true
+      for (final ayah in sajdahs) {
+        expect(ayah.sajda, isTrue);
+      }
     });
   });
 
