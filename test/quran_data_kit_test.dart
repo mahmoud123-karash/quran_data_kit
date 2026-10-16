@@ -106,10 +106,16 @@ void main() {
       expect(hajjSajdahs[0].ayahNumber, 18);
       expect(hajjSajdahs[1].ayahNumber, 77);
 
-      // Verify each ayah in the list has sajda == true
+      // Verify each ayah in the list has sajda == true and clean Mushaf formatting
       for (final ayah in sajdahs) {
         expect(ayah.sajda, isTrue);
+        expect(ayah.ayah, isNot(contains('۩۩')));
+        expect(ayah.ayah, isNot(contains('ۤ۩')));
       }
+
+      // Verify Surah Al-A'raf 206 ends with single sajdah symbol
+      final araf206 = sajdahs.firstWhere((a) => a.surahNumber == 7 && a.ayahNumber == 206);
+      expect(araf206.ayah, contains('وَلَهُۥ يَسۡجُدُونَ ۩'));
     });
   });
 
