@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import '../utils/quran_text_styles.dart';
 
 class BasmallahWidget extends StatelessWidget {
-  const BasmallahWidget(this.surahNumber, {super.key});
-
+  const BasmallahWidget(
+    this.surahNumber, {
+    super.key,
+    this.color,
+    this.fontSize,
+  });
   final int surahNumber;
+  final Color? color;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
-    final Color? color = Theme.of(context).textTheme.bodyLarge?.color;
-
     return LayoutBuilder(
       builder: (context, constraints) {
         final double availableWidth =
             constraints.maxWidth.isInfinite
                 ? MediaQuery.of(context).size.width
                 : constraints.maxWidth;
-
-        final double fontSize = (availableWidth * 0.0533).clamp(18.0, 23.0);
 
         return RepaintBoundary(
           child: Center(
@@ -30,8 +32,9 @@ class BasmallahWidget extends StatelessWidget {
                 softWrap: false,
                 overflow: TextOverflow.visible,
                 style: QuranTextStyles.basmallahStyle(
-                  fontSize: fontSize,
-                  color: color,
+                  fontSize:
+                      fontSize ?? (availableWidth * 0.0533).clamp(18.0, 23.0),
+                  color: color ?? Theme.of(context).textTheme.bodyLarge?.color,
                 ),
               ),
             ),

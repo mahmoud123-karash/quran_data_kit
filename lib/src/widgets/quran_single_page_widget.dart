@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/quran_page.dart';
 import '../utils/font_loader_service.dart';
 import '../utils/quran_text_styles.dart';
-import 'bsmallah_widget.dart';
+import 'basmallah_widget.dart';
 import 'quran_line.dart';
 import 'quran_page/highlight_index.dart';
 import 'quran_page/parsed_quran_data.dart';
@@ -25,21 +25,32 @@ class QuranSinglePageWidget extends StatefulWidget {
   final BookmarkIndex bookmarkIndex;
 
   /// Callback fired when a verse on this page is long-pressed.
-  final void Function(int surahNumber, int verseNumber, LongPressStartDetails details)?
+  final void Function(
+    int surahNumber,
+    int verseNumber,
+    LongPressStartDetails details,
+  )?
   onLongPress;
 
   /// Callback fired when an individual word is tapped.
-  final void Function(int surahNumber, int verseNumber, int wordIndex, String word)?
+  final void Function(
+    int surahNumber,
+    int verseNumber,
+    int wordIndex,
+    String word,
+  )?
   onWordTap;
 
   /// Optional PageController passed from parent context.
   final PageController? pageController;
 
   /// Custom builder for Surah headers.
-  final Widget Function(BuildContext context, int surahNumber)? surahHeaderBuilder;
+  final Widget Function(BuildContext context, int surahNumber)?
+  surahHeaderBuilder;
 
   /// Custom builder for the Basmallah graphic or text.
-  final Widget Function(BuildContext context, int surahNumber)? basmallahBuilder;
+  final Widget Function(BuildContext context, int surahNumber)?
+  basmallahBuilder;
 
   /// Custom builder for the header of the page (e.g. Juz / Hizb / Page markers).
   final Widget Function(BuildContext context, int pageIndex)? pageHeaderBuilder;
@@ -231,14 +242,24 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
     );
   }
 
-  Widget _buildSurahHeaderWidget(BuildContext context, int surahNumber, bool shouldFit) {
-    final Widget header = widget.surahHeaderBuilder?.call(context, surahNumber) ??
+  Widget _buildSurahHeaderWidget(
+    BuildContext context,
+    int surahNumber,
+    bool shouldFit,
+  ) {
+    final Widget header =
+        widget.surahHeaderBuilder?.call(context, surahNumber) ??
         SurahHeaderWidget(surahNumber: surahNumber);
     return shouldFit ? Expanded(child: Center(child: header)) : header;
   }
 
-  Widget _buildBasmallahWidget(BuildContext context, int surahNumber, bool shouldFit) {
-    final Widget basmallah = widget.basmallahBuilder?.call(context, surahNumber) ??
+  Widget _buildBasmallahWidget(
+    BuildContext context,
+    int surahNumber,
+    bool shouldFit,
+  ) {
+    final Widget basmallah =
+        widget.basmallahBuilder?.call(context, surahNumber) ??
         BasmallahWidget(surahNumber);
     return shouldFit ? Expanded(child: Center(child: basmallah)) : basmallah;
   }
@@ -279,9 +300,10 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
     for (int i = 0; i < widget.page.lines.length; i++) {
       final line = widget.page.lines[i];
       final bool isCentered = line.ayahs.isNotEmpty && line.ayahs.last.centered;
-      final BoxFit fit = isCentered
-          ? BoxFit.scaleDown
-          : (shouldFit ? BoxFit.contain : BoxFit.fitWidth);
+      final BoxFit fit =
+          isCentered
+              ? BoxFit.scaleDown
+              : (shouldFit ? BoxFit.contain : BoxFit.fitWidth);
 
       final lineWidget = _buildQuranLine(
         line,
@@ -296,15 +318,18 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
         shouldFit
             ? Expanded(child: Center(child: lineWidget))
             : Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: lineWidget,
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: lineWidget,
+            ),
       );
       flexCount++;
     }
 
     if (shouldFit) {
-      final int emptyFlex = (_standardLinesPerPage - flexCount).clamp(0, _standardLinesPerPage);
+      final int emptyFlex = (_standardLinesPerPage - flexCount).clamp(
+        0,
+        _standardLinesPerPage,
+      );
       if (emptyFlex > 0) {
         final int topEmpty = emptyFlex ~/ 2;
         final int bottomEmpty = emptyFlex - topEmpty;
@@ -318,7 +343,11 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
       children.addAll(flexChildren);
     }
 
-    return _wrapPageContent(children, shouldFit: shouldFit, horizontalPadding: 8.0);
+    return _wrapPageContent(
+      children,
+      shouldFit: shouldFit,
+      horizontalPadding: 8.0,
+    );
   }
 
   /// Constructs the layout for standard Quran pages (Pages 3–604).
@@ -363,9 +392,10 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
       }
 
       final bool isCentered = line.ayahs.isNotEmpty && line.ayahs.last.centered;
-      final BoxFit fit = isCentered
-          ? BoxFit.scaleDown
-          : (shouldFit ? BoxFit.contain : BoxFit.fitWidth);
+      final BoxFit fit =
+          isCentered
+              ? BoxFit.scaleDown
+              : (shouldFit ? BoxFit.contain : BoxFit.fitWidth);
 
       Widget lineWidget = _buildQuranLine(
         line,
@@ -390,9 +420,9 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
         shouldFit
             ? Expanded(child: lineWidget)
             : Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: lineWidget,
-              ),
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: lineWidget,
+            ),
       );
     }
 
@@ -403,7 +433,11 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
       }
     }
 
-    return _wrapPageContent(children, shouldFit: shouldFit, horizontalPadding: 4.0);
+    return _wrapPageContent(
+      children,
+      shouldFit: shouldFit,
+      horizontalPadding: 4.0,
+    );
   }
 
   Widget _wrapPageContent(
@@ -412,7 +446,10 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
     required double horizontalPadding,
   }) {
     final pageContent = Padding(
-      padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 4.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+        vertical: 4.0,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -423,11 +460,11 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
     return shouldFit
         ? pageContent
         : Center(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: pageContent,
-            ),
-          );
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: pageContent,
+          ),
+        );
   }
 
   /// Builds an individual line of Quranic text with responsive font sizing and QCF styling.
@@ -446,7 +483,8 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
       widget.lineOffsets[lineIndex],
     );
 
-    final baseStyle = widget.ayahStyle ??
+    final baseStyle =
+        widget.ayahStyle ??
         QuranTextStyles.qcfStyle(
           height: 1.45,
           pageNumber: widget.pageIndex,
