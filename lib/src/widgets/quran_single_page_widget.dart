@@ -71,7 +71,7 @@ class QuranSinglePageWidget extends StatefulWidget {
   final bool forceFitConstraints;
 
   /// Custom builder displayed when the page font fails to load.
-  final Widget Function({int pageIndex, VoidCallback onRetry})? errorBuilder;
+  final Widget Function(int pageIndex, VoidCallback onRetry)? errorBuilder;
 
   /// Custom widget displayed while the page font is loading.
   final Widget? loadingBuilder;
@@ -182,63 +182,61 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
     if (widget.loadingBuilder != null) {
       return widget.loadingBuilder!;
     }
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(
-            width: 28,
-            height: 28,
-            child: CircularProgressIndicator(strokeWidth: 2.5),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(
+          width: 28,
+          height: 28,
+          child: CircularProgressIndicator(strokeWidth: 3),
+        ),
+        const SizedBox(height: 16),
+
+        Text(
+          'جاري تحميل الصفحة ${widget.pageIndex}...',
+          style: TextStyle(
+            fontSize: 13,
+            color: widget.isDark ? Colors.white70 : Colors.black54,
           ),
-          const SizedBox(height: 12),
-          Text(
-            'جاري تحميل الصفحة ${widget.pageIndex}...',
-            style: TextStyle(
-              fontSize: 13,
-              fontFamily: 'Cairo',
-              color: widget.isDark ? Colors.white70 : Colors.black54,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   Widget _buildErrorState() {
     if (widget.errorBuilder != null) {
-      return widget.errorBuilder!(
-        pageIndex: widget.pageIndex,
-        onRetry: () {
-          setState(() => _fontError = false);
-          _checkFont();
-        },
-      );
+      return widget.errorBuilder!(widget.pageIndex, () {
+        setState(() => _fontError = false);
+        _checkFont();
+      });
     }
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.cloud_off_rounded, size: 42, color: Colors.grey),
-          const SizedBox(height: 12),
-          Text(
-            'تعذر تحميل خط الصفحة ${widget.pageIndex}',
-            style: const TextStyle(fontSize: 14, fontFamily: 'Cairo'),
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Icon(Icons.info_outline_rounded, size: 42, color: Colors.grey),
+        const SizedBox(height: 16),
+
+        Text(
+          'تعذر تحميل خط الصفحة (page: ${widget.pageIndex})',
+          style: TextStyle(
+            fontSize: 13,
+            color: widget.isDark ? Colors.white70 : Colors.black87,
           ),
-          const SizedBox(height: 8),
-          TextButton.icon(
-            onPressed: () {
-              setState(() => _fontError = false);
-              _checkFont();
-            },
-            icon: const Icon(Icons.refresh, size: 18),
-            label: const Text(
-              'إعادة المحاولة',
-              style: TextStyle(fontFamily: 'Cairo'),
-            ),
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 16),
+
+        TextButton.icon(
+          onPressed: () {
+            setState(() => _fontError = false);
+            _checkFont();
+          },
+          icon: const Icon(Icons.refresh_rounded, size: 18),
+          label: const Text('إعادة المحاولة'),
+        ),
+      ],
     );
   }
 

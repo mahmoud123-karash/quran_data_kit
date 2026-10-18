@@ -9,11 +9,6 @@ import 'package:path_provider/path_provider.dart';
 
 enum FontStorageMode { permanentDisk, memoryOnly }
 
-/// Manages lazy loading, registration, and variant generation for the Quran font set.
-///
-/// Each page is stored under a canonical family name and then cloned into alternate
-/// variants such as dark mode, no-tajweed, and red-highlight styles. Fonts can be
-/// cached on disk or kept in memory depending on the configured storage mode.
 class QdkFontLoader {
   QdkFontLoader._();
 
@@ -26,6 +21,9 @@ class QdkFontLoader {
 
   static Directory? _fontDirCache;
   static int _generation = 0;
+
+  /// Callback triggered whenever a page font is written/saved to disk.
+  static void Function(int pageNumber)? onPageFontSaved;
 
   /// Returns the base family name for the given Quran page.
   static String getBaseFontFamily(int pageNumber) {
@@ -173,6 +171,10 @@ class QdkFontLoader {
         .then((_) {
           _loadedPages.add(pageNumber);
         })
+        .catchError((_) {
+          // Avoid unhandled zone errors on this derived chain;
+          // callers who await or catch on `task` directly will receive the error.
+        })
         .whenComplete(() {
           _loadingTasks.remove(pageNumber);
         });
@@ -190,53 +192,66 @@ class QdkFontLoader {
   /// The generation token guards against stale preloading calls when the user moves
   /// to another page while asynchronous loads are still running.
   static Future<void> preloadPages(int currentPage, {int radius = 5}) async {
-    if (currentPage < 1) {
-      currentPage = 1;
-    }
-
-    if (currentPage > totalPages) {
-      currentPage = totalPages;
-    }
-
-    final myGeneration = ++_generation;
-
-    await ensureFontLoaded(currentPage);
-
-    if (myGeneration != _generation) {
-      return;
-    }
-
-    final neighbors = <int>[];
-
-    for (int i = 1; i <= radius; i++) {
-      final next = currentPage + i;
-      final previous = currentPage - i;
-
-      if (next <= totalPages) {
-        neighbors.add(next);
+    try {
+      if (currentPage < 1) {
+        currentPage = 1;
       }
 
-      if (previous >= 1) {
-        neighbors.add(previous);
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
       }
-    }
 
-    for (final page in neighbors) {
-      if (myGeneration != _generation) {
+      final myGeneration = ++_generation;
+
+      try {
+        await ensureFontLoaded(currentPage);
+      } catch (_) {
+        // If current page cannot load (e.g. offline), stop speculative prefetch gracefully
         return;
       }
-
-      if (_loadedPages.contains(page) || _loadingTasks.containsKey(page)) {
-        continue;
-      }
-
-      await Future<void>.delayed(Duration.zero);
 
       if (myGeneration != _generation) {
         return;
       }
 
-      await ensureFontLoaded(page);
+      final neighbors = <int>[];
+
+      for (int i = 1; i <= radius; i++) {
+        final next = currentPage + i;
+        final previous = currentPage - i;
+
+        if (next <= totalPages) {
+          neighbors.add(next);
+        }
+
+        if (previous >= 1) {
+          neighbors.add(previous);
+        }
+      }
+
+      for (final page in neighbors) {
+        if (myGeneration != _generation) {
+          return;
+        }
+
+        if (_loadedPages.contains(page) || _loadingTasks.containsKey(page)) {
+          continue;
+        }
+
+        await Future<void>.delayed(Duration.zero);
+
+        if (myGeneration != _generation) {
+          return;
+        }
+
+        try {
+          await ensureFontLoaded(page);
+        } catch (_) {
+          // Ignore prefetch failures silently
+        }
+      }
+    } catch (_) {
+      // Ignore background prefetch exceptions completely
     }
   }
 
@@ -255,16 +270,21 @@ class QdkFontLoader {
         fontBytes = await file.readAsBytes();
       } else {
         final gzipBytes = await _loadCompressedFont(fontName);
-        fontBytes = await Isolate.run(() {
-          final extracted = _extractFont(gzipBytes);
-          file.parent.createSync(recursive: true);
-          file.writeAsBytesSync(extracted, flush: true);
-          return extracted;
-        });
+        fontBytes = await _decompressInIsolate(gzipBytes);
+        final tempFile = File('${file.path}.part');
+        await tempFile.parent.create(recursive: true);
+        await tempFile.writeAsBytes(fontBytes, flush: true);
+        if (await file.exists()) {
+          try {
+            await file.delete();
+          } catch (_) {}
+        }
+        await tempFile.rename(file.path);
+        onPageFontSaved?.call(pageNumber);
       }
     } else {
       final gzipBytes = await _loadCompressedFont(fontName);
-      fontBytes = await Isolate.run(() => _extractFont(gzipBytes));
+      fontBytes = await _decompressInIsolate(gzipBytes);
     }
 
     await _registerFont(fontBytes, getTajweedLightFamily(pageNumber));
@@ -309,9 +329,23 @@ class QdkFontLoader {
     await loader.load();
   }
 
-  /// Base URL where QCF Tajweed fonts are hosted.
-  static String fontCdnBaseUrl =
-      'https://raw.githubusercontent.com/hussein12347/qcf_quran_plus/main/assets/fonts/qcf_tajweed';
+  /// Base URLs where QCF Tajweed fonts are hosted with fallbacks.
+  static List<String> fontCdnMirrors = [
+    'https://raw.githubusercontent.com/mahmoud123-karash/quran_fonts/main/assets/fonts/qcf_tajweed',
+    'https://mahmoud123-karash.github.io/quran_fonts/assets/fonts/qcf_tajweed',
+    'https://raw.githubusercontent.com/hussein12347/qcf_quran_plus/main/assets/fonts/qcf_tajweed',
+  ];
+
+  static String fontCdnBaseUrl = fontCdnMirrors.first;
+
+  /// Sets a primary custom hosted CDN base URL for fonts.
+  static void setHostedCdnUrl(String url) {
+    final cleanUrl = url.endsWith('/') ? url.substring(0, url.length - 1) : url;
+    fontCdnBaseUrl = cleanUrl;
+    if (!fontCdnMirrors.contains(cleanUrl)) {
+      fontCdnMirrors.insert(0, cleanUrl);
+    }
+  }
 
   /// Checks if a specific page font exists and is downloaded on disk.
   static Future<bool> isPageFontOnDisk(int pageNumber) async {
@@ -351,16 +385,23 @@ class QdkFontLoader {
 
   /// Downloads all remaining Quran page fonts concurrently with progress reporting.
   static Future<void> downloadAllFonts({
-    required Function(int downloaded, int total, double progress) onProgress,
+    required Function(
+      int downloaded,
+      int total,
+      double progress,
+      int bytesDownloaded,
+    ) onProgress,
     required Function() onComplete,
     required Function(dynamic error) onError,
     bool Function()? isCancelled,
-    int concurrency = 6,
+    int concurrency = 4,
   }) async {
+    HttpClient? sharedClient;
     try {
       final fontDir = await _getFontDirectory();
       final List<int> pagesToDownload = [];
       int downloadedCount = 0;
+      int totalBytesDownloaded = 0;
 
       for (int i = 1; i <= totalPages; i++) {
         final file = File('${fontDir.path}/${getBaseFontFamily(i)}.ttf');
@@ -371,14 +412,25 @@ class QdkFontLoader {
         }
       }
 
-      onProgress(downloadedCount, totalPages, downloadedCount / totalPages);
+      totalBytesDownloaded = downloadedCount * 128000;
+      onProgress(
+        downloadedCount,
+        totalPages,
+        downloadedCount / totalPages,
+        totalBytesDownloaded,
+      );
 
       if (pagesToDownload.isEmpty) {
         onComplete();
         return;
       }
 
+      sharedClient = HttpClient();
+      sharedClient.connectionTimeout = const Duration(seconds: 15);
+      sharedClient.maxConnectionsPerHost = 10;
+
       int queueIndex = 0;
+      final List<int> failedPages = [];
 
       Future<void> worker() async {
         while (true) {
@@ -394,14 +446,36 @@ class QdkFontLoader {
           final file = File(fontPath);
 
           if (!await file.exists() || await file.length() <= 1000) {
-            final gzipBytes = await _downloadFontBytes(fontName);
-            final extracted = await Isolate.run(() => _extractFont(gzipBytes));
-            await file.parent.create(recursive: true);
-            await file.writeAsBytes(extracted, flush: true);
+            try {
+              final gzipBytes = await _downloadFontBytes(
+                fontName,
+                sharedClient: sharedClient,
+              );
+              totalBytesDownloaded += gzipBytes.length;
+              final extracted = await _decompressInIsolate(gzipBytes);
+              final tempFile = File('${file.path}.part');
+              await tempFile.parent.create(recursive: true);
+              await tempFile.writeAsBytes(extracted, flush: true);
+              if (await file.exists()) {
+                try {
+                  await file.delete();
+                } catch (_) {}
+              }
+              await tempFile.rename(file.path);
+            } catch (e) {
+              failedPages.add(page);
+              continue;
+            }
           }
 
           downloadedCount++;
-          onProgress(downloadedCount, totalPages, downloadedCount / totalPages);
+          onPageFontSaved?.call(page);
+          onProgress(
+            downloadedCount,
+            totalPages,
+            downloadedCount / totalPages,
+            totalBytesDownloaded,
+          );
         }
       }
 
@@ -410,34 +484,102 @@ class QdkFontLoader {
 
       if (isCancelled?.call() == true) return;
 
+      // Retry any transiently failed pages once more
+      if (failedPages.isNotEmpty) {
+        for (final page in failedPages) {
+          if (isCancelled?.call() == true) return;
+          final fontName = getBaseFontFamily(page);
+          final fontPath = '${fontDir.path}/$fontName.ttf';
+          final file = File(fontPath);
+          try {
+            final gzipBytes = await _downloadFontBytes(
+              fontName,
+              sharedClient: sharedClient,
+              maxRetries: 4,
+            );
+            totalBytesDownloaded += gzipBytes.length;
+            final extracted = await _decompressInIsolate(gzipBytes);
+            final tempFile = File('${file.path}.part');
+            await tempFile.parent.create(recursive: true);
+            await tempFile.writeAsBytes(extracted, flush: true);
+            if (await file.exists()) {
+              try {
+                await file.delete();
+              } catch (_) {}
+            }
+            await tempFile.rename(file.path);
+            downloadedCount++;
+            onPageFontSaved?.call(page);
+            onProgress(
+              downloadedCount,
+              totalPages,
+              downloadedCount / totalPages,
+              totalBytesDownloaded,
+            );
+          } catch (e) {
+            onError(e);
+            return;
+          }
+        }
+      }
+
       onComplete();
     } catch (e) {
       onError(e);
+    } finally {
+      sharedClient?.close();
     }
   }
 
-  /// Helper to fetch font bytes over HTTP from CDN.
-  static Future<Uint8List> _downloadFontBytes(String fontName) async {
-    final client = HttpClient();
-    client.connectionTimeout = const Duration(seconds: 20);
+  /// Helper to fetch font bytes over HTTP from CDN with retries and mirror fallback.
+  static Future<Uint8List> _downloadFontBytes(
+    String fontName, {
+    HttpClient? sharedClient,
+    int maxRetries = 3,
+  }) async {
+    final client = sharedClient ?? HttpClient();
+    if (sharedClient == null) {
+      client.connectionTimeout = const Duration(seconds: 15);
+    }
+
     try {
-      final uri = Uri.parse('$fontCdnBaseUrl/$fontName.ttf.gz');
-      final request = await client.getUrl(uri);
-      final response = await request.close();
+      Exception? lastException;
 
-      if (response.statusCode != 200) {
-        throw HttpException(
-          'Failed to download $fontName (HTTP ${response.statusCode})',
-        );
+      for (int attempt = 0; attempt < maxRetries; attempt++) {
+        final mirror = fontCdnMirrors[attempt % fontCdnMirrors.length];
+        try {
+          final uri = Uri.parse('$mirror/$fontName.ttf.gz');
+          final request = await client.getUrl(uri);
+          final response = await request.close();
+
+          if (response.statusCode == 200) {
+            final builder = BytesBuilder(copy: false);
+            await for (final chunk in response) {
+              builder.add(chunk);
+            }
+            return builder.takeBytes();
+          } else {
+            lastException = HttpException(
+              'HTTP ${response.statusCode} from $mirror for $fontName',
+            );
+          }
+        } catch (e) {
+          lastException = Exception(e.toString());
+        }
+
+        if (attempt < maxRetries - 1) {
+          await Future.delayed(Duration(milliseconds: 300 * (attempt + 1)));
+        }
       }
 
-      final builder = BytesBuilder(copy: false);
-      await for (final chunk in response) {
-        builder.add(chunk);
-      }
-      return builder.takeBytes();
+      throw lastException ??
+          HttpException(
+            'Failed to download $fontName after $maxRetries attempts',
+          );
     } finally {
-      client.close();
+      if (sharedClient == null) {
+        client.close();
+      }
     }
   }
 
@@ -454,10 +596,12 @@ class QdkFontLoader {
     return await _downloadFontBytes(fontName);
   }
 
-  /// Decompresses a GZip-compressed font payload to raw TrueType bytes.
-  static Uint8List _extractFont(Uint8List gzipBytes) {
-    final decompressed = const GZipDecoder().decodeBytes(gzipBytes);
-    return Uint8List.fromList(decompressed);
+  /// Safely decompresses GZip bytes in a background isolate without capturing any outer scope.
+  static Future<Uint8List> _decompressInIsolate(Uint8List gzipBytes) {
+    return Isolate.run(() {
+      final decompressed = const GZipDecoder().decodeBytes(gzipBytes);
+      return Uint8List.fromList(decompressed);
+    });
   }
 
   /// Replaces dark base palette entries with the provided color while preserving the

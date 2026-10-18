@@ -61,10 +61,12 @@ class QuranPageView extends StatefulWidget {
   final int quranPagesCount;
 
   /// Custom builder for Surah header graphics or text.
-  final Widget Function(BuildContext context, int surahNumber)? surahHeaderBuilder;
+  final Widget Function(BuildContext context, int surahNumber)?
+  surahHeaderBuilder;
 
   /// Custom builder for the Basmallah graphic or text.
-  final Widget Function(BuildContext context, int surahNumber)? basmallahBuilder;
+  final Widget Function(BuildContext context, int surahNumber)?
+  basmallahBuilder;
 
   /// Custom builder for the page header (e.g. displaying Juz name or page number).
   final Widget Function(BuildContext context, int pageIndex)? pageHeaderBuilder;
@@ -88,7 +90,7 @@ class QuranPageView extends StatefulWidget {
   final double twoPageBreakpoint;
 
   /// Optional custom builder displayed when a page font fails to load.
-  final Widget Function({int pageIndex, VoidCallback onRetry})? errorBuilder;
+  final Widget Function(int? pageIndex, VoidCallback? onRetry)? errorBuilder;
 
   /// Optional custom widget displayed while a page font is downloading or loading.
   final Widget? loadingBuilder;
@@ -168,9 +170,11 @@ class _QuranPageViewState extends State<QuranPageView> {
     _bookmarkIndex = _bookmarkIndexer.refresh(widget.highlights);
 
     if (oldWidget.enableTwoPageLayout != widget.enableTwoPageLayout) {
-      final int currentPage = widget.pageController.hasClients
-          ? widget.pageController.page?.round() ?? widget.pageController.initialPage
-          : widget.pageController.initialPage;
+      final int currentPage =
+          widget.pageController.hasClients
+              ? widget.pageController.page?.round() ??
+                  widget.pageController.initialPage
+              : widget.pageController.initialPage;
 
       if (widget.enableTwoPageLayout && _twoPageController.hasClients) {
         final int targetPair = currentPage ~/ 2;
@@ -199,7 +203,8 @@ class _QuranPageViewState extends State<QuranPageView> {
     }
     _isSyncing = true;
     final int singlePage =
-        widget.pageController.page?.round() ?? widget.pageController.initialPage;
+        widget.pageController.page?.round() ??
+        widget.pageController.initialPage;
     final int targetPair = singlePage ~/ 2;
     if (_twoPageController.page?.round() != targetPair) {
       _twoPageController.jumpToPage(targetPair);
@@ -226,7 +231,10 @@ class _QuranPageViewState extends State<QuranPageView> {
 
   /// Initiates font prefetching for neighboring pages.
   void _preloadFonts(int pageIndex, {int radius = 3}) {
-    QdkFontLoader.preloadPages(pageIndex + 1, radius: radius);
+    QdkFontLoader.preloadPages(
+      pageIndex + 1,
+      radius: radius,
+    ).catchError((_) {});
   }
 
   @override
@@ -338,25 +346,27 @@ class _QuranPageViewState extends State<QuranPageView> {
                 textDirection: TextDirection.rtl,
                 children: [
                   Expanded(
-                    child: rightPageIndex < pages.length
-                        ? _buildPageItem(
-                            index: rightPageIndex,
-                            pages: pages,
-                            wordOffsets: wordOffsets,
-                            isTwoPageMode: true,
-                          )
-                        : const SizedBox.shrink(),
+                    child:
+                        rightPageIndex < pages.length
+                            ? _buildPageItem(
+                              index: rightPageIndex,
+                              pages: pages,
+                              wordOffsets: wordOffsets,
+                              isTwoPageMode: true,
+                            )
+                            : const SizedBox.shrink(),
                   ),
                   const _TwoPageSpineDivider(),
                   Expanded(
-                    child: leftPageIndex < pages.length
-                        ? _buildPageItem(
-                            index: leftPageIndex,
-                            pages: pages,
-                            wordOffsets: wordOffsets,
-                            isTwoPageMode: true,
-                          )
-                        : const SizedBox.shrink(),
+                    child:
+                        leftPageIndex < pages.length
+                            ? _buildPageItem(
+                              index: leftPageIndex,
+                              pages: pages,
+                              wordOffsets: wordOffsets,
+                              isTwoPageMode: true,
+                            )
+                            : const SizedBox.shrink(),
                   ),
                 ],
               ),

@@ -34,7 +34,6 @@ class SurahHeaderWidget extends StatelessWidget {
 
         return RepaintBoundary(
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8),
             alignment: Alignment.center,
             child: Stack(
               alignment: Alignment.center,
@@ -59,7 +58,8 @@ class SurahHeaderWidget extends StatelessWidget {
                     child: SurahTextWidget(
                       surahNumber: surahNumber,
                       fontSize: fontSize,
-                      color: color,
+                      color:
+                          color ?? Theme.of(context).textTheme.bodyLarge?.color,
                     ),
                   ),
                 ),
