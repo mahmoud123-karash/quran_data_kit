@@ -28,8 +28,10 @@ class QuranSinglePageWidget extends StatefulWidget {
   final void Function(
     int surahNumber,
     int verseNumber,
-    LongPressStartDetails details,
-  )?
+    LongPressStartDetails details, {
+    double? ayahBottomY,
+    double? ayahTopY,
+  })?
   onLongPress;
 
   /// Callback fired when an individual word is tapped.
@@ -104,6 +106,7 @@ class QuranSinglePageWidget extends StatefulWidget {
 class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
   static const int _standardLinesPerPage = 15;
 
+  final Map<int, GlobalKey> _lineKeys = {};
   bool _fontReady = false;
   bool _fontError = false;
 
@@ -117,8 +120,61 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
   void didUpdateWidget(covariant QuranSinglePageWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.pageIndex != widget.pageIndex) {
+      _lineKeys.clear();
       _checkFont();
     }
+  }
+
+  void _handleVerseLongPress(
+    int surahNumber,
+    int verseNumber,
+    LongPressStartDetails details,
+  ) {
+    // Locate the first and last line of this verse on the current page
+    final firstLineIdx = widget.page.lines.indexWhere(
+      (l) => l.ayahs.any(
+        (a) => a.surahNumber == surahNumber && a.ayahNumber == verseNumber,
+      ),
+    );
+    final lastLineIdx = widget.page.lines.lastIndexWhere(
+      (l) => l.ayahs.any(
+        (a) => a.surahNumber == surahNumber && a.ayahNumber == verseNumber,
+      ),
+    );
+
+    double? ayahBottomY;
+    double? ayahTopY;
+
+    if (lastLineIdx != -1) {
+      final key = _lineKeys[lastLineIdx];
+      final renderBox = key?.currentContext?.findRenderObject() as RenderBox?;
+      if (renderBox != null && renderBox.hasSize) {
+        ayahBottomY =
+            renderBox.localToGlobal(Offset(0, renderBox.size.height)).dy;
+      }
+    }
+
+    if (firstLineIdx != -1) {
+      final key = _lineKeys[firstLineIdx];
+      final renderBox = key?.currentContext?.findRenderObject() as RenderBox?;
+      if (renderBox != null && renderBox.hasSize) {
+        ayahTopY = renderBox.localToGlobal(Offset.zero).dy;
+      }
+    }
+
+    widget.onLongPress?.call(
+      surahNumber,
+      verseNumber,
+      LongPressStartDetails(
+        globalPosition: Offset(
+          details.globalPosition.dx,
+          ayahBottomY ?? details.globalPosition.dy,
+        ),
+        localPosition: details.localPosition,
+      ),
+      ayahBottomY: ayahBottomY,
+      ayahTopY: ayahTopY,
+    );
   }
 
   void _checkFont() {
@@ -303,6 +359,7 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
               ? BoxFit.scaleDown
               : (shouldFit ? BoxFit.contain : BoxFit.fitWidth);
 
+      final lineKey = _lineKeys.putIfAbsent(i, () => GlobalKey());
       final lineWidget = _buildQuranLine(
         line,
         availableSize,
@@ -312,12 +369,14 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
         isCentered: isCentered,
       );
 
+      final wrappedLine = KeyedSubtree(key: lineKey, child: lineWidget);
+
       flexChildren.add(
         shouldFit
-            ? Expanded(child: Center(child: lineWidget))
+            ? Expanded(child: Center(child: wrappedLine))
             : Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: lineWidget,
+              child: wrappedLine,
             ),
       );
       flexCount++;
@@ -395,6 +454,8 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
               ? BoxFit.scaleDown
               : (shouldFit ? BoxFit.contain : BoxFit.fitWidth);
 
+      final lineKey = _lineKeys.putIfAbsent(lineIdx, () => GlobalKey());
+
       Widget lineWidget = _buildQuranLine(
         line,
         availableSize,
@@ -413,6 +474,8 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
           child: SizedBox(width: double.infinity, child: lineWidget),
         );
       }
+
+      lineWidget = KeyedSubtree(key: lineKey, child: lineWidget);
 
       children.add(
         shouldFit
@@ -506,7 +569,9 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
       bookmarkIndex: widget.bookmarkIndex,
       onWordTap: widget.onWordTap,
       boxFit: boxFit,
-      onLongPress: widget.onLongPress,
+      onLongPress: (surahNumber, verseNumber, details) {
+        _handleVerseLongPress(surahNumber, verseNumber, details);
+      },
       ayahStyle: fixedStyle,
       isTajweed: widget.isTajweed,
       isDark: widget.isDark,

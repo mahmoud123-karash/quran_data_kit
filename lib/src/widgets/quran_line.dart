@@ -226,26 +226,44 @@ class _QuranLineState extends State<QuranLine> {
 
           return WidgetSpan(
             alignment: PlaceholderAlignment.middle,
-            child: GestureDetector(
-              onLongPressStart:
-                  (details) => widget.onLongPress?.call(
-                    ayahData.surahNumber,
-                    ayahData.ayahNumber,
-                    details,
+            child: Builder(
+              builder: (innerCtx) {
+                return GestureDetector(
+                  onLongPressStart: (details) {
+                    // Resolve the actual rendered bottom of this ayah widget
+                    // so the overlay anchor is placed precisely below the line.
+                    final box = innerCtx.findRenderObject() as RenderBox?;
+                    final double bottomY =
+                        box != null
+                            ? box.localToGlobal(Offset(0, box.size.height)).dy
+                            : details.globalPosition.dy;
+                    widget.onLongPress?.call(
+                      ayahData.surahNumber,
+                      ayahData.ayahNumber,
+                      LongPressStartDetails(
+                        globalPosition: Offset(
+                          details.globalPosition.dx,
+                          bottomY,
+                        ),
+                        localPosition: details.localPosition,
+                      ),
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4.0),
+                      color:
+                          isAyahHighlighted
+                              ? highlightColor.withValues(alpha: 0.4)
+                              : null,
+                    ),
+                    child: Text.rich(
+                      TextSpan(children: wordSpans),
+                      textDirection: TextDirection.rtl,
+                    ),
                   ),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.0),
-                  color:
-                      isAyahHighlighted
-                          ? highlightColor.withValues(alpha: 0.4)
-                          : null,
-                ),
-                child: Text.rich(
-                  TextSpan(children: wordSpans),
-                  textDirection: TextDirection.rtl,
-                ),
-              ),
+                );
+              },
             ),
           );
         }),

@@ -47,8 +47,10 @@ class QuranPageView extends StatefulWidget {
   final void Function(
     int surahNumber,
     int verseNumber,
-    LongPressStartDetails details,
-  )?
+    LongPressStartDetails details, {
+    double? ayahBottomY,
+    double? ayahTopY,
+  })?
   onLongPress;
 
   /// Optional bar displayed above the Quran page content within the reader area.
