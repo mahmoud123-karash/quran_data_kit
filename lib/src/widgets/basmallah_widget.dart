@@ -7,10 +7,12 @@ class BasmallahWidget extends StatelessWidget {
     super.key,
     this.color,
     this.fontSize,
+    this.isDark = false,
   });
   final int surahNumber;
   final Color? color;
   final double? fontSize;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,8 @@ class BasmallahWidget extends StatelessWidget {
             constraints.maxWidth.isInfinite
                 ? MediaQuery.of(context).size.width
                 : constraints.maxWidth;
+
+        final Color textColor = color ?? (isDark ? Colors.white : Colors.black);
 
         return RepaintBoundary(
           child: Center(
@@ -34,7 +38,7 @@ class BasmallahWidget extends StatelessWidget {
                 style: QuranTextStyles.basmallahStyle(
                   fontSize:
                       fontSize ?? (availableWidth * 0.0533).clamp(18.0, 23.0),
-                  color: color ?? Theme.of(context).textTheme.bodyLarge?.color,
+                  color: textColor,
                 ),
               ),
             ),

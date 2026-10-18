@@ -4,8 +4,14 @@ import 'package:quran_data_kit/quran_data_kit.dart';
 class SurahHeaderWidget extends StatelessWidget {
   final int surahNumber;
   final Color? color;
+  final bool isDark;
 
-  const SurahHeaderWidget({super.key, required this.surahNumber, this.color});
+  const SurahHeaderWidget({
+    super.key,
+    required this.surahNumber,
+    this.color,
+    this.isDark = false,
+  });
 
   static const String _imagePath = 'assets/surah_banner.png';
 
@@ -31,6 +37,8 @@ class SurahHeaderWidget extends StatelessWidget {
 
         final double headerWidth = availableWidth;
         final double fontSize = headerWidth * 0.085;
+
+        final Color textColor = color ?? (isDark ? Colors.white : Colors.black);
 
         return RepaintBoundary(
           child: Container(
@@ -58,8 +66,7 @@ class SurahHeaderWidget extends StatelessWidget {
                     child: SurahTextWidget(
                       surahNumber: surahNumber,
                       fontSize: fontSize,
-                      color:
-                          color ?? Theme.of(context).textTheme.bodyLarge?.color,
+                      color: textColor,
                     ),
                   ),
                 ),

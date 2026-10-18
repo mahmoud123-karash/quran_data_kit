@@ -303,7 +303,10 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
   ) {
     final Widget header =
         widget.surahHeaderBuilder?.call(context, surahNumber) ??
-        SurahHeaderWidget(surahNumber: surahNumber);
+        SurahHeaderWidget(
+          surahNumber: surahNumber,
+          isDark: widget.isDark,
+        );
     return shouldFit ? Expanded(child: Center(child: header)) : header;
   }
 
@@ -314,7 +317,10 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
   ) {
     final Widget basmallah =
         widget.basmallahBuilder?.call(context, surahNumber) ??
-        BasmallahWidget(surahNumber);
+        BasmallahWidget(
+          surahNumber,
+          isDark: widget.isDark,
+        );
     return shouldFit ? Expanded(child: Center(child: basmallah)) : basmallah;
   }
 
