@@ -331,9 +331,8 @@ class QdkFontLoader {
 
   /// Base URLs where QCF Tajweed fonts are hosted with fallbacks.
   static List<String> fontCdnMirrors = [
-    'https://raw.githubusercontent.com/mahmoud123-karash/quran_fonts/main/assets/fonts/qcf_tajweed',
-    'https://mahmoud123-karash.github.io/quran_fonts/assets/fonts/qcf_tajweed',
-    'https://raw.githubusercontent.com/hussein12347/qcf_quran_plus/main/assets/fonts/qcf_tajweed',
+    'https://raw.githubusercontent.com/mahmoud123-karash/islamic_data/main/assets/fonts/qcf_tajweed',
+    'https://mahmoud123-karash.github.io/islamic_data/assets/fonts/qcf_tajweed',
   ];
 
   static String fontCdnBaseUrl = fontCdnMirrors.first;
@@ -390,7 +389,8 @@ class QdkFontLoader {
       int total,
       double progress,
       int bytesDownloaded,
-    ) onProgress,
+    )
+    onProgress,
     required Function() onComplete,
     required Function(dynamic error) onError,
     bool Function()? isCancelled,
