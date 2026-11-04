@@ -142,8 +142,12 @@ String getSurahNameEnglish(int surahNumber) {
 }
 
 /// Returns the Arabic name of [surahNumber].
-String getSurahNameArabic(int surahNumber) {
+String getSurahNameArabic(int surahNumber, {bool showSurahText = false}) {
   _validateSurah(surahNumber);
+
+  if (showSurahText) {
+    return 'سورة ${surah[surahNumber - 1]['arabic'].toString()}';
+  }
   return surah[surahNumber - 1]['arabic'].toString();
 }
 
