@@ -18,6 +18,10 @@ A modern, comprehensive, and high-performance Flutter/Dart package for Holy Qura
   - `QuranSinglePageWidget`: Render any individual Mushaf page with headers, Basmallah, and QCF line layouts.
   - Dark mode and light mode Tajweed coloring.
   - Interactive Ayah and word highlighting (for audio sync, bookmarks, or memorization).
+- 🔤 **Smart Font Management (`QdkFontLoader`)**:
+  - Bundled calligraphy and Basmallah fonts.
+  - Automatic on-demand streaming and local disk caching for all 604 page fonts.
+  - Bulk background downloader for complete 100% offline usage.
 - 🌍 **16 Offline Translations**: English (Saheeh International, Clear Quran), Turkish, Malayalam, Persian/Dari, French, Italian, Dutch, Portuguese, Russian, Urdu, Bengali, Chinese, Indonesian, Spanish, and Swedish.
 - 🔊 **Audio Streaming Helpers**: CDN URLs for full Surahs and individual verses with multiple reciter identifiers.
 - 🔍 **Arabic Text Utilities**: Diacritic removal, flexible orthographic normalization, and in-memory search across Emlaey and Uthmanic scripts.
@@ -85,7 +89,86 @@ class _MushafScreenState extends State<MushafScreen> {
 }
 ```
 
-### 2. Metadata & Lookups
+---
+
+### 2. Managing & Downloading Fonts (`QdkFontLoader`)
+
+`quran_data_kit` includes two types of fonts:
+1. **Bundled Asset Fonts**: `arsura` (Surah headers), `hafs` (general Hafs script), and `QCF4_BSML` (Basmallah glyphs) are built directly into the package assets and work completely offline from the start.
+2. **QCF Page Fonts (Pages 1–604)**: To keep the package upload size compact (~7 MB instead of 150+ MB), page-specific Tajweed fonts are compressed (`.ttf.gz`) and hosted on high-availability CDN mirrors.
+
+#### A. Automatic On-Demand Streaming (Default / Zero Config)
+You don't need to write any extra code to load fonts. When `QuranPageView` or `QuranSinglePageWidget` displays a page:
+- The font is fetched from the CDN (if not already downloaded).
+- It is decompressed in a background isolate.
+- It is saved locally to the device's persistent storage (`app_documents/qcf_fonts/`).
+- Neighboring pages are preloaded automatically for smooth swiping.
+- Once downloaded, it loads instantly from disk offline.
+
+#### B. Bulk Downloading for Full Offline Reading
+To allow users to download all 604 page fonts upfront (~74.5 MB total) so the app works 100% offline without needing internet:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:quran_data_kit/quran_data_kit.dart';
+
+Future<void> downloadQuranFonts({
+  required void Function(double progress, int count) onProgressUpdate,
+}) async {
+  // Check if already downloaded
+  final bool isComplete = await QdkFontLoader.isAllFontsDownloaded();
+  if (isComplete) {
+    debugPrint('All fonts are already on disk!');
+    return;
+  }
+
+  // Start concurrent bulk download with progress tracking
+  await QdkFontLoader.downloadAllFonts(
+    concurrency: 4, // Number of concurrent worker threads
+    onProgress: (downloaded, total, progress, bytesDownloaded) {
+      debugPrint('Downloaded $downloaded / $total pages (${(progress * 100).toStringAsFixed(1)}%)');
+      onProgressUpdate(progress, downloaded);
+    },
+    onComplete: () {
+      debugPrint('All 604 Quran fonts downloaded successfully!');
+    },
+    onError: (error) {
+      debugPrint('Download error: $error');
+    },
+    isCancelled: () => false, // Return true if user cancels the download
+  );
+}
+```
+
+#### C. Font Inspection & Utility APIs
+
+```dart
+import 'package:quran_data_kit/quran_data_kit.dart';
+
+// Check if all 604 page fonts have been downloaded
+bool isAllDownloaded = await QdkFontLoader.isAllFontsDownloaded();
+
+// Get the current number of downloaded page fonts (0 - 604)
+int downloadedCount = await QdkFontLoader.getDownloadedPagesCount();
+
+// Check if a specific page font exists locally on disk
+bool isPage5Saved = await QdkFontLoader.isPageFontOnDisk(5);
+
+// Listen to individual page font save events
+QdkFontLoader.onPageFontSaved = (int pageNumber) {
+  debugPrint('Font for page $pageNumber was saved to disk.');
+};
+
+// Set a custom CDN base URL or self-hosted mirror
+QdkFontLoader.setHostedCdnUrl('https://your-custom-cdn.com/qcf_tajweed');
+
+// Clear cached fonts (both in-memory and on disk)
+await QdkFontLoader.clearCache();
+```
+
+---
+
+### 3. Metadata & Lookups
 
 ```dart
 import 'package:quran_data_kit/quran_data_kit.dart';
@@ -110,7 +193,9 @@ int quarter = getQuarterNumber(2, 255);    // 8
 bool isSajda = isSajdahVerse(32, 15);       // true
 ```
 
-### 3. Bundled Offline Translations
+---
+
+### 4. Bundled Offline Translations
 
 ```dart
 import 'package:quran_data_kit/quran_data_kit.dart';
@@ -126,7 +211,9 @@ Map searchRes = searchWordsInTranslation(['mercy', 'forgiveness'], translation: 
 debugPrint('Matches found: ${searchRes['occurences']}');
 ```
 
-### 4. Audio URLs & Reciters
+---
+
+### 5. Audio URLs & Reciters
 
 ```dart
 import 'package:quran_data_kit/quran_data_kit.dart';
@@ -141,7 +228,9 @@ String verseAudio = getAudioURLByVerse(1, 'ar.alafasy');
 List<Map<String, dynamic>> reciters = getReciters();
 ```
 
-### 5. Verse of the Day (`RandomVerse`)
+---
+
+### 6. Verse of the Day (`RandomVerse`)
 
 ```dart
 import 'package:quran_data_kit/quran_data_kit.dart';
