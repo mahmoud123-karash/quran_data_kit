@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:quran_data_kit/quran_data_kit.dart';
 
@@ -208,6 +209,72 @@ void main() {
       expect(fatiha.arabicName, 'الفَاتِحة');
       expect(fatiha.englishName, 'Al-Fātiḥah');
       expect(fatiha.revelationType, 'Makkah');
+    });
+  });
+
+  group('UI Widgets Tests', () {
+    testWidgets('SurahHeaderWidget renders correctly', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: SurahHeaderWidget(surahNumber: 1),
+          ),
+        ),
+      );
+      expect(find.byType(SurahHeaderWidget), findsOneWidget);
+      expect(find.byType(SurahTextWidget), findsOneWidget);
+    });
+
+    testWidgets('BasmallahWidget renders with correct text glyphs', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: BasmallahWidget(1),
+          ),
+        ),
+      );
+      expect(find.byType(BasmallahWidget), findsOneWidget);
+      expect(find.text('齃𧻓𥳐𥉉'), findsOneWidget);
+    });
+
+    testWidgets('QuranSurahListView renders verses and headers', (tester) async {
+      int tappedSurah = 0;
+      int tappedVerse = 0;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: QuranSurahListView(
+              surahNumber: 1,
+              highlights: [
+                HighlightVerse(
+                  surah: 1,
+                  verseNumber: 1,
+                  page: 1,
+                  color: Colors.amber,
+                ),
+              ],
+              translation: Translation.enSaheeh,
+              onAyahTap: (s, v) {
+                tappedSurah = s;
+                tappedVerse = v;
+              },
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(QuranSurahListView), findsOneWidget);
+      expect(find.byType(SurahHeaderWidget), findsOneWidget);
+
+      // Tap on verse 1
+      final verseOneFinder = find.text('1');
+      expect(verseOneFinder, findsWidgets);
+
+      await tester.tap(verseOneFinder.first);
+      expect(tappedSurah, 1);
+      expect(tappedVerse, 1);
     });
   });
 }

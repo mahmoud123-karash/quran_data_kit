@@ -15,7 +15,7 @@ A modern, comprehensive, and high-performance Flutter/Dart package for Holy Qura
 - 📜 **Complete Quran Dataset**: In-memory metadata and text for all 114 Surahs, 6,236 Ayahs, 604 Hafs pages, 30 Juzs, and 240 Hizb quarters (Rub el-Hizb).
 - 🎨 **QCF Tajweed Rendering Engine**:
   - `QuranPageView`: Authentic page-by-page Mushaf reader with smooth horizontal scrolling, responsive two-page layout on tablets, and lazy font caching.
-  - `QuranSurahListView`: Vertical continuous scrollable Surah reader with line-by-line or verse-by-verse presentation.
+  - `QuranSurahListView`: Vertical continuous scrollable Surah reader with line-by-line or verse-by-verse presentation and translations.
   - Dark mode and light mode Tajweed coloring.
   - Interactive Ayah and word highlighting (for audio sync, bookmarks, or memorization).
 - 🌍 **16 Offline Translations**: English (Saheeh International, Clear Quran), Turkish, Malayalam, Persian/Dari, French, Italian, Dutch, Portuguese, Russian, Urdu, Bengali, Chinese, Indonesian, Spanish, and Swedish.
@@ -70,10 +70,10 @@ class _MushafScreenState extends State<MushafScreen> {
           isTajweed: true,
           isDarkMode: Theme.of(context).brightness == Brightness.dark,
           onPageChanged: (pageIndex) {
-            print('Current page: ${pageIndex + 1}');
+            debugPrint('Current page: $pageIndex');
           },
-          onLongPress: (surah, verse, details) {
-            print('Long pressed on Surah $surah, Ayah $verse');
+          onLongPress: (surah, verse, details, {ayahBottomY, ayahTopY}) {
+            debugPrint('Long pressed on Surah $surah, Ayah $verse');
           },
         ),
       ),
@@ -98,13 +98,14 @@ class SurahReaderScreen extends StatelessWidget {
       appBar: AppBar(title: Text(getSurahName(surahNumber))),
       body: QuranSurahListView(
         surahNumber: surahNumber,
+        translation: Translation.enSaheeh,
         highlights: [
           // Highlight verse 1 with amber tint
           HighlightVerse(
             surah: surahNumber,
             verseNumber: 1,
             page: getPageNumber(surahNumber, 1),
-            color: Colors.amber.withOpacity(0.3),
+            color: Colors.amber.withValues(alpha: 0.3),
           ),
         ],
         onLongPress: (surah, verse, details) {
@@ -156,7 +157,7 @@ String frText = getVerseTranslation(1, 1, translation: Translation.frHamidullah)
 
 // Search words across translations
 Map searchRes = searchWordsInTranslation(['mercy', 'forgiveness'], translation: Translation.enSaheeh);
-print('Matches found: ${searchRes['occurences']}');
+debugPrint('Matches found: ${searchRes['occurences']}');
 ```
 
 ### 5. Audio URLs & Reciters
@@ -171,7 +172,7 @@ String surahAudio = getAudioURLBySurah(1);
 String verseAudio = getAudioURLByVerse(1, 'ar.alafasy');
 
 // Reciter metadata list
-List reciters = getReciters();
+List<Map<String, dynamic>> reciters = getReciters();
 ```
 
 ### 6. Verse of the Day (`RandomVerse`)
@@ -180,10 +181,10 @@ List reciters = getReciters();
 import 'package:quran_data_kit/quran_data_kit.dart';
 
 final random = RandomVerse();
-print('Surah: ${random.surahNumber}');
-print('Ayah: ${random.verseNumber}');
-print('Arabic: ${random.verse}');
-print('Translation: ${random.translation}');
+debugPrint('Surah: ${random.surahNumber}');
+debugPrint('Ayah: ${random.verseNumber}');
+debugPrint('Arabic: ${random.verse}');
+debugPrint('Translation: ${random.translation}');
 ```
 
 ---
@@ -195,14 +196,15 @@ quran_data_kit/
 ├── assets/
 │   ├── fonts/           # Arsura, Hafs, and Basmalah fonts
 │   └── surah_banner.png # Vector banner for Surah headers
+├── example/             # Complete runnable demo Flutter app
 ├── lib/
 │   ├── quran_data_kit.dart  # Top-level API and facade exports
 │   └── src/
 │       ├── data/            # In-memory Quran dataset, quarters, suwar, translations
 │       ├── models/          # Ayah, Surah, QuranPage, Line, HighlightVerse, RandomVerse
 │       ├── services/        # GetPage parser and isolate processor
-│       ├── utils/           # QcfFontLoader, QuranTextStyles, text normalizers
-│       └── widgets/         # QuranPageView, QuranSurahListView, header & basmalah widgets
+│       ├── utils/           # QdkFontLoader, QuranTextStyles, text normalizers
+│       └── widgets/         # QuranPageView, QuranSurahListView, header & basmallah widgets
 ```
 
 ---

@@ -20,7 +20,9 @@ import 'package:quran_data_kit/src/utils/quran_helpers.dart';
 // 1. UI Widgets
 // ---------------------------------------------------------------------------
 export 'src/widgets/quran_page_view.dart';
+export 'src/widgets/quran_surah_list_view.dart';
 export 'src/widgets/quran_single_page_widget.dart';
+export 'src/widgets/surah_header_widget.dart';
 export 'src/widgets/surah_text_widget.dart';
 export 'src/widgets/basmallah_widget.dart';
 
