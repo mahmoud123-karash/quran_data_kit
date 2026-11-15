@@ -121,8 +121,7 @@ void main() {
       final sajdahs = getSajdahVerses();
       expect(sajdahs.length, 15);
 
-      final hajjSajdahs =
-          sajdahs.where((a) => a.surahNumber == 22).toList();
+      final hajjSajdahs = sajdahs.where((a) => a.surahNumber == 22).toList();
       expect(hajjSajdahs.length, 2);
       expect(hajjSajdahs[0].ayahNumber, 18);
       expect(hajjSajdahs[1].ayahNumber, 77);
@@ -133,8 +132,9 @@ void main() {
         expect(ayah.ayah, isNot(contains('ۤ۩')));
       }
 
-      final araf206 =
-          sajdahs.firstWhere((a) => a.surahNumber == 7 && a.ayahNumber == 206);
+      final araf206 = sajdahs.firstWhere(
+        (a) => a.surahNumber == 7 && a.ayahNumber == 206,
+      );
       expect(araf206.ayah, contains('وَلَهُۥ يَسۡجُدُونَ ۩'));
     });
   });
@@ -234,22 +234,18 @@ void main() {
     testWidgets('SurahHeaderWidget renders correctly', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: SurahHeaderWidget(surahNumber: 1),
-          ),
+          home: Scaffold(body: SurahHeaderWidget(surahNumber: 1)),
         ),
       );
       expect(find.byType(SurahHeaderWidget), findsOneWidget);
       expect(find.byType(SurahTextWidget), findsOneWidget);
     });
 
-    testWidgets('BasmallahWidget renders with correct text glyphs', (tester) async {
+    testWidgets('BasmallahWidget renders with correct text glyphs', (
+      tester,
+    ) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: BasmallahWidget(1),
-          ),
-        ),
+        const MaterialApp(home: Scaffold(body: BasmallahWidget(1))),
       );
       expect(find.byType(BasmallahWidget), findsOneWidget);
       expect(find.text('齃𧻓𥳐𥉉'), findsOneWidget);

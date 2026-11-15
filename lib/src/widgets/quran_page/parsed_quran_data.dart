@@ -69,16 +69,16 @@ List<ParsedAyahData> parseLine(
 
   for (final ayah in line.ayahs.toList().reversed) {
     final ayaText = ayah.ayah.replaceAll('\n', ' ').trim();
-    final logicalWords = ayaText.split(_wordSplitRegex).where((w) {
-      return w.isNotEmpty && !_digitsRegex.hasMatch(w);
-    }).toList();
+    final logicalWords =
+        ayaText.split(_wordSplitRegex).where((w) {
+          return w.isNotEmpty && !_digitsRegex.hasMatch(w);
+        }).toList();
 
     final rawQcf = ayah.qcfData.replaceAll('\n', '').trimRight();
     final glyph = getAyaNoQCF(ayah.surahNumber, ayah.ayahNumber);
     final hasGlyph = rawQcf.endsWith(glyph);
-    final cleanQcf = hasGlyph
-        ? rawQcf.substring(0, rawQcf.length - glyph.length)
-        : rawQcf;
+    final cleanQcf =
+        hasGlyph ? rawQcf.substring(0, rawQcf.length - glyph.length) : rawQcf;
 
     final ayahKey = '${ayah.surahNumber}-${ayah.ayahNumber}';
     int currentWordIndex = startingWordIndices?[ayahKey] ?? 0;

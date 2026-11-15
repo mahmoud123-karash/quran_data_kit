@@ -40,7 +40,9 @@ class Surah {
 
   /// English translation/meaning of the Surah name.
   String get englishNameTranslation =>
-      (index >= 1 && index <= 114) ? surah[index - 1]['english'].toString() : '';
+      (index >= 1 && index <= 114)
+          ? surah[index - 1]['english'].toString()
+          : '';
 
   /// Creates a [Surah] instance.
   Surah({
@@ -62,9 +64,10 @@ class Surah {
     endPage: json['end_page'],
     nameEn: json['name_en'],
     nameAr: json['name_ar'],
-    ayahs: (json['ayahs'] as List)
-        .map<Ayah>((ayah) => Ayah.fromJson(ayah))
-        .toList(),
+    ayahs:
+        (json['ayahs'] as List)
+            .map<Ayah>((ayah) => Ayah.fromJson(ayah))
+            .toList(),
   );
 
   /// Converts the [Surah] instance into a JSON map.

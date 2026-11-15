@@ -1,6 +1,6 @@
-/// juz
+// juz
 const List<Map<String, dynamic>> juz = [
-  /// juz
+  // juz
   {
     "id": 1,
     "surahs": [1, 2],
@@ -9,8 +9,7 @@ const List<Map<String, dynamic>> juz = [
       2: [1, 141],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 2,
     "surahs": [2],
@@ -18,8 +17,7 @@ const List<Map<String, dynamic>> juz = [
       2: [142, 252],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 3,
     "surahs": [2, 3],
@@ -28,8 +26,7 @@ const List<Map<String, dynamic>> juz = [
       3: [1, 92],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 4,
     "surahs": [3, 4],
@@ -38,8 +35,7 @@ const List<Map<String, dynamic>> juz = [
       4: [1, 23],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 5,
     "surahs": [4],
@@ -47,8 +43,7 @@ const List<Map<String, dynamic>> juz = [
       4: [24, 147],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 6,
     "surahs": [4, 5],
@@ -57,8 +52,7 @@ const List<Map<String, dynamic>> juz = [
       5: [1, 81],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 7,
     "surahs": [5, 6],
@@ -67,8 +61,7 @@ const List<Map<String, dynamic>> juz = [
       6: [1, 110],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 8,
     "surahs": [6, 7],
@@ -77,8 +70,7 @@ const List<Map<String, dynamic>> juz = [
       7: [1, 87],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 9,
     "surahs": [7, 8],
@@ -87,8 +79,7 @@ const List<Map<String, dynamic>> juz = [
       8: [1, 40],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 10,
     "surahs": [8, 9],
@@ -97,8 +88,7 @@ const List<Map<String, dynamic>> juz = [
       9: [1, 92],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 11,
     "surahs": [9, 10, 11],
@@ -108,8 +98,7 @@ const List<Map<String, dynamic>> juz = [
       11: [1, 5],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 12,
     "surahs": [11, 12],
@@ -118,8 +107,7 @@ const List<Map<String, dynamic>> juz = [
       12: [1, 52],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 13,
     "surahs": [12, 13, 14],
@@ -129,8 +117,7 @@ const List<Map<String, dynamic>> juz = [
       14: [1, 52],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 14,
     "surahs": [15, 16],
@@ -139,8 +126,7 @@ const List<Map<String, dynamic>> juz = [
       16: [1, 128],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 15,
     "surahs": [17, 18],
@@ -149,8 +135,7 @@ const List<Map<String, dynamic>> juz = [
       18: [1, 74],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 16,
     "surahs": [18, 19, 20],
@@ -160,8 +145,7 @@ const List<Map<String, dynamic>> juz = [
       20: [1, 135],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 17,
     "surahs": [21, 22],
@@ -170,8 +154,7 @@ const List<Map<String, dynamic>> juz = [
       22: [1, 78],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 18,
     "surahs": [23, 24, 25],
@@ -181,8 +164,7 @@ const List<Map<String, dynamic>> juz = [
       25: [1, 20],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 19,
     "surahs": [25, 26, 27],
@@ -192,8 +174,7 @@ const List<Map<String, dynamic>> juz = [
       27: [1, 55],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 20,
     "surahs": [27, 28, 29],
@@ -203,8 +184,7 @@ const List<Map<String, dynamic>> juz = [
       29: [1, 45],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 21,
     "surahs": [29, 30, 31, 32, 33],
@@ -216,8 +196,7 @@ const List<Map<String, dynamic>> juz = [
       33: [1, 30],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 22,
     "surahs": [33, 34, 35, 36],
@@ -228,8 +207,7 @@ const List<Map<String, dynamic>> juz = [
       36: [1, 27],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 23,
     "surahs": [36, 37, 38, 39],
@@ -240,8 +218,7 @@ const List<Map<String, dynamic>> juz = [
       39: [1, 31],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 24,
     "surahs": [39, 40, 41],
@@ -251,8 +228,7 @@ const List<Map<String, dynamic>> juz = [
       41: [1, 46],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 25,
     "surahs": [41, 42, 43, 44, 45],
@@ -264,8 +240,7 @@ const List<Map<String, dynamic>> juz = [
       45: [1, 37],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 26,
     "surahs": [46, 47, 48, 49, 50, 51],
@@ -278,8 +253,7 @@ const List<Map<String, dynamic>> juz = [
       51: [1, 30],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 27,
     "surahs": [51, 52, 53, 54, 55, 56, 57],
@@ -293,8 +267,7 @@ const List<Map<String, dynamic>> juz = [
       57: [1, 29],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 28,
     "surahs": [58, 59, 60, 61, 62, 63, 64, 65, 66],
@@ -310,8 +283,7 @@ const List<Map<String, dynamic>> juz = [
       66: [1, 12],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 29,
     "surahs": [67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77],
@@ -329,8 +301,7 @@ const List<Map<String, dynamic>> juz = [
       77: [1, 50],
     },
   },
-
-  /// juz
+  // juz
   {
     "id": 30,
     "surahs": [

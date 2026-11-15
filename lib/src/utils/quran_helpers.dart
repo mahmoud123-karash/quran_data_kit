@@ -59,11 +59,8 @@ String getVerseEndSymbol(int verseNumber, {bool arabicNumeral = true}) {
     '9': '٩',
   };
 
-  final arabicNumeric = verseNumber
-      .toString()
-      .split('')
-      .map((d) => arabicNumbers[d] ?? d)
-      .join();
+  final arabicNumeric =
+      verseNumber.toString().split('').map((d) => arabicNumbers[d] ?? d).join();
 
   return '\u06dd$arabicNumeric';
 }

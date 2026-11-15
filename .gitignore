@@ -27,6 +27,7 @@
 .pub-cache/
 .pub/
 /build/
+.metadata
 
 # Android / iOS local configs
 .env

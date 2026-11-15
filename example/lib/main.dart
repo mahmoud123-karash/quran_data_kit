@@ -90,10 +90,7 @@ class _ExampleHomeScreenState extends State<ExampleHomeScreen> {
           ),
         ],
       ),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: screens,
-      ),
+      body: IndexedStack(index: _selectedIndex, children: screens),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: (idx) => setState(() => _selectedIndex = idx),
@@ -207,8 +204,9 @@ class QuranMetadataTab extends StatefulWidget {
 }
 
 class _QuranMetadataTabState extends State<QuranMetadataTab> {
-  final TextEditingController _searchController =
-      TextEditingController(text: 'نور');
+  final TextEditingController _searchController = TextEditingController(
+    text: 'نور',
+  );
   Map<String, dynamic>? _searchResults;
   RandomVerse? _randomVerse;
 
@@ -279,7 +277,10 @@ class _QuranMetadataTabState extends State<QuranMetadataTab> {
                   const SizedBox(height: 8),
                   Text(
                     _randomVerse!.translation,
-                    style: const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ],
               ],

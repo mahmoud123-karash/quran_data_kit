@@ -259,7 +259,9 @@ String getAyaNoQCF(int surahNumber, int ayaNo) {
       }
     }
   }
-  throw ArgumentError('No QCF glyph found for Surah $surahNumber, Ayah $ayaNo.');
+  throw ArgumentError(
+    'No QCF glyph found for Surah $surahNumber, Ayah $ayaNo.',
+  );
 }
 
 /// Returns the QCF (Quran Complex Font) text for [surahNumber]/[ayaNo].
@@ -270,7 +272,9 @@ String getVerseQCF(int surahNumber, int ayaNo, {bool verseEndSymbol = false}) {
       return qcf + (verseEndSymbol ? getVerseEndSymbol(ayaNo) : '');
     }
   }
-  throw ArgumentError('No QCF verse found for Surah $surahNumber, Ayah $ayaNo.');
+  throw ArgumentError(
+    'No QCF verse found for Surah $surahNumber, Ayah $ayaNo.',
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -390,16 +394,24 @@ String normalizeArabicText(String text) {
 /// First searches Emlaey (plain spelling) text; falls back to Uthmanic if no
 /// results are found. Returns up to [limit] results (default 50).
 Map<String, dynamic> searchWords(String query, {int limit = 50}) {
-  if (query.trim().isEmpty) return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
+  if (query.trim().isEmpty) {
+    return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
+  }
 
   final normalized = normalizeArabicText(query.toLowerCase());
-  if (normalized.isEmpty) return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
+  if (normalized.isEmpty) {
+    return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
+  }
 
   final searchQuery = normalized.replaceAll(RegExp(r'\s+'), '');
-  if (searchQuery.isEmpty) return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
+  if (searchQuery.isEmpty) {
+    return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
+  }
 
   bool contains(String text) {
-    final norm = normalizeArabicText(text.toLowerCase()).replaceAll(RegExp(r'\s+'), '');
+    final norm = normalizeArabicText(
+      text.toLowerCase(),
+    ).replaceAll(RegExp(r'\s+'), '');
     return norm.contains(searchQuery);
   }
 
@@ -412,7 +424,8 @@ Map<String, dynamic> searchWords(String query, {int limit = 50}) {
     result.add({
       'sora': aya['sora'],
       'aya_no': aya['aya_no'],
-      'text': emlaey.replaceAll('\n', ' ').replaceAll(RegExp(r'\s+'), ' ').trim(),
+      'text':
+          emlaey.replaceAll('\n', ' ').replaceAll(RegExp(r'\s+'), ' ').trim(),
     });
     if (result.length >= limit) break;
   }
@@ -425,7 +438,11 @@ Map<String, dynamic> searchWords(String query, {int limit = 50}) {
       result.add({
         'sora': aya['sora'],
         'aya_no': aya['aya_no'],
-        'text': othmanic.replaceAll('\n', ' ').replaceAll(RegExp(r'\s+'), ' ').trim(),
+        'text':
+            othmanic
+                .replaceAll('\n', ' ')
+                .replaceAll(RegExp(r'\s+'), ' ')
+                .trim(),
       });
       if (result.length >= limit) break;
     }

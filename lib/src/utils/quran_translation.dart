@@ -96,10 +96,7 @@ String getVerseTranslation(
     throw 'No verse found with given surahNumber and verseNumber.';
   }
 
-  return verse +
-      (verseEndSymbol
-          ? _getVerseEndSymbolLatin(verseNumber)
-          : '');
+  return verse + (verseEndSymbol ? _getVerseEndSymbolLatin(verseNumber) : '');
 }
 
 /// Returns the verse end symbol using Western (Latin) digits.

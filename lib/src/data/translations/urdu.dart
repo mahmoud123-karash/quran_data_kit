@@ -9,37 +9,21 @@ const List urdu = [
     "verse_number": 2,
     "content": "تعریف اللہ ہی کے لیے ہے جو تمام کائنات کا رب ہے",
   },
-  {
-    "surah_number": 1,
-    "verse_number": 3,
-    "content": "رحمان اور رحیم ہے",
-  },
-  {
-    "surah_number": 1,
-    "verse_number": 4,
-    "content": "روز جزا کا مالک ہے",
-  },
+  {"surah_number": 1, "verse_number": 3, "content": "رحمان اور رحیم ہے"},
+  {"surah_number": 1, "verse_number": 4, "content": "روز جزا کا مالک ہے"},
   {
     "surah_number": 1,
     "verse_number": 5,
     "content": "ہم تیری ہی عبادت کرتے ہیں اور تجھی سے مدد مانگتے ہیں",
   },
-  {
-    "surah_number": 1,
-    "verse_number": 6,
-    "content": "ہمیں سیدھا راستہ دکھا",
-  },
+  {"surah_number": 1, "verse_number": 6, "content": "ہمیں سیدھا راستہ دکھا"},
   {
     "surah_number": 1,
     "verse_number": 7,
     "content":
         "اُن لوگوں کا راستہ جن پر تو نے انعام فرمایا، جو معتوب نہیں ہوئے، جو بھٹکے ہوئے نہیں ہیں",
   },
-  {
-    "surah_number": 2,
-    "verse_number": 1,
-    "content": "الف لام میم",
-  },
+  {"surah_number": 2, "verse_number": 1, "content": "الف لام میم"},
   {
     "surah_number": 2,
     "verse_number": 2,
@@ -1747,11 +1731,7 @@ const List urdu = [
     "content":
         "اللہ کسی متنفس پر اُس کی مقدرت سے بڑھ کر ذمہ داری کا بوجھ نہیں ڈالتا ہر شخص نے جو نیکی کمائی ہے، اس کا پھل اسی کے لیے ہے اور جو بدی سمیٹی ہے، اس کا وبال اسی پر ہے (ایمان لانے والو! تم یوں دعا کیا کرو) اے ہمارے رب! ہم سے بھول چوک میں جو قصور ہو جائیں، ان پر گرفت نہ کر مالک! ہم پر وہ بوجھ نہ ڈال، جو تو نے ہم سے پہلے لوگوں پر ڈالے تھے پروردگار! جس بار کو اٹھانے کی طاقت ہم میں نہیں ہے، وہ ہم پر نہ رکھ، ہمارے ساتھ نرمی کر، ہم سے در گزر فرما، ہم پر رحم کر، تو ہمارا مولیٰ ہے، کافروں کے مقابلے میں ہماری مدد کر",
   },
-  {
-    "surah_number": 3,
-    "verse_number": 1,
-    "content": "الف لام میم",
-  },
+  {"surah_number": 3, "verse_number": 1, "content": "الف لام میم"},
   {
     "surah_number": 3,
     "verse_number": 2,
@@ -5702,11 +5682,7 @@ const List urdu = [
     "content":
         "وہی ہے جس نے تم کو زمین کا خلیفہ بنایا، اور تم میں سے بعض کو بعض کے مقابلہ میں زیادہ بلند درجے دیے، تاکہ جو کچھ تم کو دیا ہے اسی میں تمہاری آزمائش کرے بے شک تمہارا رب سزا دینے میں بھی بہت تیز ہے اور بہت درگزر کرنے اور رحم فرمانے والا بھی ہے",
   },
-  {
-    "surah_number": 7,
-    "verse_number": 1,
-    "content": "ا، ل، م، ص",
-  },
+  {"surah_number": 7, "verse_number": 1, "content": "ا، ل، م، ص"},
   {
     "surah_number": 7,
     "verse_number": 2,
@@ -5785,11 +5761,7 @@ const List urdu = [
     "content":
         "بولا، 'مجھے اُس دن تک مہلت دے جب کہ یہ سب دوبارہ اٹھائے جائیں گے",
   },
-  {
-    "surah_number": 7,
-    "verse_number": 15,
-    "content": "فرمایا، 'تجھے مہلت ہے",
-  },
+  {"surah_number": 7, "verse_number": 15, "content": "فرمایا، 'تجھے مہلت ہے"},
   {
     "surah_number": 7,
     "verse_number": 16,
@@ -11201,11 +11173,7 @@ const List urdu = [
     "verse_number": 77,
     "content": "اُس میں سامان عبرت ہے اُن لوگوں کے لیے جو صاحب ایمان ہیں",
   },
-  {
-    "surah_number": 15,
-    "verse_number": 78,
-    "content": "اور ایکہ والے ظالم تھے",
-  },
+  {"surah_number": 15, "verse_number": 78, "content": "اور ایکہ والے ظالم تھے"},
   {
     "surah_number": 15,
     "verse_number": 79,
@@ -11284,11 +11252,7 @@ const List urdu = [
     "verse_number": 92,
     "content": "تو قسم ہے تیرے رب کی، ہم ضرور ان سب سے پوچھیں گے",
   },
-  {
-    "surah_number": 15,
-    "verse_number": 93,
-    "content": "کہ تم کیا کرتے رہے ہو",
-  },
+  {"surah_number": 15, "verse_number": 93, "content": "کہ تم کیا کرتے رہے ہو"},
   {
     "surah_number": 15,
     "verse_number": 94,
@@ -12765,11 +12729,7 @@ const List urdu = [
     "content":
         "ٹھیک ٹھیک سیدھی بات کہنے والی کتاب، تاکہ وہ لوگوں کو خدا کے سخت عذاب سے خبردار کر دے، اور ایمان لا کر نیک عمل کرنے والوں کو خوشخبری دیدے کہ ان کے لیے اچھا اجر ہے",
   },
-  {
-    "surah_number": 18,
-    "verse_number": 3,
-    "content": "جس میں وہ ہمیشہ رہیں گے",
-  },
+  {"surah_number": 18, "verse_number": 3, "content": "جس میں وہ ہمیشہ رہیں گے"},
   {
     "surah_number": 18,
     "verse_number": 4,
@@ -13406,11 +13366,7 @@ const List urdu = [
     "content":
         "اے محمدؐ، کہو کہ میں تو ایک انسان ہوں تم ہی جیسا، میری طرف وحی کی جاتی ہے کہ تمہارا خدا بس ایک ہی خدا ہے، پس جو کوئی اپنے رب کی ملاقات کا امیدوار ہو اسے چاہیے کہ نیک عمل کرے اور بندگی میں اپنے رب کے ساتھ کسی اور کو شریک نہ کرے",
   },
-  {
-    "surah_number": 19,
-    "verse_number": 1,
-    "content": "ک، ہ، ی، ع، ص",
-  },
+  {"surah_number": 19, "verse_number": 1, "content": "ک، ہ، ی، ع، ص"},
   {
     "surah_number": 19,
     "verse_number": 2,
@@ -13981,11 +13937,7 @@ const List urdu = [
     "content":
         "ان سے پہلے ہم کتنی ہی قوموں کو ہلاک کر چکے ہیں، پھر آج کہیں تم ان کا نشان پاتے ہو یا اُن کی بھنک بھی کہیں سنائی دیتی ہے؟",
   },
-  {
-    "surah_number": 20,
-    "verse_number": 1,
-    "content": "طٰہٰ",
-  },
+  {"surah_number": 20, "verse_number": 1, "content": "طٰہٰ"},
   {
     "surah_number": 20,
     "verse_number": 2,
@@ -14157,11 +14109,7 @@ const List urdu = [
     "verse_number": 33,
     "content": "تاکہ ہم خوب تیری پاکی بیان کریں",
   },
-  {
-    "surah_number": 20,
-    "verse_number": 34,
-    "content": "اور خوب تیرا چرچا کریں",
-  },
+  {"surah_number": 20, "verse_number": 34, "content": "اور خوب تیرا چرچا کریں"},
   {
     "surah_number": 20,
     "verse_number": 35,
@@ -15891,11 +15839,7 @@ const List urdu = [
     "verse_number": 2,
     "content": "اپنی نماز میں خشوع اختیار کرتے ہیں",
   },
-  {
-    "surah_number": 23,
-    "verse_number": 3,
-    "content": "لغویات سے دور رہتے ہیں",
-  },
+  {"surah_number": 23, "verse_number": 3, "content": "لغویات سے دور رہتے ہیں"},
   {
     "surah_number": 23,
     "verse_number": 4,
@@ -15927,11 +15871,7 @@ const List urdu = [
     "verse_number": 9,
     "content": "اور اپنی نمازوں کی محافظت کرتے ہیں",
   },
-  {
-    "surah_number": 23,
-    "verse_number": 10,
-    "content": "یہی لوگ وہ وارث ہیں",
-  },
+  {"surah_number": 23, "verse_number": 10, "content": "یہی لوگ وہ وارث ہیں"},
   {
     "surah_number": 23,
     "verse_number": 11,
@@ -17397,11 +17337,7 @@ const List urdu = [
     "content":
         "اے محمدؐ، لوگوں سے کہو 'میرے رب کو تمہاری کیا حاجت پڑی ہے اگر تم اس کو نہ پکارو اب کہ تم نے جھٹلا دیا ہے، عنقریب وہ سزا پاؤ گے کہ جان چھڑانی محال ہو گی",
   },
-  {
-    "surah_number": 26,
-    "verse_number": 1,
-    "content": "ط س م",
-  },
+  {"surah_number": 26, "verse_number": 1, "content": "ط س م"},
   {
     "surah_number": 26,
     "verse_number": 2,
@@ -17943,11 +17879,7 @@ const List urdu = [
     "verse_number": 100,
     "content": "اب نہ ہمارا کوئی سفارشی ہے",
   },
-  {
-    "surah_number": 26,
-    "verse_number": 101,
-    "content": "اور نہ کوئی جگری دوست",
-  },
+  {"surah_number": 26, "verse_number": 101, "content": "اور نہ کوئی جگری دوست"},
   {
     "surah_number": 26,
     "verse_number": 102,
@@ -18119,11 +18051,7 @@ const List urdu = [
     "verse_number": 133,
     "content": "تمہیں جانور دیے، اولادیں دیں",
   },
-  {
-    "surah_number": 26,
-    "verse_number": 134,
-    "content": "باغ دیے اور چشمے دیے",
-  },
+  {"surah_number": 26, "verse_number": 134, "content": "باغ دیے اور چشمے دیے"},
   {
     "surah_number": 26,
     "verse_number": 135,
@@ -18374,11 +18302,7 @@ const List urdu = [
     "verse_number": 181,
     "content": "پیمانے ٹھیک بھرو اور کسی کو گھاٹا نہ دو",
   },
-  {
-    "surah_number": 26,
-    "verse_number": 182,
-    "content": "صحیح ترازو سے تولو",
-  },
+  {"surah_number": 26, "verse_number": 182, "content": "صحیح ترازو سے تولو"},
   {
     "surah_number": 26,
     "verse_number": 183,
@@ -18445,11 +18369,7 @@ const List urdu = [
     "content":
         "تاکہ تو اُن لوگوں میں شامل ہو جو (خدا کی طرف سے خلق خدا کو) متنبّہ کرنے والے ہیں",
   },
-  {
-    "surah_number": 26,
-    "verse_number": 195,
-    "content": "صاف صاف عربی زبان میں",
-  },
+  {"surah_number": 26, "verse_number": 195, "content": "صاف صاف عربی زبان میں"},
   {
     "surah_number": 26,
     "verse_number": 196,
@@ -18520,11 +18440,7 @@ const List urdu = [
     "content":
         "(دیکھو) ہم نے کبھی کسی بستی کو اِس کے بغیر ہلاک نہیں کیا کہ اُس کے لیے خبردار کرنے والے حق نصیحت ادا کرنے کو موجود تھے",
   },
-  {
-    "surah_number": 26,
-    "verse_number": 209,
-    "content": "اور ہم ظالم نہ تھے",
-  },
+  {"surah_number": 26, "verse_number": 209, "content": "اور ہم ظالم نہ تھے"},
   {
     "surah_number": 26,
     "verse_number": 210,
@@ -19172,11 +19088,7 @@ const List urdu = [
     "content":
         "اِن سے کہو، تعریف اللہ ہی کے لیے ہے، عنقریب وہ تمہیں اپنی نشانیاں دکھا دے گا اور تم انہیں پہچان لو گے، اور تیرا رب بے خبر نہیں ہے اُن اعمال سے جو تم لوگ کرتے ہو",
   },
-  {
-    "surah_number": 28,
-    "verse_number": 1,
-    "content": "ط س م",
-  },
+  {"surah_number": 28, "verse_number": 1, "content": "ط س م"},
   {
     "surah_number": 28,
     "verse_number": 2,
@@ -19698,11 +19610,7 @@ const List urdu = [
     "content":
         "اور اللہ کے ساتھ کسی دُوسرے معبُود کو نہ پکارو اُس کے سوا کوئی معبُود نہیں ہے ہر چیز ہلاک ہونے والی ہے سوائے اُس کی ذات کے فرماں روائی اُسی کی ہے اور اُسی کی طرف تم سب پلٹائے جاؤ گے",
   },
-  {
-    "surah_number": 29,
-    "verse_number": 1,
-    "content": "الف ل م",
-  },
+  {"surah_number": 29, "verse_number": 1, "content": "الف ل م"},
   {
     "surah_number": 29,
     "verse_number": 2,
@@ -20111,11 +20019,7 @@ const List urdu = [
     "content":
         "جو لوگ ہماری خاطر مجاہدہ کریں گے انہیں ہم اپنے راستے دکھائیں گے، اور یقیناً اللہ نیکو کاروں ہی کے ساتھ ہے",
   },
-  {
-    "surah_number": 30,
-    "verse_number": 1,
-    "content": "ا ل م",
-  },
+  {"surah_number": 30, "verse_number": 1, "content": "ا ل م"},
   {
     "surah_number": 30,
     "verse_number": 2,
@@ -20467,11 +20371,7 @@ const List urdu = [
     "content":
         "پس (اے نبیؐ) صبر کرو، یقیناً اللہ کا وعدہ سچا ہے، اور ہرگز ہلکا نہ پائیں تم کو وہ لوگ جو یقین نہیں لاتے",
   },
-  {
-    "surah_number": 31,
-    "verse_number": 1,
-    "content": "الم",
-  },
+  {"surah_number": 31, "verse_number": 1, "content": "الم"},
   {
     "surah_number": 31,
     "verse_number": 2,
@@ -20668,11 +20568,7 @@ const List urdu = [
     "content":
         "اُس گھڑی کا علم اللہ ہی کے پاس ہے، وہی بارش برساتا ہے، وہی جانتا ہے کہ ماؤں کے پیٹوں میں کیا پرورش پا رہا ہے، کوئی متنفس نہیں جانتا کہ کل وہ کیا کمائی کرنے والا ہے اور نہ کسی شخص کو یہ خبر ہے کہ کس سرزمین میں اس کی موت آنی ہے، اللہ ہی سب کچھ جاننے والا اور باخبر ہے",
   },
-  {
-    "surah_number": 32,
-    "verse_number": 1,
-    "content": "ا ل م",
-  },
+  {"surah_number": 32, "verse_number": 1, "content": "ا ل م"},
   {
     "surah_number": 32,
     "verse_number": 2,
@@ -21860,26 +21756,14 @@ const List urdu = [
     "content":
         "اگر کہیں وہ لوگوں کو اُن کے کیے کرتوتوں پر پکڑتا تو زمین پر کسی متنفس کو جیتا نہ چھوڑتا مگر وہ انہیں ایک مقرر وقت تک کے لیے مہلت دے رہا ہے پھر جب ان کا وقت آن پورا ہوگا تو اللہ اپنے بندوں کو دیکھ لے گا",
   },
-  {
-    "surah_number": 36,
-    "verse_number": 1,
-    "content": "یٰس",
-  },
-  {
-    "surah_number": 36,
-    "verse_number": 2,
-    "content": "قسم ہے قرآن حکیم کی",
-  },
+  {"surah_number": 36, "verse_number": 1, "content": "یٰس"},
+  {"surah_number": 36, "verse_number": 2, "content": "قسم ہے قرآن حکیم کی"},
   {
     "surah_number": 36,
     "verse_number": 3,
     "content": "کہ تم یقیناً رسولوں میں سے ہو",
   },
-  {
-    "surah_number": 36,
-    "verse_number": 4,
-    "content": "سیدھے راستے پر ہو",
-  },
+  {"surah_number": 36, "verse_number": 4, "content": "سیدھے راستے پر ہو"},
   {
     "surah_number": 36,
     "verse_number": 5,
@@ -22565,16 +22449,8 @@ const List urdu = [
     "verse_number": 41,
     "content": "ان کے لیے جانا بوجھا رزق ہے",
   },
-  {
-    "surah_number": 37,
-    "verse_number": 42,
-    "content": "ہر طرح کی لذیذ چیزیں،",
-  },
-  {
-    "surah_number": 37,
-    "verse_number": 43,
-    "content": "اور نعمت بھری جنتیں",
-  },
+  {"surah_number": 37, "verse_number": 42, "content": "ہر طرح کی لذیذ چیزیں،"},
+  {"surah_number": 37, "verse_number": 43, "content": "اور نعمت بھری جنتیں"},
   {
     "surah_number": 37,
     "verse_number": 44,
@@ -22920,11 +22796,7 @@ const List urdu = [
     "verse_number": 108,
     "content": "اور اس کی تعریف و توصیف ہمیشہ کے لیے بعد کی نسلوں میں چھوڑ دی",
   },
-  {
-    "surah_number": 37,
-    "verse_number": 109,
-    "content": "سلام ہے ابراہیمؑ پر",
-  },
+  {"surah_number": 37, "verse_number": 109, "content": "سلام ہے ابراہیمؑ پر"},
   {
     "surah_number": 37,
     "verse_number": 110,
@@ -22966,11 +22838,7 @@ const List urdu = [
     "verse_number": 117,
     "content": "ان کو نہایت واضح کتاب عطا کی",
   },
-  {
-    "surah_number": 37,
-    "verse_number": 118,
-    "content": "انہیں راہ راست دکھائی",
-  },
+  {"surah_number": 37, "verse_number": 118, "content": "انہیں راہ راست دکھائی"},
   {
     "surah_number": 37,
     "verse_number": 119,
@@ -23028,11 +22896,7 @@ const List urdu = [
     "verse_number": 129,
     "content": "اور الیاسؑ کا ذکر خیر ہم نے بعد کی نسلوں میں باقی رکھا",
   },
-  {
-    "surah_number": 37,
-    "verse_number": 130,
-    "content": "سلام ہے الیاسؑ پر",
-  },
+  {"surah_number": 37, "verse_number": 130, "content": "سلام ہے الیاسؑ پر"},
   {
     "surah_number": 37,
     "verse_number": 131,
@@ -23291,11 +23155,7 @@ const List urdu = [
     "content":
         "پاک ہے تیرا رب، عزت کا مالک، اُن تمام باتوں سے جو یہ لوگ بنا رہے ہیں",
   },
-  {
-    "surah_number": 37,
-    "verse_number": 181,
-    "content": "اور سلام ہے مرسلین پر",
-  },
+  {"surah_number": 37, "verse_number": 181, "content": "اور سلام ہے مرسلین پر"},
   {
     "surah_number": 37,
     "verse_number": 182,
@@ -24250,11 +24110,7 @@ const List urdu = [
     "content":
         "اور تم دیکھو گے کہ فرشتے عرش کے گرد حلقہ بنائے ہوئے اپنے رب کی حمد اور تسبیح کر رہے ہوں گے، اور لوگوں کے درمیان ٹھیک ٹھیک حق کے ساتھ فیصلہ چکا دیا جائے گا، اور پکار دیا جائے گا کہ حمد ہے اللہ ربّ العالمین کے لیے",
   },
-  {
-    "surah_number": 40,
-    "verse_number": 1,
-    "content": "ح م",
-  },
+  {"surah_number": 40, "verse_number": 1, "content": "ح م"},
   {
     "surah_number": 40,
     "verse_number": 2,
@@ -24381,11 +24237,7 @@ const List urdu = [
     "content":
         "یہ ان کا انجام اس لیے ہوا کہ ان کے پاس اُن کے رسول بینات لے کر آئے اور انہوں نے ماننے سے انکار کر دیا آخر کار اللہ نے ان کو پکڑ لیا، یقیناً وہ بڑی قوت والا اور سزا دینے میں بہت سخت ہے",
   },
-  {
-    "surah_number": 40,
-    "verse_number": 23,
-    "content": "ہم نے موسیٰؑ کو",
-  },
+  {"surah_number": 40, "verse_number": 23, "content": "ہم نے موسیٰؑ کو"},
   {
     "surah_number": 40,
     "verse_number": 24,
@@ -24755,11 +24607,7 @@ const List urdu = [
     "content":
         "مگر ہمارا عذاب دیکھ لینے کے بعد ان کا ایمان اُن کے لیے کچھ بھی نافع نہ ہو سکتا تھا، کیونکہ یہی اللہ کا مقرر ضابطہ ہے جو ہمیشہ اس کے بندوں میں جاری رہا ہے، اور اس وقت کافر لوگ خسارے میں پڑ گئے",
   },
-  {
-    "surah_number": 41,
-    "verse_number": 1,
-    "content": "ح م",
-  },
+  {"surah_number": 41, "verse_number": 1, "content": "ح م"},
   {
     "surah_number": 41,
     "verse_number": 2,
@@ -25075,16 +24923,8 @@ const List urdu = [
     "content":
         "آگاہ رہو، یہ لوگ اپنے رب کی ملاقات میں شک رکھتے ہیں سن رکھو، وہ ہر چیز پر محیط ہے",
   },
-  {
-    "surah_number": 42,
-    "verse_number": 1,
-    "content": "ح م",
-  },
-  {
-    "surah_number": 42,
-    "verse_number": 2,
-    "content": "ع س ق",
-  },
+  {"surah_number": 42, "verse_number": 1, "content": "ح م"},
+  {"surah_number": 42, "verse_number": 2, "content": "ع س ق"},
   {
     "surah_number": 42,
     "verse_number": 3,
@@ -25390,16 +25230,8 @@ const List urdu = [
     "content":
         "اُس خدا کے راستے کی طرف جو زمین اور آسمانوں کی ہر چیز کا مالک ہے خبردار رہو، سارے معاملات اللہ ہی کی طرف رجوع کرتے ہیں",
   },
-  {
-    "surah_number": 43,
-    "verse_number": 1,
-    "content": "ح م",
-  },
-  {
-    "surah_number": 43,
-    "verse_number": 2,
-    "content": "قسم ہے اِس واضح کتاب کی",
-  },
+  {"surah_number": 43, "verse_number": 1, "content": "ح م"},
+  {"surah_number": 43, "verse_number": 2, "content": "قسم ہے اِس واضح کتاب کی"},
   {
     "surah_number": 43,
     "verse_number": 3,
@@ -25914,16 +25746,8 @@ const List urdu = [
     "content":
         "اچھا، اے نبیؐ، اِن سے درگزر کرو اور کہہ دو کہ سلام ہے تمہیں، عنقریب اِنہیں معلوم ہو جائے گا",
   },
-  {
-    "surah_number": 44,
-    "verse_number": 1,
-    "content": "ح م",
-  },
-  {
-    "surah_number": 44,
-    "verse_number": 2,
-    "content": "قسم ہے اِس کتاب مبین کی",
-  },
+  {"surah_number": 44, "verse_number": 1, "content": "ح م"},
+  {"surah_number": 44, "verse_number": 2, "content": "قسم ہے اِس کتاب مبین کی"},
   {
     "surah_number": 44,
     "verse_number": 3,
@@ -26050,11 +25874,7 @@ const List urdu = [
     "content":
         "سمندر کو اُس کے حال پر کھلا چھوڑ دے یہ سارا لشکر غرق ہونے والا ہے",
   },
-  {
-    "surah_number": 44,
-    "verse_number": 25,
-    "content": "کتنے ہی باغ اور چشمے",
-  },
+  {"surah_number": 44, "verse_number": 25, "content": "کتنے ہی باغ اور چشمے"},
   {
     "surah_number": 44,
     "verse_number": 26,
@@ -26100,11 +25920,7 @@ const List urdu = [
     "verse_number": 33,
     "content": "اور اُنہیں ایسی نشانیاں دکھائیں جن میں صریح آزمائش تھی",
   },
-  {
-    "surah_number": 44,
-    "verse_number": 34,
-    "content": "یہ لوگ کہتے ہیں",
-  },
+  {"surah_number": 44, "verse_number": 34, "content": "یہ لوگ کہتے ہیں"},
   {
     "surah_number": 44,
     "verse_number": 35,
@@ -26149,16 +25965,8 @@ const List urdu = [
     "verse_number": 42,
     "content": "سوائے اِس کے کہ اللہ ہی کسی پر رحم کرے، وہ زبردست اور رحیم ہے",
   },
-  {
-    "surah_number": 44,
-    "verse_number": 43,
-    "content": "زقوم کا درخت",
-  },
-  {
-    "surah_number": 44,
-    "verse_number": 44,
-    "content": "گناہ گار کا کھاجا ہوگا",
-  },
+  {"surah_number": 44, "verse_number": 43, "content": "زقوم کا درخت"},
+  {"surah_number": 44, "verse_number": 44, "content": "گناہ گار کا کھاجا ہوگا"},
   {
     "surah_number": 44,
     "verse_number": 45,
@@ -26194,11 +26002,7 @@ const List urdu = [
     "verse_number": 51,
     "content": "خدا ترس لوگ امن کی جگہ میں ہوں گے",
   },
-  {
-    "surah_number": 44,
-    "verse_number": 52,
-    "content": "باغوں اور چشموں میں",
-  },
+  {"surah_number": 44, "verse_number": 52, "content": "باغوں اور چشموں میں"},
   {
     "surah_number": 44,
     "verse_number": 53,
@@ -26237,11 +26041,7 @@ const List urdu = [
     "verse_number": 59,
     "content": "اب تم بھی انتظار کرو، یہ بھی منتظر ہیں",
   },
-  {
-    "surah_number": 45,
-    "verse_number": 1,
-    "content": "ح م",
-  },
+  {"surah_number": 45, "verse_number": 1, "content": "ح م"},
   {
     "surah_number": 45,
     "verse_number": 2,
@@ -26456,11 +26256,7 @@ const List urdu = [
     "content":
         "زمین اور آسمانوں میں بڑائی اُسی کے لیے ہے اور وہی زبردست اور دانا ہے",
   },
-  {
-    "surah_number": 46,
-    "verse_number": 1,
-    "content": "ح م",
-  },
+  {"surah_number": 46, "verse_number": 1, "content": "ح م"},
   {
     "surah_number": 46,
     "verse_number": 2,
@@ -27171,11 +26967,7 @@ const List urdu = [
     "content":
         "اللہ زمین اور آسمانوں کی ہر پوشیدہ چیز کا علم رکھتا ہے اور جو کچھ تم کرتے ہو وہ سب اس کی نگاہ میں ہے",
   },
-  {
-    "surah_number": 50,
-    "verse_number": 1,
-    "content": "ق، قسم ہے قرآن مجید کی",
-  },
+  {"surah_number": 50, "verse_number": 1, "content": "ق، قسم ہے قرآن مجید کی"},
   {
     "surah_number": 50,
     "verse_number": 2,
@@ -27762,11 +27554,7 @@ const List urdu = [
     "content":
         "آخر کو تباہی ہے کفر کرنے والوں کے لیے اُس روز جس کا انہیں خوف دلایا جا رہا ہے",
   },
-  {
-    "surah_number": 52,
-    "verse_number": 1,
-    "content": "قسم ہے طور کی",
-  },
+  {"surah_number": 52, "verse_number": 1, "content": "قسم ہے طور کی"},
   {
     "surah_number": 52,
     "verse_number": 2,
@@ -27777,21 +27565,9 @@ const List urdu = [
     "verse_number": 3,
     "content": "جو رقیق جلد میں لکھی ہوئی ہے",
   },
-  {
-    "surah_number": 52,
-    "verse_number": 4,
-    "content": "اور آباد گھر کی",
-  },
-  {
-    "surah_number": 52,
-    "verse_number": 5,
-    "content": "اور اونچی چھت کی",
-  },
-  {
-    "surah_number": 52,
-    "verse_number": 6,
-    "content": "اور موجزن سمندر کی",
-  },
+  {"surah_number": 52, "verse_number": 4, "content": "اور آباد گھر کی"},
+  {"surah_number": 52, "verse_number": 5, "content": "اور اونچی چھت کی"},
+  {"surah_number": 52, "verse_number": 6, "content": "اور موجزن سمندر کی"},
   {
     "surah_number": 52,
     "verse_number": 7,
@@ -28065,11 +27841,7 @@ const List urdu = [
     "verse_number": 5,
     "content": "اُسے زبردست قوت والے نے تعلیم دی ہے",
   },
-  {
-    "surah_number": 53,
-    "verse_number": 6,
-    "content": "جو بڑا صاحب حکمت ہے",
-  },
+  {"surah_number": 53, "verse_number": 6, "content": "جو بڑا صاحب حکمت ہے"},
   {
     "surah_number": 53,
     "verse_number": 7,
@@ -28677,26 +28449,14 @@ const List urdu = [
     "verse_number": 55,
     "content": "سچی عزت کی جگہ، بڑے ذی اقتدار بادشاہ کے قریب",
   },
-  {
-    "surah_number": 55,
-    "verse_number": 1,
-    "content": "رحمٰن نے",
-  },
-  {
-    "surah_number": 55,
-    "verse_number": 2,
-    "content": "اِس قرآن کی تعلیم دی ہے",
-  },
+  {"surah_number": 55, "verse_number": 1, "content": "رحمٰن نے"},
+  {"surah_number": 55, "verse_number": 2, "content": "اِس قرآن کی تعلیم دی ہے"},
   {
     "surah_number": 55,
     "verse_number": 3,
     "content": "اُسی نے انسان کو پیدا کیا",
   },
-  {
-    "surah_number": 55,
-    "verse_number": 4,
-    "content": "اور اسے بولنا سکھایا",
-  },
+  {"surah_number": 55, "verse_number": 4, "content": "اور اسے بولنا سکھایا"},
   {
     "surah_number": 55,
     "verse_number": 5,
@@ -29010,11 +28770,7 @@ const List urdu = [
     "verse_number": 63,
     "content": "اپنے رب کے کن کن انعامات کو تم جھٹلاؤ گے؟",
   },
-  {
-    "surah_number": 55,
-    "verse_number": 64,
-    "content": "گھنے سرسبز و شاداب باغ",
-  },
+  {"surah_number": 55, "verse_number": 64, "content": "گھنے سرسبز و شاداب باغ"},
   {
     "surah_number": 55,
     "verse_number": 65,
@@ -29138,11 +28894,7 @@ const List urdu = [
     "verse_number": 10,
     "content": "اور آگے والے تو پھر آگے وا لے ہی ہیں",
   },
-  {
-    "surah_number": 56,
-    "verse_number": 11,
-    "content": "وہی تو مقرب لوگ ہیں",
-  },
+  {"surah_number": 56, "verse_number": 11, "content": "وہی تو مقرب لوگ ہیں"},
   {
     "surah_number": 56,
     "verse_number": 12,
@@ -29153,16 +28905,8 @@ const List urdu = [
     "verse_number": 13,
     "content": "اگلوں میں سے بہت ہوں گے",
   },
-  {
-    "surah_number": 56,
-    "verse_number": 14,
-    "content": "اور پچھلوں میں سے کم",
-  },
-  {
-    "surah_number": 56,
-    "verse_number": 15,
-    "content": "مرصع تختوں پر",
-  },
+  {"surah_number": 56, "verse_number": 14, "content": "اور پچھلوں میں سے کم"},
+  {"surah_number": 56, "verse_number": 15, "content": "مرصع تختوں پر"},
   {
     "surah_number": 56,
     "verse_number": 16,
@@ -29226,11 +28970,7 @@ const List urdu = [
     "verse_number": 27,
     "content": "اور دائیں بازو والے، دائیں بازو والوں کی خوش نصیبی کا کیا کہنا",
   },
-  {
-    "surah_number": 56,
-    "verse_number": 28,
-    "content": "وہ بے خار بیریوں",
-  },
+  {"surah_number": 56, "verse_number": 28, "content": "وہ بے خار بیریوں"},
   {
     "surah_number": 56,
     "verse_number": 29,
@@ -29241,11 +28981,7 @@ const List urdu = [
     "verse_number": 30,
     "content": "اور دور تک پھیلی ہوئی چھاؤں",
   },
-  {
-    "surah_number": 56,
-    "verse_number": 31,
-    "content": "اور ہر دم رواں پانی",
-  },
+  {"surah_number": 56, "verse_number": 31, "content": "اور ہر دم رواں پانی"},
   {
     "surah_number": 56,
     "verse_number": 32,
@@ -29354,11 +29090,7 @@ const List urdu = [
     "verse_number": 52,
     "content": "تم شجر زقوم کی غذا کھانے والے ہو",
   },
-  {
-    "surah_number": 56,
-    "verse_number": 53,
-    "content": "اُسی سے تم پیٹ بھرو گے",
-  },
+  {"surah_number": 56, "verse_number": 53, "content": "اُسی سے تم پیٹ بھرو گے"},
   {
     "surah_number": 56,
     "verse_number": 54,
@@ -29484,11 +29216,7 @@ const List urdu = [
     "verse_number": 77,
     "content": "کہ یہ ایک بلند پایہ قرآن ہے",
   },
-  {
-    "surah_number": 56,
-    "verse_number": 78,
-    "content": "ایک محفوظ کتاب میں ثبت",
-  },
+  {"surah_number": 56, "verse_number": 78, "content": "ایک محفوظ کتاب میں ثبت"},
   {
     "surah_number": 56,
     "verse_number": 79,
@@ -29571,11 +29299,7 @@ const List urdu = [
     "verse_number": 94,
     "content": "اور جہنم میں جھونکا جانا",
   },
-  {
-    "surah_number": 56,
-    "verse_number": 95,
-    "content": "یہ سب کچھ قطعی حق ہے",
-  },
+  {"surah_number": 56, "verse_number": 95, "content": "یہ سب کچھ قطعی حق ہے"},
   {
     "surah_number": 56,
     "verse_number": 96,
@@ -31038,16 +30762,8 @@ const List urdu = [
     "verse_number": 52,
     "content": "حالانکہ یہ تو سارے جہان والوں کے لیے ایک نصیحت ہے",
   },
-  {
-    "surah_number": 69,
-    "verse_number": 1,
-    "content": "ہونی شدنی",
-  },
-  {
-    "surah_number": 69,
-    "verse_number": 2,
-    "content": "کیا ہے وہ ہونی شدنی؟",
-  },
+  {"surah_number": 69, "verse_number": 1, "content": "ہونی شدنی"},
+  {"surah_number": 69, "verse_number": 2, "content": "کیا ہے وہ ہونی شدنی؟"},
   {
     "surah_number": 69,
     "verse_number": 3,
@@ -31152,11 +30868,7 @@ const List urdu = [
     "verse_number": 21,
     "content": "پس وہ دل پسند عیش میں ہوگا",
   },
-  {
-    "surah_number": 69,
-    "verse_number": 22,
-    "content": "عالی مقام جنت میں",
-  },
+  {"surah_number": 69, "verse_number": 22, "content": "عالی مقام جنت میں"},
   {
     "surah_number": 69,
     "verse_number": 23,
@@ -31431,11 +31143,7 @@ const List urdu = [
     "verse_number": 23,
     "content": "جو اپنی نماز کی ہمیشہ پابندی کرتے ہیں",
   },
-  {
-    "surah_number": 70,
-    "verse_number": 24,
-    "content": "جن کے مالوں میں،",
-  },
+  {"surah_number": 70, "verse_number": 24, "content": "جن کے مالوں میں،"},
   {
     "surah_number": 70,
     "verse_number": 25,
@@ -31878,11 +31586,7 @@ const List urdu = [
     "verse_number": 2,
     "content": "رات کو نماز میں کھڑے رہا کرو مگر کم",
   },
-  {
-    "surah_number": 73,
-    "verse_number": 3,
-    "content": "آدھی رات،",
-  },
+  {"surah_number": 73, "verse_number": 3, "content": "آدھی رات،"},
   {
     "surah_number": 73,
     "verse_number": 4,
@@ -31985,26 +31689,14 @@ const List urdu = [
     "verse_number": 1,
     "content": "اے اوڑھ لپیٹ کر لیٹنے والے",
   },
-  {
-    "surah_number": 74,
-    "verse_number": 2,
-    "content": "اٹھو اور خبردار کرو",
-  },
+  {"surah_number": 74, "verse_number": 2, "content": "اٹھو اور خبردار کرو"},
   {
     "surah_number": 74,
     "verse_number": 3,
     "content": "اور اپنے رب کی بڑائی کا اعلان کرو",
   },
-  {
-    "surah_number": 74,
-    "verse_number": 4,
-    "content": "اور اپنے کپڑے پاک رکھو",
-  },
-  {
-    "surah_number": 74,
-    "verse_number": 5,
-    "content": "اور گندگی سے دور رہو",
-  },
+  {"surah_number": 74, "verse_number": 4, "content": "اور اپنے کپڑے پاک رکھو"},
+  {"surah_number": 74, "verse_number": 5, "content": "اور گندگی سے دور رہو"},
   {
     "surah_number": 74,
     "verse_number": 6,
@@ -32035,11 +31727,7 @@ const List urdu = [
     "verse_number": 11,
     "content": "چھوڑ دو مجھے اور اُس شخص کو جسے میں نے اکیلا پیدا کیا ہے",
   },
-  {
-    "surah_number": 74,
-    "verse_number": 12,
-    "content": "بہت سا مال اُس کو دیا",
-  },
+  {"surah_number": 74, "verse_number": 12, "content": "بہت سا مال اُس کو دیا"},
   {
     "surah_number": 74,
     "verse_number": 13,
@@ -32116,16 +31804,8 @@ const List urdu = [
     "verse_number": 27,
     "content": "اور تم کیا جانو کہ کیا ہے وہ دوزخ؟",
   },
-  {
-    "surah_number": 74,
-    "verse_number": 28,
-    "content": "نہ باقی رکھے نہ چھوڑے",
-  },
-  {
-    "surah_number": 74,
-    "verse_number": 29,
-    "content": "کھال جھلس دینے والی",
-  },
+  {"surah_number": 74, "verse_number": 28, "content": "نہ باقی رکھے نہ چھوڑے"},
+  {"surah_number": 74, "verse_number": 29, "content": "کھال جھلس دینے والی"},
   {
     "surah_number": 74,
     "verse_number": 30,
@@ -32157,11 +31837,7 @@ const List urdu = [
     "verse_number": 35,
     "content": "یہ دوزخ بھی بڑی چیزوں میں سے ایک ہے",
   },
-  {
-    "surah_number": 74,
-    "verse_number": 36,
-    "content": "انسانوں کے لیے ڈراوا",
-  },
+  {"surah_number": 74, "verse_number": 36, "content": "انسانوں کے لیے ڈراوا"},
   {
     "surah_number": 74,
     "verse_number": 37,
@@ -32183,11 +31859,7 @@ const List urdu = [
     "verse_number": 40,
     "content": "جو جنتوں میں ہوں گے وہاں وہ،",
   },
-  {
-    "surah_number": 74,
-    "verse_number": 41,
-    "content": "مجرموں سے پوچھیں گے",
-  },
+  {"surah_number": 74, "verse_number": 41, "content": "مجرموں سے پوچھیں گے"},
   {
     "surah_number": 74,
     "verse_number": 42,
@@ -32230,11 +31902,7 @@ const List urdu = [
     "content":
         "آخر اِن لوگوں کو کیا ہو گیا ہے کہ یہ اِس نصیحت سے منہ موڑ رہے ہیں",
   },
-  {
-    "surah_number": 74,
-    "verse_number": 50,
-    "content": "گویا یہ جنگلی گدھے ہیں",
-  },
+  {"surah_number": 74, "verse_number": 50, "content": "گویا یہ جنگلی گدھے ہیں"},
   {
     "surah_number": 74,
     "verse_number": 51,
@@ -32716,11 +32384,7 @@ const List urdu = [
     "verse_number": 12,
     "content": "کس روز کے لیے یہ کام اٹھا رکھا گیا ہے؟",
   },
-  {
-    "surah_number": 77,
-    "verse_number": 13,
-    "content": "فیصلے کے روز کے لیے",
-  },
+  {"surah_number": 77, "verse_number": 13, "content": "فیصلے کے روز کے لیے"},
   {
     "surah_number": 77,
     "verse_number": 14,
@@ -32756,11 +32420,7 @@ const List urdu = [
     "verse_number": 20,
     "content": "کیا ہم نے ایک حقیر پانی سے تمہیں پیدا نہیں کیا",
   },
-  {
-    "surah_number": 77,
-    "verse_number": 21,
-    "content": "اور ایک مقررہ مدت تک،",
-  },
+  {"surah_number": 77, "verse_number": 21, "content": "اور ایک مقررہ مدت تک،"},
   {
     "surah_number": 77,
     "verse_number": 22,
@@ -32955,11 +32615,7 @@ const List urdu = [
     "verse_number": 9,
     "content": "اور تمہاری نیند کو باعث سکون بنایا",
   },
-  {
-    "surah_number": 78,
-    "verse_number": 10,
-    "content": "اور رات کو پردہ پوش",
-  },
+  {"surah_number": 78, "verse_number": 10, "content": "اور رات کو پردہ پوش"},
   {
     "surah_number": 78,
     "verse_number": 11,
@@ -32985,11 +32641,7 @@ const List urdu = [
     "verse_number": 15,
     "content": "تاکہ اس کے ذریعہ سے غلہ اور سبزی",
   },
-  {
-    "surah_number": 78,
-    "verse_number": 16,
-    "content": "اور گھنے باغ اگائیں؟",
-  },
+  {"surah_number": 78, "verse_number": 16, "content": "اور گھنے باغ اگائیں؟"},
   {
     "surah_number": 78,
     "verse_number": 17,
@@ -33016,11 +32668,7 @@ const List urdu = [
     "verse_number": 21,
     "content": "درحقیقت جہنم ایک گھات ہے",
   },
-  {
-    "surah_number": 78,
-    "verse_number": 22,
-    "content": "سرکشوں کا ٹھکانا",
-  },
+  {"surah_number": 78, "verse_number": 22, "content": "سرکشوں کا ٹھکانا"},
   {
     "surah_number": 78,
     "verse_number": 23,
@@ -33068,21 +32716,9 @@ const List urdu = [
     "verse_number": 31,
     "content": "یقیناً متقیوں کے لیے کامرانی کا ایک مقام ہے",
   },
-  {
-    "surah_number": 78,
-    "verse_number": 32,
-    "content": "باغ اور انگور",
-  },
-  {
-    "surah_number": 78,
-    "verse_number": 33,
-    "content": "اور نوخیر ہم سن لڑکیاں",
-  },
-  {
-    "surah_number": 78,
-    "verse_number": 34,
-    "content": "اور چھلکتے ہوئے جام",
-  },
+  {"surah_number": 78, "verse_number": 32, "content": "باغ اور انگور"},
+  {"surah_number": 78, "verse_number": 33, "content": "اور نوخیر ہم سن لڑکیاں"},
+  {"surah_number": 78, "verse_number": 34, "content": "اور چھلکتے ہوئے جام"},
   {
     "surah_number": 78,
     "verse_number": 35,
@@ -33299,11 +32935,7 @@ const List urdu = [
     "verse_number": 36,
     "content": "اور ہر دیکھنے والے کے سامنے دوزخ کھول کر رکھ دی جائے گی",
   },
-  {
-    "surah_number": 79,
-    "verse_number": 37,
-    "content": "تو جس نے سرکشی کی تھی",
-  },
+  {"surah_number": 79, "verse_number": 37, "content": "تو جس نے سرکشی کی تھی"},
   {
     "surah_number": 79,
     "verse_number": 38,
@@ -33320,11 +32952,7 @@ const List urdu = [
     "content":
         "اور جس نے اپنے رب کے سامنے کھڑے ہونے کا خوف کیا تھا اور نفس کو بری خواہشات سے باز رکھا تھا",
   },
-  {
-    "surah_number": 79,
-    "verse_number": 41,
-    "content": "جنت اس کا ٹھکانا ہوگی",
-  },
+  {"surah_number": 79, "verse_number": 41, "content": "جنت اس کا ٹھکانا ہوگی"},
   {
     "surah_number": 79,
     "verse_number": 42,
@@ -33391,11 +33019,7 @@ const List urdu = [
     "verse_number": 8,
     "content": "اور جو خود تمہارے پاس دوڑا آتا ہے",
   },
-  {
-    "surah_number": 80,
-    "verse_number": 9,
-    "content": "اور وہ ڈر رہا ہوتا ہے",
-  },
+  {"surah_number": 80, "verse_number": 9, "content": "اور وہ ڈر رہا ہوتا ہے"},
   {
     "surah_number": 80,
     "verse_number": 10,
@@ -33421,16 +33045,8 @@ const List urdu = [
     "verse_number": 14,
     "content": "بلند مرتبہ ہیں، پاکیزہ ہیں",
   },
-  {
-    "surah_number": 80,
-    "verse_number": 15,
-    "content": "معزز اور نیک کاتبوں کے",
-  },
-  {
-    "surah_number": 80,
-    "verse_number": 16,
-    "content": "ہاتھوں میں رہتے ہیں",
-  },
+  {"surah_number": 80, "verse_number": 15, "content": "معزز اور نیک کاتبوں کے"},
+  {"surah_number": 80, "verse_number": 16, "content": "ہاتھوں میں رہتے ہیں"},
   {
     "surah_number": 80,
     "verse_number": 17,
@@ -33473,11 +33089,7 @@ const List urdu = [
     "verse_number": 24,
     "content": "پھر ذرا انسان اپنی خوراک کو دیکھے",
   },
-  {
-    "surah_number": 80,
-    "verse_number": 25,
-    "content": "ہم نے خوب پانی لنڈھایا",
-  },
+  {"surah_number": 80, "verse_number": 25, "content": "ہم نے خوب پانی لنڈھایا"},
   {
     "surah_number": 80,
     "verse_number": 26,
@@ -33488,21 +33100,9 @@ const List urdu = [
     "verse_number": 27,
     "content": "پھر اُس کے اندر اگائے غلے",
   },
-  {
-    "surah_number": 80,
-    "verse_number": 28,
-    "content": "اور انگور اور ترکاریاں",
-  },
-  {
-    "surah_number": 80,
-    "verse_number": 29,
-    "content": "اور زیتون اور کھجوریں",
-  },
-  {
-    "surah_number": 80,
-    "verse_number": 30,
-    "content": "اور گھنے باغ",
-  },
+  {"surah_number": 80, "verse_number": 28, "content": "اور انگور اور ترکاریاں"},
+  {"surah_number": 80, "verse_number": 29, "content": "اور زیتون اور کھجوریں"},
+  {"surah_number": 80, "verse_number": 30, "content": "اور گھنے باغ"},
   {
     "surah_number": 80,
     "verse_number": 31,
@@ -33711,11 +33311,7 @@ const List urdu = [
     "content":
         "اور تمہارے چاہنے سے کچھ نہیں ہوتا جب تک اللہ رب العالمین نہ چاہے",
   },
-  {
-    "surah_number": 82,
-    "verse_number": 1,
-    "content": "جب آسمان پھٹ جائے گا",
-  },
+  {"surah_number": 82, "verse_number": 1, "content": "جب آسمان پھٹ جائے گا"},
   {
     "surah_number": 82,
     "verse_number": 2,
@@ -33764,11 +33360,7 @@ const List urdu = [
     "verse_number": 10,
     "content": "حالانکہ تم پر نگراں مقرر ہیں",
   },
-  {
-    "surah_number": 82,
-    "verse_number": 11,
-    "content": "ایسے معزز کاتب",
-  },
+  {"surah_number": 82, "verse_number": 11, "content": "ایسے معزز کاتب"},
   {
     "surah_number": 82,
     "verse_number": 12,
@@ -33851,11 +33443,7 @@ const List urdu = [
     "verse_number": 8,
     "content": "اور تمہیں کیا معلوم کہ وہ قید خانے کا دفتر کیا ہے؟",
   },
-  {
-    "surah_number": 83,
-    "verse_number": 9,
-    "content": "ایک کتاب ہے لکھی ہوئی",
-  },
+  {"surah_number": 83, "verse_number": 9, "content": "ایک کتاب ہے لکھی ہوئی"},
   {
     "surah_number": 83,
     "verse_number": 10,
@@ -33912,11 +33500,7 @@ const List urdu = [
     "verse_number": 19,
     "content": "اور تمہیں کیا خبر کہ کیا ہے وہ بلند پایہ لوگوں کا دفتر؟",
   },
-  {
-    "surah_number": 83,
-    "verse_number": 20,
-    "content": "ایک لکھی ہوئی کتاب ہے",
-  },
+  {"surah_number": 83, "verse_number": 20, "content": "ایک لکھی ہوئی کتاب ہے"},
   {
     "surah_number": 83,
     "verse_number": 21,
@@ -34000,11 +33584,7 @@ const List urdu = [
     "verse_number": 36,
     "content": "مل گیا نا کافروں کو اُن حرکتوں کا ثواب جو وہ کیا کرتے تھے",
   },
-  {
-    "surah_number": 84,
-    "verse_number": 1,
-    "content": "جب آسمان پھٹ جائے گا",
-  },
+  {"surah_number": 84, "verse_number": 1, "content": "جب آسمان پھٹ جائے گا"},
   {
     "surah_number": 84,
     "verse_number": 2,
@@ -34053,11 +33633,7 @@ const List urdu = [
     "verse_number": 10,
     "content": "رہا وہ شخص جس کا نامہ اعمال اُس کی پیٹھ کے پیچھے دیا جائے گا",
   },
-  {
-    "surah_number": 84,
-    "verse_number": 11,
-    "content": "تو وہ موت کو پکارے گا",
-  },
+  {"surah_number": 84, "verse_number": 11, "content": "تو وہ موت کو پکارے گا"},
   {
     "surah_number": 84,
     "verse_number": 12,
@@ -34146,11 +33722,7 @@ const List urdu = [
     "verse_number": 3,
     "content": "اور دیکھنے والے کی اور دیکھی جانے والی چیز کی",
   },
-  {
-    "surah_number": 85,
-    "verse_number": 4,
-    "content": "کہ مارے گئے گڑھے والے",
-  },
+  {"surah_number": 85, "verse_number": 4, "content": "کہ مارے گئے گڑھے والے"},
   {
     "surah_number": 85,
     "verse_number": 5,
@@ -34257,11 +33829,7 @@ const List urdu = [
     "verse_number": 2,
     "content": "اور تم کیا جانو کہ وہ رات کو نمودار ہونے والا کیا ہے؟",
   },
-  {
-    "surah_number": 86,
-    "verse_number": 3,
-    "content": "چمکتا ہوا تارا",
-  },
+  {"surah_number": 86, "verse_number": 3, "content": "چمکتا ہوا تارا"},
   {
     "surah_number": 86,
     "verse_number": 4,
@@ -34308,16 +33876,8 @@ const List urdu = [
     "verse_number": 12,
     "content": "اور (نباتات اگتے وقت) پھٹ جانے والی زمین کی",
   },
-  {
-    "surah_number": 86,
-    "verse_number": 13,
-    "content": "یہ ایک جچی تلی بات ہے",
-  },
-  {
-    "surah_number": 86,
-    "verse_number": 14,
-    "content": "ہنسی مذاق نہیں ہے",
-  },
+  {"surah_number": 86, "verse_number": 13, "content": "یہ ایک جچی تلی بات ہے"},
+  {"surah_number": 86, "verse_number": 14, "content": "ہنسی مذاق نہیں ہے"},
   {
     "surah_number": 86,
     "verse_number": 15,
@@ -34349,11 +33909,7 @@ const List urdu = [
     "verse_number": 3,
     "content": "جس نے تقدیر بنائی پھر راہ دکھائی",
   },
-  {
-    "surah_number": 87,
-    "verse_number": 4,
-    "content": "جس نے نباتات اگائیں",
-  },
+  {"surah_number": 87, "verse_number": 4, "content": "جس نے نباتات اگائیں"},
   {
     "surah_number": 87,
     "verse_number": 5,
@@ -34390,11 +33946,7 @@ const List urdu = [
     "verse_number": 11,
     "content": "اور اس سے گریز کریگا وہ انتہائی بد بخت",
   },
-  {
-    "surah_number": 87,
-    "verse_number": 12,
-    "content": "جو بڑی آگ میں جائے گا",
-  },
+  {"surah_number": 87, "verse_number": 12, "content": "جو بڑی آگ میں جائے گا"},
   {
     "surah_number": 87,
     "verse_number": 13,
@@ -34440,11 +33992,7 @@ const List urdu = [
     "verse_number": 2,
     "content": "کچھ چہرے اُس روز خوف زدہ ہونگے",
   },
-  {
-    "surah_number": 88,
-    "verse_number": 3,
-    "content": "سخت مشقت کر رہے ہونگے",
-  },
+  {"surah_number": 88, "verse_number": 3, "content": "سخت مشقت کر رہے ہونگے"},
   {
     "surah_number": 88,
     "verse_number": 4,
@@ -34495,11 +34043,7 @@ const List urdu = [
     "verse_number": 13,
     "content": "اُس کے اندر اونچی مسندیں ہوں گی",
   },
-  {
-    "surah_number": 88,
-    "verse_number": 14,
-    "content": "ساغر رکھے ہوئے ہوں گے",
-  },
+  {"surah_number": 88, "verse_number": 14, "content": "ساغر رکھے ہوئے ہوں گے"},
   {
     "surah_number": 88,
     "verse_number": 15,
@@ -34561,21 +34105,9 @@ const List urdu = [
     "verse_number": 26,
     "content": "پھر اِن کا حساب لینا ہمارے ہی ذمہ ہے",
   },
-  {
-    "surah_number": 89,
-    "verse_number": 1,
-    "content": "قسم ہے فجر کی",
-  },
-  {
-    "surah_number": 89,
-    "verse_number": 2,
-    "content": "اور دس راتوں کی",
-  },
-  {
-    "surah_number": 89,
-    "verse_number": 3,
-    "content": "اور جفت اور طاق کی",
-  },
+  {"surah_number": 89, "verse_number": 1, "content": "قسم ہے فجر کی"},
+  {"surah_number": 89, "verse_number": 2, "content": "اور دس راتوں کی"},
+  {"surah_number": 89, "verse_number": 3, "content": "اور جفت اور طاق کی"},
   {
     "surah_number": 89,
     "verse_number": 4,
@@ -34783,16 +34315,8 @@ const List urdu = [
     "verse_number": 13,
     "content": "کسی گردن کو غلامی سے چھڑانا",
   },
-  {
-    "surah_number": 90,
-    "verse_number": 14,
-    "content": "یا فاقے کے دن",
-  },
-  {
-    "surah_number": 90,
-    "verse_number": 15,
-    "content": "کسی قریبی یتیم",
-  },
+  {"surah_number": 90, "verse_number": 14, "content": "یا فاقے کے دن"},
+  {"surah_number": 90, "verse_number": 15, "content": "کسی قریبی یتیم"},
   {
     "surah_number": 90,
     "verse_number": 16,
@@ -34923,11 +34447,7 @@ const List urdu = [
     "content":
         "تو جس نے (راہ خدا میں) مال دیا اور (خدا کی نافرمانی سے) پرہیز کیا",
   },
-  {
-    "surah_number": 92,
-    "verse_number": 6,
-    "content": "اور بھلائی کو سچ مانا",
-  },
+  {"surah_number": 92, "verse_number": 6, "content": "اور بھلائی کو سچ مانا"},
   {
     "surah_number": 92,
     "verse_number": 7,
@@ -34938,11 +34458,7 @@ const List urdu = [
     "verse_number": 8,
     "content": "اور جس نے بخل کیا اور (اپنے خدا سے) بے نیازی برتی",
   },
-  {
-    "surah_number": 92,
-    "verse_number": 9,
-    "content": "اور بھلائی کو جھٹلایا",
-  },
+  {"surah_number": 92, "verse_number": 9, "content": "اور بھلائی کو جھٹلایا"},
   {
     "surah_number": 92,
     "verse_number": 10,
@@ -35003,11 +34519,7 @@ const List urdu = [
     "verse_number": 21,
     "content": "اور ضرور وہ (اُس سے) خوش ہوگا",
   },
-  {
-    "surah_number": 93,
-    "verse_number": 1,
-    "content": "قسم ہے روز روشن کی",
-  },
+  {"surah_number": 93, "verse_number": 1, "content": "قسم ہے روز روشن کی"},
   {
     "surah_number": 93,
     "verse_number": 2,
@@ -35049,11 +34561,7 @@ const List urdu = [
     "verse_number": 9,
     "content": "لہٰذا یتیم پر سختی نہ کرو",
   },
-  {
-    "surah_number": 93,
-    "verse_number": 10,
-    "content": "اور سائل کو نہ جھڑکو",
-  },
+  {"surah_number": 93, "verse_number": 10, "content": "اور سائل کو نہ جھڑکو"},
   {
     "surah_number": 93,
     "verse_number": 11,
@@ -35104,11 +34612,7 @@ const List urdu = [
     "verse_number": 1,
     "content": "قسم ہے انجیر اور زیتون کی",
   },
-  {
-    "surah_number": 95,
-    "verse_number": 2,
-    "content": "اور طور سینا کی",
-  },
+  {"surah_number": 95, "verse_number": 2, "content": "اور طور سینا کی"},
   {
     "surah_number": 95,
     "verse_number": 3,
@@ -35181,11 +34685,7 @@ const List urdu = [
     "verse_number": 8,
     "content": "پلٹنا یقیناً تیرے رب ہی کی طرف ہے",
   },
-  {
-    "surah_number": 96,
-    "verse_number": 9,
-    "content": "تم نے دیکھا اُس شخص کو",
-  },
+  {"surah_number": 96, "verse_number": 9, "content": "تم نے دیکھا اُس شخص کو"},
   {
     "surah_number": 96,
     "verse_number": 10,
@@ -35408,16 +34908,8 @@ const List urdu = [
     "verse_number": 11,
     "content": "یقیناً اُن کا رب اُس روز اُن سے خوب باخبر ہوگا",
   },
-  {
-    "surah_number": 101,
-    "verse_number": 1,
-    "content": "عظیم حادثہ",
-  },
-  {
-    "surah_number": 101,
-    "verse_number": 2,
-    "content": "کیا ہے وہ عظیم حادثہ؟",
-  },
+  {"surah_number": 101, "verse_number": 1, "content": "عظیم حادثہ"},
+  {"surah_number": 101, "verse_number": 2, "content": "کیا ہے وہ عظیم حادثہ؟"},
   {
     "surah_number": 101,
     "verse_number": 3,
@@ -35458,11 +34950,7 @@ const List urdu = [
     "verse_number": 10,
     "content": "اور تمہیں کیا خبر کہ وہ کیا چیز ہے؟",
   },
-  {
-    "surah_number": 101,
-    "verse_number": 11,
-    "content": "بھڑکتی ہوئی آگ",
-  },
+  {"surah_number": 101, "verse_number": 11, "content": "بھڑکتی ہوئی آگ"},
   {
     "surah_number": 102,
     "verse_number": 1,
@@ -35490,11 +34978,7 @@ const List urdu = [
     "content":
         "ہرگز نہیں، اگر تم یقینی علم کی حیثیت سے (اِس روش کے انجام کو) جانتے ہوتے (تو تمہارا یہ طرز عمل نہ ہوتا)",
   },
-  {
-    "surah_number": 102,
-    "verse_number": 6,
-    "content": "تم دوزخ دیکھ کر رہو گے",
-  },
+  {"surah_number": 102, "verse_number": 6, "content": "تم دوزخ دیکھ کر رہو گے"},
   {
     "surah_number": 102,
     "verse_number": 7,
@@ -35506,11 +34990,7 @@ const List urdu = [
     "content":
         "پھر ضرور اُس روز تم سے اِن نعمتوں کے بارے میں جواب طلبی کی جائے گی",
   },
-  {
-    "surah_number": 103,
-    "verse_number": 1,
-    "content": "زمانے کی قسم",
-  },
+  {"surah_number": 103, "verse_number": 1, "content": "زمانے کی قسم"},
   {
     "surah_number": 103,
     "verse_number": 2,
@@ -35554,11 +35034,7 @@ const List urdu = [
     "verse_number": 6,
     "content": "اللہ کی آگ، خوب بھڑکائی ہوئی",
   },
-  {
-    "surah_number": 104,
-    "verse_number": 7,
-    "content": "جو دلوں تک پہنچے گی",
-  },
+  {"surah_number": 104, "verse_number": 7, "content": "جو دلوں تک پہنچے گی"},
   {
     "surah_number": 104,
     "verse_number": 8,
@@ -35594,11 +35070,7 @@ const List urdu = [
     "verse_number": 5,
     "content": "پھر اُن کا یہ حال کر دیا جیسے جانوروں کا کھایا ہوا بھوسا",
   },
-  {
-    "surah_number": 106,
-    "verse_number": 1,
-    "content": "چونکہ قریش مانوس ہوئے",
-  },
+  {"surah_number": 106, "verse_number": 1, "content": "چونکہ قریش مانوس ہوئے"},
   {
     "surah_number": 106,
     "verse_number": 2,
@@ -35640,11 +35112,7 @@ const List urdu = [
     "verse_number": 5,
     "content": "جو اپنی نماز سے غفلت برتتے ہیں",
   },
-  {
-    "surah_number": 107,
-    "verse_number": 6,
-    "content": "جو ریا کاری کرتے ہیں",
-  },
+  {"surah_number": 107, "verse_number": 6, "content": "جو ریا کاری کرتے ہیں"},
   {
     "surah_number": 107,
     "verse_number": 7,
@@ -35665,11 +35133,7 @@ const List urdu = [
     "verse_number": 3,
     "content": "تمہارا دشمن ہی جڑ کٹا ہے",
   },
-  {
-    "surah_number": 109,
-    "verse_number": 1,
-    "content": "کہہ دو کہ اے کافرو",
-  },
+  {"surah_number": 109, "verse_number": 1, "content": "کہہ دو کہ اے کافرو"},
   {
     "surah_number": 109,
     "verse_number": 2,
@@ -35737,11 +35201,7 @@ const List urdu = [
     "verse_number": 5,
     "content": "اُس کی گردن میں مونجھ کی رسی ہوگی",
   },
-  {
-    "surah_number": 112,
-    "verse_number": 1,
-    "content": "کہو، وہ اللہ ہے، یکتا",
-  },
+  {"surah_number": 112, "verse_number": 1, "content": "کہو، وہ اللہ ہے، یکتا"},
   {
     "surah_number": 112,
     "verse_number": 2,
@@ -35787,11 +35247,7 @@ const List urdu = [
     "verse_number": 1,
     "content": "کہو، میں پناہ مانگتا ہوں انسانوں کے رب",
   },
-  {
-    "surah_number": 114,
-    "verse_number": 2,
-    "content": "انسانوں کے بادشاہ",
-  },
+  {"surah_number": 114, "verse_number": 2, "content": "انسانوں کے بادشاہ"},
   {
     "surah_number": 114,
     "verse_number": 3,

@@ -266,4 +266,4 @@ quran_data_kit/
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License — see the [LICENSE](https://github.com/mahmoud123-karash/quran_data_kit/blob/main/LICENSE) file for details.

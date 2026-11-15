@@ -40,7 +40,16 @@ class WordHighlightIndex {
     // O(words_on_page * n) cost.
     int hash = list.length;
     for (final h in list) {
-      hash = 0x1fffffff & (hash + Object.hash(h.surah, h.verseNumber, h.wordIndex, h.textColor, h.backgroundColor));
+      hash =
+          0x1fffffff &
+          (hash +
+              Object.hash(
+                h.surah,
+                h.verseNumber,
+                h.wordIndex,
+                h.textColor,
+                h.backgroundColor,
+              ));
     }
     return hash;
   }
@@ -72,7 +81,8 @@ class BookmarkIndex {
     return BookmarkIndex._(map, _signatureOf(bookmarks));
   }
 
-  bool isHighlighted(int surah, int verse) => _byAyah.containsKey('$surah-$verse');
+  bool isHighlighted(int surah, int verse) =>
+      _byAyah.containsKey('$surah-$verse');
 
   HighlightVerse? lookup(int surah, int verse) => _byAyah['$surah-$verse'];
 

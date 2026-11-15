@@ -92,10 +92,11 @@ _LoadResult _loadAndComputeOffsets(int count) {
         lineMap[key] = currentOffset;
 
         final ayaText = ayah.ayah.replaceAll('\n', ' ').trim();
-        final wordCount = ayaText
-            .split(wordSplitRegex)
-            .where((w) => w.isNotEmpty && !digitsRegex.hasMatch(w))
-            .length;
+        final wordCount =
+            ayaText
+                .split(wordSplitRegex)
+                .where((w) => w.isNotEmpty && !digitsRegex.hasMatch(w))
+                .length;
 
         runningCounts[key] = currentOffset + wordCount;
       }

@@ -1,722 +1,483 @@
 /// A list of all the Quarters (Rub el Hizb) in the Holy Quran.
 List quarters = [
-  /// quarters
+  // quarter
   {"surah": 1, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 26},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 44},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 60},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 75},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 92},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 106},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 124},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 142},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 158},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 177},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 189},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 203},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 219},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 233},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 243},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 253},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 263},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 272},
-
-  /// quarters
+  // quarter
   {"surah": 2, "ayah": 283},
-
-  /// quarters
+  // quarter
   {"surah": 3, "ayah": 15},
-
-  /// quarters
+  // quarter
   {"surah": 3, "ayah": 33},
-
-  /// quarters
+  // quarter
   {"surah": 3, "ayah": 52},
-
-  /// quarters
+  // quarter
   {"surah": 3, "ayah": 75},
-
-  /// quarters
+  // quarter
   {"surah": 3, "ayah": 93},
-
-  /// quarters
+  // quarter
   {"surah": 3, "ayah": 113},
-
-  /// quarters
+  // quarter
   {"surah": 3, "ayah": 133},
-
-  /// quarters
+  // quarter
   {"surah": 3, "ayah": 153},
-
-  /// quarters
+  // quarter
   {"surah": 3, "ayah": 171},
-
-  /// quarters
+  // quarter
   {"surah": 3, "ayah": 186},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 12},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 24},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 36},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 58},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 74},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 88},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 100},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 114},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 135},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 148},
-
-  /// quarters
+  // quarter
   {"surah": 4, "ayah": 163},
-
-  /// quarters
+  // quarter
   {"surah": 5, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 5, "ayah": 12},
-
-  /// quarters
+  // quarter
   {"surah": 5, "ayah": 27},
-
-  /// quarters
+  // quarter
   {"surah": 5, "ayah": 41},
-
-  /// quarters
+  // quarter
   {"surah": 5, "ayah": 51},
-
-  /// quarters
+  // quarter
   {"surah": 5, "ayah": 67},
-
-  /// quarters
+  // quarter
   {"surah": 5, "ayah": 82},
-
-  /// quarters
+  // quarter
   {"surah": 5, "ayah": 97},
-
-  /// quarters
+  // quarter
   {"surah": 5, "ayah": 109},
-
-  /// quarters
+  // quarter
   {"surah": 6, "ayah": 13},
-
-  /// quarters
+  // quarter
   {"surah": 6, "ayah": 36},
-
-  /// quarters
+  // quarter
   {"surah": 6, "ayah": 59},
-
-  /// quarters
+  // quarter
   {"surah": 6, "ayah": 74},
-
-  /// quarters
+  // quarter
   {"surah": 6, "ayah": 95},
-
-  /// quarters
+  // quarter
   {"surah": 6, "ayah": 111},
-
-  /// quarters
+  // quarter
   {"surah": 6, "ayah": 127},
-
-  /// quarters
+  // quarter
   {"surah": 6, "ayah": 141},
-
-  /// quarters
+  // quarter
   {"surah": 6, "ayah": 151},
-
-  /// quarters
+  // quarter
   {"surah": 7, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 7, "ayah": 31},
-
-  /// quarters
+  // quarter
   {"surah": 7, "ayah": 47},
-
-  /// quarters
+  // quarter
   {"surah": 7, "ayah": 65},
-
-  /// quarters
+  // quarter
   {"surah": 7, "ayah": 88},
-
-  /// quarters
+  // quarter
   {"surah": 7, "ayah": 117},
-
-  /// quarters
+  // quarter
   {"surah": 7, "ayah": 142},
-
-  /// quarters
+  // quarter
   {"surah": 7, "ayah": 156},
-
-  /// quarters
+  // quarter
   {"surah": 7, "ayah": 171},
-
-  /// quarters
+  // quarter
   {"surah": 7, "ayah": 189},
-
-  /// quarters
+  // quarter
   {"surah": 8, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 8, "ayah": 22},
-
-  /// quarters
+  // quarter
   {"surah": 8, "ayah": 41},
-
-  /// quarters
+  // quarter
   {"surah": 8, "ayah": 61},
-
-  /// quarters
+  // quarter
   {"surah": 9, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 9, "ayah": 19},
-
-  /// quarters
+  // quarter
   {"surah": 9, "ayah": 34},
-
-  /// quarters
+  // quarter
   {"surah": 9, "ayah": 46},
-
-  /// quarters
+  // quarter
   {"surah": 9, "ayah": 60},
-
-  /// quarters
+  // quarter
   {"surah": 9, "ayah": 75},
-
-  /// quarters
+  // quarter
   {"surah": 9, "ayah": 93},
-
-  /// quarters
+  // quarter
   {"surah": 9, "ayah": 111},
-
-  /// quarters
+  // quarter
   {"surah": 9, "ayah": 122},
-
-  /// quarters
+  // quarter
   {"surah": 10, "ayah": 11},
-
-  /// quarters
+  // quarter
   {"surah": 10, "ayah": 26},
-
-  /// quarters
+  // quarter
   {"surah": 10, "ayah": 53},
-
-  /// quarters
+  // quarter
   {"surah": 10, "ayah": 71},
-
-  /// quarters
+  // quarter
   {"surah": 10, "ayah": 90},
-
-  /// quarters
+  // quarter
   {"surah": 11, "ayah": 6},
-
-  /// quarters
+  // quarter
   {"surah": 11, "ayah": 24},
-
-  /// quarters
+  // quarter
   {"surah": 11, "ayah": 41},
-
-  /// quarters
+  // quarter
   {"surah": 11, "ayah": 61},
-
-  /// quarters
+  // quarter
   {"surah": 11, "ayah": 84},
-
-  /// quarters
+  // quarter
   {"surah": 11, "ayah": 108},
-
-  /// quarters
+  // quarter
   {"surah": 12, "ayah": 7},
-
-  /// quarters
+  // quarter
   {"surah": 12, "ayah": 30},
-
-  /// quarters
+  // quarter
   {"surah": 12, "ayah": 53},
-
-  /// quarters
+  // quarter
   {"surah": 12, "ayah": 77},
-
-  /// quarters
+  // quarter
   {"surah": 12, "ayah": 101},
-
-  /// quarters
+  // quarter
   {"surah": 13, "ayah": 5},
-
-  /// quarters
+  // quarter
   {"surah": 13, "ayah": 19},
-
-  /// quarters
+  // quarter
   {"surah": 13, "ayah": 35},
-
-  /// quarters
+  // quarter
   {"surah": 14, "ayah": 10},
-
-  /// quarters
+  // quarter
   {"surah": 14, "ayah": 28},
-
-  /// quarters
+  // quarter
   {"surah": 15, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 15, "ayah": 50},
-
-  /// quarters
+  // quarter
   {"surah": 16, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 16, "ayah": 30},
-
-  /// quarters
+  // quarter
   {"surah": 16, "ayah": 51},
-
-  /// quarters
+  // quarter
   {"surah": 16, "ayah": 75},
-
-  /// quarters
+  // quarter
   {"surah": 16, "ayah": 90},
-
-  /// quarters
+  // quarter
   {"surah": 16, "ayah": 111},
-
-  /// quarters
+  // quarter
   {"surah": 17, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 17, "ayah": 23},
-
-  /// quarters
+  // quarter
   {"surah": 17, "ayah": 50},
-
-  /// quarters
+  // quarter
   {"surah": 17, "ayah": 70},
-
-  /// quarters
+  // quarter
   {"surah": 17, "ayah": 99},
-
-  /// quarters
+  // quarter
   {"surah": 18, "ayah": 17},
-
-  /// quarters
+  // quarter
   {"surah": 18, "ayah": 32},
-
-  /// quarters
+  // quarter
   {"surah": 18, "ayah": 51},
-
-  /// quarters
+  // quarter
   {"surah": 18, "ayah": 75},
-
-  /// quarters
+  // quarter
   {"surah": 18, "ayah": 99},
-
-  /// quarters
+  // quarter
   {"surah": 19, "ayah": 22},
-
-  /// quarters
+  // quarter
   {"surah": 19, "ayah": 59},
-
-  /// quarters
+  // quarter
   {"surah": 20, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 20, "ayah": 55},
-
-  /// quarters
+  // quarter
   {"surah": 20, "ayah": 83},
-
-  /// quarters
+  // quarter
   {"surah": 20, "ayah": 111},
-
-  /// quarters
+  // quarter
   {"surah": 21, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 21, "ayah": 29},
-
-  /// quarters
+  // quarter
   {"surah": 21, "ayah": 51},
-
-  /// quarters
+  // quarter
   {"surah": 21, "ayah": 83},
-
-  /// quarters
+  // quarter
   {"surah": 22, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 22, "ayah": 19},
-
-  /// quarters
+  // quarter
   {"surah": 22, "ayah": 38},
-
-  /// quarters
+  // quarter
   {"surah": 22, "ayah": 60},
-
-  /// quarters
+  // quarter
   {"surah": 23, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 23, "ayah": 36},
-
-  /// quarters
+  // quarter
   {"surah": 23, "ayah": 75},
-
-  /// quarters
+  // quarter
   {"surah": 24, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 24, "ayah": 21},
-
-  /// quarters
+  // quarter
   {"surah": 24, "ayah": 35},
-
-  /// quarters
+  // quarter
   {"surah": 24, "ayah": 53},
-
-  /// quarters
+  // quarter
   {"surah": 25, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 25, "ayah": 21},
-
-  /// quarters
+  // quarter
   {"surah": 25, "ayah": 53},
-
-  /// quarters
+  // quarter
   {"surah": 26, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 26, "ayah": 52},
-
-  /// quarters
+  // quarter
   {"surah": 26, "ayah": 111},
-
-  /// quarters
+  // quarter
   {"surah": 26, "ayah": 181},
-
-  /// quarters
+  // quarter
   {"surah": 27, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 27, "ayah": 27},
-
-  /// quarters
+  // quarter
   {"surah": 27, "ayah": 56},
-
-  /// quarters
+  // quarter
   {"surah": 27, "ayah": 82},
-
-  /// quarters
+  // quarter
   {"surah": 28, "ayah": 12},
-
-  /// quarters
+  // quarter
   {"surah": 28, "ayah": 29},
-
-  /// quarters
+  // quarter
   {"surah": 28, "ayah": 51},
-
-  /// quarters
+  // quarter
   {"surah": 28, "ayah": 76},
-
-  /// quarters
+  // quarter
   {"surah": 29, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 29, "ayah": 26},
-
-  /// quarters
+  // quarter
   {"surah": 29, "ayah": 46},
-
-  /// quarters
+  // quarter
   {"surah": 30, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 30, "ayah": 31},
-
-  /// quarters
+  // quarter
   {"surah": 30, "ayah": 54},
-
-  /// quarters
+  // quarter
   {"surah": 31, "ayah": 22},
-
-  /// quarters
+  // quarter
   {"surah": 32, "ayah": 11},
-
-  /// quarters
+  // quarter
   {"surah": 33, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 33, "ayah": 18},
-
-  /// quarters
+  // quarter
   {"surah": 33, "ayah": 31},
-
-  /// quarters
+  // quarter
   {"surah": 33, "ayah": 51},
-
-  /// quarters
+  // quarter
   {"surah": 33, "ayah": 60},
-
-  /// quarters
+  // quarter
   {"surah": 34, "ayah": 10},
-
-  /// quarters
+  // quarter
   {"surah": 34, "ayah": 24},
-
-  /// quarters
+  // quarter
   {"surah": 34, "ayah": 46},
-
-  /// quarters
+  // quarter
   {"surah": 35, "ayah": 15},
-
-  /// quarters
+  // quarter
   {"surah": 35, "ayah": 41},
-
-  /// quarters
+  // quarter
   {"surah": 36, "ayah": 28},
-
-  /// quarters
+  // quarter
   {"surah": 36, "ayah": 60},
-
-  /// quarters
+  // quarter
   {"surah": 37, "ayah": 22},
-
-  /// quarters
+  // quarter
   {"surah": 37, "ayah": 83},
-
-  /// quarters
+  // quarter
   {"surah": 37, "ayah": 145},
-
-  /// quarters
+  // quarter
   {"surah": 38, "ayah": 21},
-
-  /// quarters
+  // quarter
   {"surah": 38, "ayah": 52},
-
-  /// quarters
+  // quarter
   {"surah": 39, "ayah": 8},
-
-  /// quarters
+  // quarter
   {"surah": 39, "ayah": 32},
-
-  /// quarters
+  // quarter
   {"surah": 39, "ayah": 53},
-
-  /// quarters
+  // quarter
   {"surah": 40, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 40, "ayah": 21},
-
-  /// quarters
+  // quarter
   {"surah": 40, "ayah": 41},
-
-  /// quarters
+  // quarter
   {"surah": 40, "ayah": 66},
-
-  /// quarters
+  // quarter
   {"surah": 41, "ayah": 9},
-
-  /// quarters
+  // quarter
   {"surah": 41, "ayah": 25},
-
-  /// quarters
+  // quarter
   {"surah": 41, "ayah": 47},
-
-  /// quarters
+  // quarter
   {"surah": 42, "ayah": 13},
-
-  /// quarters
+  // quarter
   {"surah": 42, "ayah": 27},
-
-  /// quarters
+  // quarter
   {"surah": 42, "ayah": 51},
-
-  /// quarters
+  // quarter
   {"surah": 43, "ayah": 24},
-
-  /// quarters
+  // quarter
   {"surah": 43, "ayah": 57},
-
-  /// quarters
+  // quarter
   {"surah": 44, "ayah": 17},
-
-  /// quarters
+  // quarter
   {"surah": 45, "ayah": 12},
-
-  /// quarters
+  // quarter
   {"surah": 46, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 46, "ayah": 21},
-
-  /// quarters
+  // quarter
   {"surah": 47, "ayah": 10},
-
-  /// quarters
+  // quarter
   {"surah": 47, "ayah": 33},
-
-  /// quarters
+  // quarter
   {"surah": 48, "ayah": 18},
-
-  /// quarters
+  // quarter
   {"surah": 49, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 49, "ayah": 14},
-
-  /// quarters
+  // quarter
   {"surah": 50, "ayah": 27},
-
-  /// quarters
+  // quarter
   {"surah": 51, "ayah": 31},
-
-  /// quarters
+  // quarter
   {"surah": 52, "ayah": 24},
-
-  /// quarters
+  // quarter
   {"surah": 53, "ayah": 26},
-
-  /// quarters
+  // quarter
   {"surah": 54, "ayah": 9},
-
-  /// quarters
+  // quarter
   {"surah": 55, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 56, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 56, "ayah": 75},
-
-  /// quarters
+  // quarter
   {"surah": 57, "ayah": 16},
-
-  /// quarters
+  // quarter
   {"surah": 58, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 58, "ayah": 14},
-
-  /// quarters
+  // quarter
   {"surah": 59, "ayah": 11},
-
-  /// quarters
+  // quarter
   {"surah": 60, "ayah": 7},
-
-  /// quarters
+  // quarter
   {"surah": 62, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 63, "ayah": 4},
-
-  /// quarters
+  // quarter
   {"surah": 65, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 66, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 67, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 68, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 69, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 70, "ayah": 19},
-
-  /// quarters
+  // quarter
   {"surah": 72, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 73, "ayah": 20},
-
-  /// quarters
+  // quarter
   {"surah": 75, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 76, "ayah": 19},
-
-  /// quarters
+  // quarter
   {"surah": 78, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 80, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 82, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 84, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 87, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 90, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 94, "ayah": 1},
-
-  /// quarters
+  // quarter
   {"surah": 100, "ayah": 9},
 ];
