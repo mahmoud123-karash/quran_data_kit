@@ -10,6 +10,14 @@ A modern, comprehensive, and high-performance Flutter/Dart package for Holy Qura
 
 ---
 
+## 📱 Screenshots
+
+| Tajweed Mode (Light) | Standard Hafs (Light) | Dark Mode |
+| :---: | :---: | :---: |
+| <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/tajweed_mode.jpg" width="250" alt="Tajweed Mode (Light)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/standard_mode.jpg" width="250" alt="Standard Hafs (Light)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/dark_mode.jpg" width="250" alt="Dark Mode" /> |
+
+---
+
 ## ✨ Features
 
 - 📜 **Complete Quran Dataset**: In-memory metadata and text for all 114 Surahs, 6,236 Ayahs, 604 Hafs pages, 30 Juzs, and 240 Hizb quarters (Rub el-Hizb).
