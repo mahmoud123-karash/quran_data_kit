@@ -12,9 +12,9 @@ A modern, comprehensive, and high-performance Flutter/Dart package for Holy Qura
 
 ## 📱 Screenshots
 
-| Tajweed Mode (Light) | Standard Hafs (Light) | Dark Mode |
+| Standard (Light) | Standard (Dark) | Tajweed Mode |
 | :---: | :---: | :---: |
-| <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/tajweed_mode.jpg" width="250" alt="Tajweed Mode (Light)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/standard_mode.jpg" width="250" alt="Standard Hafs (Light)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/dark_mode.jpg" width="250" alt="Dark Mode" /> |
+| <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/standard_mode.jpg" width="250" alt="Standard (Light)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/dark_mode.jpg" width="250" alt="Standard (Dark)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/tajweed_mode.jpg" width="250" alt="Tajweed Mode" /> |
 
 ---
 
@@ -102,11 +102,14 @@ class _MushafScreenState extends State<MushafScreen> {
 ### 2. Managing & Downloading Fonts (`QdkFontLoader`)
 
 `quran_data_kit` includes two types of fonts:
+
 1. **Bundled Asset Fonts**: `arsura` (Surah headers), `hafs` (general Hafs script), and `QCF4_BSML` (Basmallah glyphs) are built directly into the package assets and work completely offline from the start.
 2. **QCF Page Fonts (Pages 1–604)**: To keep the package upload size compact (~7 MB instead of 150+ MB), page-specific Tajweed fonts are compressed (`.ttf.gz`) and hosted on high-availability CDN mirrors.
 
 #### A. Automatic On-Demand Streaming (Default / Zero Config)
+
 You don't need to write any extra code to load fonts. When `QuranPageView` or `QuranSinglePageWidget` displays a page:
+
 - The font is fetched from the CDN (if not already downloaded).
 - It is decompressed in a background isolate.
 - It is saved locally to the device's persistent storage (`app_documents/qcf_fonts/`).
@@ -114,6 +117,7 @@ You don't need to write any extra code to load fonts. When `QuranPageView` or `Q
 - Once downloaded, it loads instantly from disk offline.
 
 #### B. Bulk Downloading for Full Offline Reading
+
 To allow users to download all 604 page fonts upfront (~74.5 MB total) so the app works 100% offline without needing internet:
 
 ```dart
