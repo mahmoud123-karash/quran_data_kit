@@ -15,7 +15,7 @@ A modern, comprehensive, and high-performance Flutter/Dart package for Holy Qura
 - 📜 **Complete Quran Dataset**: In-memory metadata and text for all 114 Surahs, 6,236 Ayahs, 604 Hafs pages, 30 Juzs, and 240 Hizb quarters (Rub el-Hizb).
 - 🎨 **QCF Tajweed Rendering Engine**:
   - `QuranPageView`: Authentic page-by-page Mushaf reader with smooth horizontal scrolling, responsive two-page layout on tablets, and lazy font caching.
-  - `QuranSurahListView`: Vertical continuous scrollable Surah reader with line-by-line or verse-by-verse presentation and translations.
+  - `QuranSinglePageWidget`: Render any individual Mushaf page with headers, Basmallah, and QCF line layouts.
   - Dark mode and light mode Tajweed coloring.
   - Interactive Ayah and word highlighting (for audio sync, bookmarks, or memorization).
 - 🌍 **16 Offline Translations**: English (Saheeh International, Clear Quran), Turkish, Malayalam, Persian/Dari, French, Italian, Dutch, Portuguese, Russian, Urdu, Bengali, Chinese, Indonesian, Spanish, and Swedish.
@@ -75,6 +75,9 @@ class _MushafScreenState extends State<MushafScreen> {
           onLongPress: (surah, verse, details, {ayahBottomY, ayahTopY}) {
             debugPrint('Long pressed on Surah $surah, Ayah $verse');
           },
+          onWordTap: (surah, verse, wordIdx, word) {
+            debugPrint('Tapped word #$wordIdx: $word');
+          },
         ),
       ),
     );
@@ -82,44 +85,7 @@ class _MushafScreenState extends State<MushafScreen> {
 }
 ```
 
-### 2. Vertical Surah Reader with Highlights (`QuranSurahListView`)
-
-```dart
-import 'package:flutter/material.dart';
-import 'package:quran_data_kit/quran_data_kit.dart';
-
-class SurahReaderScreen extends StatelessWidget {
-  final int surahNumber;
-  const SurahReaderScreen({super.key, required this.surahNumber});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(getSurahName(surahNumber))),
-      body: QuranSurahListView(
-        surahNumber: surahNumber,
-        translation: Translation.enSaheeh,
-        highlights: [
-          // Highlight verse 1 with amber tint
-          HighlightVerse(
-            surah: surahNumber,
-            verseNumber: 1,
-            page: getPageNumber(surahNumber, 1),
-            color: Colors.amber.withValues(alpha: 0.3),
-          ),
-        ],
-        onLongPress: (surah, verse, details) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Ayah: $surah:$verse')),
-          );
-        },
-      ),
-    );
-  }
-}
-```
-
-### 3. Metadata & Lookups
+### 2. Metadata & Lookups
 
 ```dart
 import 'package:quran_data_kit/quran_data_kit.dart';
@@ -144,7 +110,7 @@ int quarter = getQuarterNumber(2, 255);    // 8
 bool isSajda = isSajdahVerse(32, 15);       // true
 ```
 
-### 4. Bundled Offline Translations
+### 3. Bundled Offline Translations
 
 ```dart
 import 'package:quran_data_kit/quran_data_kit.dart';
@@ -160,7 +126,7 @@ Map searchRes = searchWordsInTranslation(['mercy', 'forgiveness'], translation: 
 debugPrint('Matches found: ${searchRes['occurences']}');
 ```
 
-### 5. Audio URLs & Reciters
+### 4. Audio URLs & Reciters
 
 ```dart
 import 'package:quran_data_kit/quran_data_kit.dart';
@@ -175,7 +141,7 @@ String verseAudio = getAudioURLByVerse(1, 'ar.alafasy');
 List<Map<String, dynamic>> reciters = getReciters();
 ```
 
-### 6. Verse of the Day (`RandomVerse`)
+### 5. Verse of the Day (`RandomVerse`)
 
 ```dart
 import 'package:quran_data_kit/quran_data_kit.dart';
@@ -204,7 +170,7 @@ quran_data_kit/
 │       ├── models/          # Ayah, Surah, QuranPage, Line, HighlightVerse, RandomVerse
 │       ├── services/        # GetPage parser and isolate processor
 │       ├── utils/           # QdkFontLoader, QuranTextStyles, text normalizers
-│       └── widgets/         # QuranPageView, QuranSurahListView, header & basmallah widgets
+│       └── widgets/         # QuranPageView, single page, header & basmallah widgets
 ```
 
 ---

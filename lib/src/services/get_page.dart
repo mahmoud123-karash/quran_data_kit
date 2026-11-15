@@ -6,36 +6,25 @@ import '../models/surah.dart';
 /// A service class responsible for processing raw Quranic data into
 /// structured [QuranPage] and [Surah] objects.
 ///
-/// **Performance Fix Applied**:
-/// Uses STATIC variables to cache the parsed data.
-/// The heavy parsing and string manipulation runs EXACTLY ONCE per app lifecycle.
-/// Subsequent calls return instantly (0ms), preventing any UI stutter or jank.
+/// Uses static memory caching so parsing runs exactly once per app lifecycle.
 class GetPage {
-  // ===========================================================================
-  // STATIC CACHE (Global Memory)
-  // ===========================================================================
   static List<QuranPage> _cachedStaticPages = [];
-  static final List<int> _cachedQuranStops = [];
-  static final List<int> _cachedSurahsStart = [];
   static final List<Surah> _cachedSurahs = [];
   static final List<Ayah> _cachedAyahs = [];
   static bool _isParsed = false;
 
-  // ===========================================================================
-  // PUBLIC GETTERS (To match your existing code structure)
-  // ===========================================================================
+  /// Cached Mushaf pages.
   List<QuranPage> get staticPages => _cachedStaticPages;
-  List<int> get quranStops => _cachedQuranStops;
-  List<int> get surahsStart => _cachedSurahsStart;
+
+  /// Cached Surahs with their verses.
   List<Surah> get surahs => _cachedSurahs;
+
+  /// Cached sequential list of all 6,236 Ayahs.
   List<Ayah> get ayahs => _cachedAyahs;
-  int lastPage = 0;
 
   /// Entry point to initialize the Quranic data structure.
-  /// Fully synchronous but blazing fast after the first run.
+  /// Fully synchronous and cached after the first run.
   void getQuran(int quranPagesCount) {
-    // If we already parsed the Quran in this app session, RETURN INSTANTLY!
-    // This is the secret to 0 jank during scrolling.
     if (_isParsed && _cachedStaticPages.length == quranPagesCount) {
       return;
     }
@@ -43,24 +32,21 @@ class GetPage {
     final List<Ayah> result = getQuranData();
     _processQuranData(result, quranPagesCount);
 
-    // Mark as parsed so we never do this heavy lifting again
     _isParsed = true;
   }
 
-  /// Fetches the raw data and maps it into a list of [Ayah] objects.
+  /// Fetches raw data and maps it into a list of [Ayah] objects.
   List<Ayah> getQuranData() {
     return quran.map((e) => Ayah.fromJson(e)).toList();
   }
 
-  /// Orchestrates the data processing
+  /// Orchestrates data processing into pages and surahs.
   void _processQuranData(List<Ayah> quranAyahsList, int quranPagesCount) {
     _cachedStaticPages = List.generate(
       quranPagesCount,
       (index) => QuranPage(pageNumber: index + 1, ayahs: [], lines: []),
     );
 
-    _cachedQuranStops.clear();
-    _cachedSurahsStart.clear();
     _cachedSurahs.clear();
     _cachedAyahs.clear();
 
@@ -68,7 +54,7 @@ class GetPage {
     int surahsIndex = 1;
     List<Ayah> thisSurahAyahs = [];
 
-    for (var ayah in quranAyahsList) {
+    for (final ayah in quranAyahsList) {
       // Logic for Surah transition and tracking
       if (ayah.surahNumber != surahsIndex) {
         if (_cachedSurahs.isNotEmpty) {
@@ -86,7 +72,6 @@ class GetPage {
       // Detect Hizb (۞) marks and Sajda (۩)
       if (ayah.ayah.contains('۞')) {
         _cachedStaticPages[ayah.page - 1].hizb = hizb++;
-        _cachedQuranStops.add(ayah.page);
       }
       if (ayah.ayah.contains('۩')) {
         _cachedStaticPages[ayah.page - 1].hasSajda = true;
@@ -94,7 +79,6 @@ class GetPage {
 
       // Handle the start of a new Surah (Ayah 1)
       if (ayah.ayahNumber == 1) {
-        // ayah.ayah = ayah.ayah.replaceAll('۞', '');
         _cachedStaticPages[ayah.page - 1].numberOfNewSurahs++;
         _cachedSurahs.add(
           Surah(
@@ -106,7 +90,6 @@ class GetPage {
             ayahs: [],
           ),
         );
-        _cachedSurahsStart.add(ayah.page - 1);
       }
     }
 
@@ -122,11 +105,11 @@ class GetPage {
 
   /// Splits Ayahs into [Line] objects based on newline characters (\n).
   void _generateLines() {
-    for (var staticPage in _cachedStaticPages) {
+    for (final staticPage in _cachedStaticPages) {
       staticPage.lines.clear();
       List<Ayah> currentLineAyahs = [];
 
-      for (var aya in staticPage.ayahs) {
+      for (final aya in staticPage.ayahs) {
         // If it's a new Surah start, force a line break for the header
         if (aya.ayahNumber == 1) {
           if (currentLineAyahs.isNotEmpty &&

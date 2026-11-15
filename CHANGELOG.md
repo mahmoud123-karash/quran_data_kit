@@ -2,9 +2,9 @@
 
 * **Initial Release of `quran_data_kit`**:
   * Unified, modern Flutter/Dart Quran package combining complete Quran dataset, QCF Tajweed font rendering, and rich metadata lookups.
-  * **QCF Page & Surah Views**:
+  * **QCF Page Views**:
     * `QuranPageView`: High-performance horizontal reader with page caching, lazy font loading, Tajweed colors, and dark-mode support.
-    * `QuranSurahListView`: Vertical scrollable Quran list reader with interactive word and Ayah tapping.
+    * `QuranSinglePageWidget`: Single-page layout widget supporting headers, Basmallah, and QCF line rendering.
   * **Rich Metadata & Lookups**:
     * Surah metadata (Arabic, English, Turkish, French, Russian names, revelation place, verse counts).
     * Page-to-verse and verse-to-page mappings (all 604 Hafs pages).

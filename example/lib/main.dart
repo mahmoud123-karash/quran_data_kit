@@ -72,8 +72,7 @@ class _ExampleHomeScreenState extends State<ExampleHomeScreen> {
   Widget build(BuildContext context) {
     final screens = [
       MushafReaderTab(isDark: widget.themeMode == ThemeMode.dark),
-      SurahReaderTab(isDark: widget.themeMode == ThemeMode.dark),
-      const QuranMetadataTab(),
+      QuranMetadataTab(isDark: widget.themeMode == ThemeMode.dark),
     ];
 
     return Scaffold(
@@ -101,11 +100,7 @@ class _ExampleHomeScreenState extends State<ExampleHomeScreen> {
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.menu_book_rounded),
-            label: 'Mushaf Page View',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.format_list_bulleted_rounded),
-            label: 'Surah List View',
+            label: 'Mushaf Reader',
           ),
           NavigationDestination(
             icon: Icon(Icons.search_rounded),
@@ -201,100 +196,11 @@ class _MushafReaderTabState extends State<MushafReaderTab> {
   }
 }
 
-/// Demonstrates [QuranSurahListView] with highlights and translations.
-class SurahReaderTab extends StatefulWidget {
-  final bool isDark;
-
-  const SurahReaderTab({super.key, required this.isDark});
-
-  @override
-  State<SurahReaderTab> createState() => _SurahReaderTabState();
-}
-
-class _SurahReaderTabState extends State<SurahReaderTab> {
-  int _selectedSurah = 1;
-  bool _showTranslation = true;
-  final Translation _selectedTranslation = Translation.enSaheeh;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Surah selector and translation options
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
-          child: Row(
-            children: [
-              // Surah dropdown
-              Expanded(
-                child: DropdownButton<int>(
-                  value: _selectedSurah,
-                  isExpanded: true,
-                  items: List.generate(114, (i) {
-                    final sNum = i + 1;
-                    return DropdownMenuItem(
-                      value: sNum,
-                      child: Text(
-                        '$sNum. ${getSurahName(sNum)} (${getSurahNameArabic(sNum)})',
-                      ),
-                    );
-                  }),
-                  onChanged: (val) {
-                    if (val != null) setState(() => _selectedSurah = val);
-                  },
-                ),
-              ),
-              const SizedBox(width: 8),
-              // Translation toggle
-              IconButton(
-                icon: Icon(
-                  _showTranslation
-                      ? Icons.translate_rounded
-                      : Icons.g_translate_rounded,
-                  color: _showTranslation ? Colors.green : Colors.grey,
-                ),
-                tooltip: 'Toggle English Translation',
-                onPressed: () {
-                  setState(() => _showTranslation = !_showTranslation);
-                },
-              ),
-            ],
-          ),
-        ),
-        // Continuous Surah View
-        Expanded(
-          child: QuranSurahListView(
-            surahNumber: _selectedSurah,
-            isDarkMode: widget.isDark,
-            translation: _showTranslation ? _selectedTranslation : null,
-            highlights: [
-              // Example highlight: highlight verse 1
-              HighlightVerse(
-                surah: _selectedSurah,
-                verseNumber: 1,
-                page: getPageNumber(_selectedSurah, 1),
-                color: Colors.amber.withValues(alpha: 0.35),
-              ),
-            ],
-            onAyahTap: (surah, verse) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Tapped Ayah $surah:$verse'),
-                  duration: const Duration(seconds: 1),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 /// Demonstrates Quran metadata, search, and random verse generator.
 class QuranMetadataTab extends StatefulWidget {
-  const QuranMetadataTab({super.key});
+  final bool isDark;
+
+  const QuranMetadataTab({super.key, required this.isDark});
 
   @override
   State<QuranMetadataTab> createState() => _QuranMetadataTabState();

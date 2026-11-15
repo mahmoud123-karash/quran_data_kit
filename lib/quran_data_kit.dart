@@ -1,7 +1,7 @@
 library;
 
 // ---------------------------------------------------------------------------
-// Internal data imports (used by helper functions below)
+// Internal data imports
 // ---------------------------------------------------------------------------
 import 'package:quran_data_kit/src/data/juzs.dart';
 import 'package:quran_data_kit/src/data/page_data.dart';
@@ -20,7 +20,6 @@ import 'package:quran_data_kit/src/utils/quran_helpers.dart';
 // 1. UI Widgets
 // ---------------------------------------------------------------------------
 export 'src/widgets/quran_page_view.dart';
-export 'src/widgets/quran_surah_list_view.dart';
 export 'src/widgets/quran_single_page_widget.dart';
 export 'src/widgets/surah_header_widget.dart';
 export 'src/widgets/surah_text_widget.dart';
@@ -29,31 +28,30 @@ export 'src/widgets/basmallah_widget.dart';
 // ---------------------------------------------------------------------------
 // 2. Models
 // ---------------------------------------------------------------------------
-export 'src/models/highlight_verse.dart';
 export 'src/models/ayah.dart';
+export 'src/models/highlight_verse.dart';
+export 'src/models/highlight_word.dart';
 export 'src/models/quran_page.dart';
 export 'src/models/quarter.dart';
-export 'src/models/surah.dart';
-export 'src/models/highlight_word.dart';
-export 'src/models/quran_constants.dart';
 export 'src/models/random_verse.dart';
+export 'src/models/surah.dart';
 
 // ---------------------------------------------------------------------------
-// 3. Data
+// 3. Raw Data
 // ---------------------------------------------------------------------------
-export 'src/data/quarters.dart';
 export 'src/data/juzs.dart';
 export 'src/data/page_data.dart';
-export 'src/data/suwar.dart';
+export 'src/data/quarters.dart';
 export 'src/data/sajdah_verses.dart';
+export 'src/data/suwar.dart';
 
 // ---------------------------------------------------------------------------
 // 4. Services & Utilities
 // ---------------------------------------------------------------------------
 export 'src/services/get_page.dart';
-export 'src/utils/quran_text_styles.dart';
 export 'src/utils/font_loader_service.dart';
 export 'src/utils/quran_helpers.dart';
+export 'src/utils/quran_text_styles.dart';
 export 'src/utils/quran_translation.dart';
 
 // ---------------------------------------------------------------------------
@@ -75,8 +73,8 @@ const int totalJuzCount = 30;
 /// Total Hizb count in the Holy Quran.
 const int totalHizbCount = 60;
 
-/// Total quarters count in the Holy Quran.
-const int quartersCount = totalHizbCount * 2;
+/// Total Rub el-Hizb (quarters) count in the Holy Quran.
+const int quartersCount = 240;
 
 /// Total Surah count in the Holy Quran.
 const int totalSurahCount = 114;
@@ -91,40 +89,32 @@ const String basmala = 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱ�
 const String sajdah = 'سَجْدَةٌ';
 
 // ---------------------------------------------------------------------------
-// 6. Page-level Data Helpers
+// 6. Page Data Helpers
 // ---------------------------------------------------------------------------
 
 /// Returns the raw page-data list for [pageNumber] (1–604).
 ///
 /// Each entry in the list is a map `{surah, start, end}` describing the
 /// Surah ranges that appear on that page.
-///
-/// Throws if [pageNumber] is outside the valid range.
-List getPageData(int pageNumber) {
-  if (pageNumber < 1 || pageNumber > 604) {
-    throw 'Invalid page number. Page number must be between 1 and 604.';
-  }
-  return pageData[pageNumber - 1];
+List<Map<String, dynamic>> getPageData(int pageNumber) {
+  _validatePage(pageNumber);
+  return List<Map<String, dynamic>>.from(pageData[pageNumber - 1]);
 }
 
-/// Returns the number of distinct Surahs that appear on [pageNumber].
-int getSurahCountByPage(int pageNumber) {
-  if (pageNumber < 1 || pageNumber > 604) {
-    throw 'Invalid page number. Page number must be between 1 and 604.';
-  }
-  return pageData[pageNumber - 1].length;
+/// Returns all Surah numbers appearing on [pageNumber].
+List<int> getSurahsInPage(int pageNumber) {
+  return getPageData(pageNumber).map<int>((e) => e['surah'] as int).toList();
 }
 
-/// Returns the total verse count on [pageNumber].
-int getVerseCountByPage(int pageNumber) {
-  if (pageNumber < 1 || pageNumber > 604) {
-    throw 'Invalid page number. Page number must be between 1 and 604.';
-  }
-  int total = 0;
-  for (final e in pageData[pageNumber - 1]) {
-    total += int.parse(e!['end'].toString());
-  }
-  return total;
+/// Returns the first Surah number appearing on [pageNumber].
+int getFirstSurahInPage(int pageNumber) {
+  return getPageData(pageNumber).first['surah'] as int;
+}
+
+/// Returns the list of [Ayah]s on [pageNumber] (1–604).
+List<Ayah> getPageAyahs(int pageNumber) {
+  _validatePage(pageNumber);
+  return pages[pageNumber - 1].ayahs;
 }
 
 // ---------------------------------------------------------------------------
@@ -146,11 +136,8 @@ String getSurahNameEnglish(int surahNumber) {
 /// Returns the Arabic name of [surahNumber].
 String getSurahNameArabic(int surahNumber, {bool showSurahText = false}) {
   _validateSurah(surahNumber);
-
-  if (showSurahText) {
-    return 'سورة ${surah[surahNumber - 1]['arabic'].toString()}';
-  }
-  return surah[surahNumber - 1]['arabic'].toString();
+  final arabicName = surah[surahNumber - 1]['arabic'].toString();
+  return showSurahText ? 'سورة $arabicName' : arabicName;
 }
 
 /// Returns the Turkish name of [surahNumber].
@@ -177,6 +164,11 @@ String getPlaceOfRevelation(int surahNumber) {
   return surah[surahNumber - 1]['place'].toString();
 }
 
+/// Returns 'مكية' for Makkah or 'مدنية' for Madinah for [surahNumber].
+String getPlaceOfRevelationArabic(int surahNumber) {
+  return getPlaceOfRevelation(surahNumber) == 'Makkah' ? 'مكية' : 'مدنية';
+}
+
 /// Returns the total Ayah count in [surahNumber].
 int getVerseCount(int surahNumber) {
   _validateSurah(surahNumber);
@@ -186,25 +178,38 @@ int getVerseCount(int surahNumber) {
 /// Returns every page number (1–604) on which [surahNumber] appears.
 List<int> getSurahPages(int surahNumber) {
   _validateSurah(surahNumber);
-  final List<int> pages = [];
+  final List<int> surahPages = [];
   for (int page = 1; page <= totalPagesCount; page++) {
     for (final entry in getPageData(page)) {
       if (entry['surah'] == surahNumber) {
-        pages.add(page);
+        surahPages.add(page);
         break;
       }
     }
   }
-  return pages;
+  return surahPages;
+}
+
+/// Searches Surahs by name in Arabic, English, or translated English name.
+List<int> searchSurahNames(String query, {List<Surah>? surahList}) {
+  final targetList = surahList ?? surahs;
+  final normalizedQuery = normalise(query).toLowerCase().trim();
+  return targetList
+      .where(
+        (s) =>
+            normalise(s.arabicName).contains(normalizedQuery) ||
+            s.englishName.toLowerCase().contains(normalizedQuery) ||
+            s.englishNameTranslation.toLowerCase().contains(normalizedQuery),
+      )
+      .map((s) => s.surahNumber)
+      .toList();
 }
 
 // ---------------------------------------------------------------------------
-// 8. Page / Verse Lookup
+// 8. Page & Verse Lookups
 // ---------------------------------------------------------------------------
 
 /// Returns the Mushaf page number (1–604) where [surahNumber]/[ayaNo] is located.
-///
-/// Throws if the verse is not found.
 int getPageNumber(int surahNumber, int ayaNo) {
   _validateSurah(surahNumber);
   for (int pageIndex = 0; pageIndex < pageData.length; pageIndex++) {
@@ -216,7 +221,7 @@ int getPageNumber(int surahNumber, int ayaNo) {
       }
     }
   }
-  throw 'Invalid verse number.';
+  throw ArgumentError('Verse $ayaNo not found in Surah $surahNumber.');
 }
 
 /// Returns the Arabic verse text for [surahNumber]/[ayaNo].
@@ -225,20 +230,24 @@ int getPageNumber(int surahNumber, int ayaNo) {
 String getVerse(int surahNumber, int ayaNo, {bool verseEndSymbol = false}) {
   for (final i in quran) {
     if (i['sora'] == surahNumber && i['aya_no'] == ayaNo) {
-      final verse = i['aya_text'].toString().replaceAll('۩', '');
+      final verse = i['aya_text'].toString().replaceAll('۩', '').trim();
+      final endGlyph = getVerseEndSymbol(ayaNo);
+      if (verseEndSymbol && !verse.contains(endGlyph)) {
+        return '$verse $endGlyph';
+      }
       return verse;
     }
   }
-  throw 'No verse found with given surahNumber and aya_no.';
+  throw ArgumentError('No verse found for Surah $surahNumber, Ayah $ayaNo.');
 }
 
+final Map<String, String> _verseGlyphCache = {};
+
 /// Returns the QCF glyph string for [surahNumber]/[ayaNo] for font rendering.
-///
-/// Uses a persistent cache to avoid redundant list scans after the first call
-/// for any given verse.
 String getAyaNoQCF(int surahNumber, int ayaNo) {
   final key = '${surahNumber}_$ayaNo';
-  if (_verseGlyphCache.containsKey(key)) return _verseGlyphCache[key]!;
+  final cached = _verseGlyphCache[key];
+  if (cached != null) return cached;
 
   for (final i in quran) {
     if (i['sora'] == surahNumber && i['aya_no'] == ayaNo) {
@@ -250,7 +259,7 @@ String getAyaNoQCF(int surahNumber, int ayaNo) {
       }
     }
   }
-  throw 'No verse found with given surahNumber and aya_no.';
+  throw ArgumentError('No QCF glyph found for Surah $surahNumber, Ayah $ayaNo.');
 }
 
 /// Returns the QCF (Quran Complex Font) text for [surahNumber]/[ayaNo].
@@ -261,74 +270,11 @@ String getVerseQCF(int surahNumber, int ayaNo, {bool verseEndSymbol = false}) {
       return qcf + (verseEndSymbol ? getVerseEndSymbol(ayaNo) : '');
     }
   }
-  throw 'No verse found with given surahNumber and aya_no.';
+  throw ArgumentError('No QCF verse found for Surah $surahNumber, Ayah $ayaNo.');
 }
-
-/// Returns the Quran.com web URL for [juzNumber].
-String getJuzURL(int juzNumber) => 'https://quran.com/juz/$juzNumber';
-
-/// Returns the Quran.com web URL for [surahNumber].
-String getSurahURL(int surahNumber) => 'https://quran.com/$surahNumber';
-
-/// Returns the Quran.com web URL for [surahNumber] and [verseNumber].
-String getVerseURL(int surahNumber, int verseNumber) =>
-    'https://quran.com/$surahNumber/$verseNumber';
-
-/// Controls how Surah headers are separated when fetching page text.
-enum SurahSeperator {
-  none,
-  surahName,
-  surahNameArabic,
-  surahNameEnglish,
-  surahNameTurkish,
-  surahNameFrench,
-  surahNameRussian,
-}
-
-/// Returns the formatted verse strings for [pageNumber].
-List<String> getVersesTextByPage(
-  int pageNumber, {
-  bool verseEndSymbol = false,
-  SurahSeperator surahSeperator = SurahSeperator.none,
-  String customSurahSeperator = '',
-}) {
-  if (pageNumber > totalPagesCount || pageNumber <= 0) {
-    throw 'Invalid pageNumber';
-  }
-
-  final List<String> verses = [];
-  final pData = getPageData(pageNumber);
-  for (final data in pData) {
-    final sNumber = int.parse(data['surah'].toString());
-    if (customSurahSeperator.isNotEmpty) {
-      verses.add(customSurahSeperator);
-    } else if (surahSeperator == SurahSeperator.surahName) {
-      verses.add(getSurahName(sNumber));
-    } else if (surahSeperator == SurahSeperator.surahNameArabic) {
-      verses.add(getSurahNameArabic(sNumber));
-    } else if (surahSeperator == SurahSeperator.surahNameEnglish) {
-      verses.add(getSurahNameEnglish(sNumber));
-    } else if (surahSeperator == SurahSeperator.surahNameTurkish) {
-      verses.add(getSurahNameTurkish(sNumber));
-    } else if (surahSeperator == SurahSeperator.surahNameFrench) {
-      verses.add(getSurahNameFrench(sNumber));
-    } else if (surahSeperator == SurahSeperator.surahNameRussian) {
-      verses.add(getSurahNameRussian(sNumber));
-    }
-    final int start = int.parse(data['start'].toString());
-    final int end = int.parse(data['end'].toString());
-    for (int j = start; j <= end; j++) {
-      verses.add(getVerse(sNumber, j, verseEndSymbol: verseEndSymbol));
-    }
-  }
-  return verses;
-}
-
-// ignore: prefer_final_fields
-Map<String, String> _verseGlyphCache = {};
 
 // ---------------------------------------------------------------------------
-// 9. Juz Helpers
+// 9. Juz & Quarter Helpers
 // ---------------------------------------------------------------------------
 
 /// Returns the Juz number (1–30) for [surahNumber]/[ayaNo].
@@ -336,9 +282,10 @@ Map<String, String> _verseGlyphCache = {};
 /// Returns -1 if the combination does not match any known verse range.
 int getJuzNumber(int surahNumber, int ayaNo) {
   for (final j in juz) {
-    if (j['verses'].keys.contains(surahNumber)) {
-      if (ayaNo >= j['verses'][surahNumber][0] &&
-          ayaNo <= j['verses'][surahNumber][1]) {
+    final verses = j['verses'] as Map<int, List<int>>;
+    if (verses.containsKey(surahNumber)) {
+      final range = verses[surahNumber]!;
+      if (ayaNo >= range[0] && ayaNo <= range[1]) {
         return int.parse(j['id'].toString());
       }
     }
@@ -346,13 +293,28 @@ int getJuzNumber(int surahNumber, int ayaNo) {
   return -1;
 }
 
-/// Returns the map of Surah number → [startVerse, endVerse] for [juzNumber].
-Map<int, List<int>> getSurahAndVersesFromJuz(int juzNumber) =>
-    juz[juzNumber - 1]['verses'];
+/// Returns the Juz number for the first verse on [pageNumber].
+int getJuzNumberByPage(int pageNumber) {
+  final p = getPageData(pageNumber);
+  return getJuzNumber(p[0]['surah'] as int, p[0]['start'] as int);
+}
 
-// ---------------------------------------------------------------------------
-// 10. Quarter / Hizb Helpers
-// ---------------------------------------------------------------------------
+/// Returns the first page number for [juzNumber] (1–30).
+int getFirstPageNumByJuz(int juzNumber) {
+  if (juzNumber < 1 || juzNumber > totalJuzCount) {
+    throw RangeError.range(juzNumber, 1, totalJuzCount, 'juzNumber');
+  }
+  return juzNumber == 1 ? 1 : (20 * (juzNumber - 1)) + 2;
+}
+
+/// Returns the two Hizb numbers contained within [juzNumber] (1–30).
+List<int> getHizbNumbersByJuz(int juzNumber) {
+  if (juzNumber < 1 || juzNumber > totalJuzCount) {
+    throw RangeError.range(juzNumber, 1, totalJuzCount, 'juzNumber');
+  }
+  final first = (juzNumber - 1) * 2 + 1;
+  return [first, first + 1];
+}
 
 /// Returns the Rub el-Hizb (quarter) number (1–240) for [surahNumber]/[ayaNo].
 int getQuarterNumber(int surahNumber, int ayaNo) {
@@ -369,24 +331,9 @@ int getQuarterNumber(int surahNumber, int ayaNo) {
   return current;
 }
 
-/// Returns the Arabic hizb/quarter label **only** if a new quarter starts
-/// exactly on [pageNumber].
-///
-/// Returns an empty string if no quarter starts on that page.
-/// Pass [isArabic] as `false` for English output.
-String getHizbTextByPage(int pageNumber, {bool isArabic = true}) {
-  final idx = quarters.indexWhere(
-    (q) => getPageNumber(q['surah']!, q['ayah']!) == pageNumber,
-  );
-  if (idx == -1) return '';
-  return _buildHizbLabel(idx + 1, isArabic);
-}
-
 /// Returns the currently active Hizb/quarter label for the top of [pageNumber].
-///
-/// Unlike [getHizbTextByPage], this returns the label even when the quarter
-/// started on a previous page.
 String getCurrentHizbTextForPage(int pageNumber, {bool isArabic = true}) {
+  _validatePage(pageNumber);
   int current = 0;
   for (int i = 0; i < quarters.length; i++) {
     final qPage = getPageNumber(quarters[i]['surah']!, quarters[i]['ayah']!);
@@ -423,7 +370,7 @@ String _buildHizbLabel(int quarter, bool isArabic) {
 }
 
 // ---------------------------------------------------------------------------
-// 11. Arabic Text Search
+// 10. Arabic Text Search & Normalization
 // ---------------------------------------------------------------------------
 
 /// Normalises Arabic [text] for robust search:
@@ -431,34 +378,28 @@ String _buildHizbLabel(int quarter, bool isArabic) {
 /// and collapses whitespace.
 String normalizeArabicText(String text) {
   if (text.isEmpty) return text;
-  text = text.replaceAll(RegExp(r'[\u064B-\u065F\u0670]'), '');
-  text = text.replaceAll(RegExp(r'[إأآا]'), 'ا');
-  text = text.replaceAll(RegExp(r'[يى]'), 'ي');
-  text = text.replaceAll('ة', 'ه');
-  return text.replaceAll(RegExp(r'\s+'), ' ').trim();
+  var result = text.replaceAll(RegExp(r'[\u064B-\u065F\u0670]'), '');
+  result = result.replaceAll(RegExp(r'[إأآا]'), 'ا');
+  result = result.replaceAll(RegExp(r'[يى]'), 'ي');
+  result = result.replaceAll('ة', 'ه');
+  return result.replaceAll(RegExp(r'\s+'), ' ').trim();
 }
 
 /// Searches the embedded Quran data for the [query] string.
 ///
 /// First searches Emlaey (plain spelling) text; falls back to Uthmanic if no
 /// results are found. Returns up to [limit] results (default 50).
-///
-/// The returned map has:
-/// - `occurences`: number of matches.
-/// - `result`: list of `{sora, aya_no, text}` maps.
 Map<String, dynamic> searchWords(String query, {int limit = 50}) {
-  if (query.trim().isEmpty) return {'occurences': 0, 'result': []};
+  if (query.trim().isEmpty) return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
 
   final normalized = normalizeArabicText(query.toLowerCase());
-  if (normalized.isEmpty) return {'occurences': 0, 'result': []};
+  if (normalized.isEmpty) return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
 
   final searchQuery = normalized.replaceAll(RegExp(r'\s+'), '');
-  if (searchQuery.isEmpty) return {'occurences': 0, 'result': []};
+  if (searchQuery.isEmpty) return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
 
   bool contains(String text) {
-    final norm = normalizeArabicText(
-      text.toLowerCase(),
-    ).replaceAll(RegExp(r'\s+'), '');
+    final norm = normalizeArabicText(text.toLowerCase()).replaceAll(RegExp(r'\s+'), '');
     return norm.contains(searchQuery);
   }
 
@@ -471,8 +412,7 @@ Map<String, dynamic> searchWords(String query, {int limit = 50}) {
     result.add({
       'sora': aya['sora'],
       'aya_no': aya['aya_no'],
-      'text':
-          emlaey.replaceAll('\n', ' ').replaceAll(RegExp(r'\s+'), ' ').trim(),
+      'text': emlaey.replaceAll('\n', ' ').replaceAll(RegExp(r'\s+'), ' ').trim(),
     });
     if (result.length >= limit) break;
   }
@@ -485,11 +425,7 @@ Map<String, dynamic> searchWords(String query, {int limit = 50}) {
       result.add({
         'sora': aya['sora'],
         'aya_no': aya['aya_no'],
-        'text':
-            othmanic
-                .replaceAll('\n', ' ')
-                .replaceAll(RegExp(r'\s+'), ' ')
-                .trim(),
+        'text': othmanic.replaceAll('\n', ' ').replaceAll(RegExp(r'\s+'), ' ').trim(),
       });
       if (result.length >= limit) break;
     }
@@ -499,7 +435,7 @@ Map<String, dynamic> searchWords(String query, {int limit = 50}) {
 }
 
 // ---------------------------------------------------------------------------
-// 12. Full Quran Data & Lookups
+// 11. Full Dataset Accessors
 // ---------------------------------------------------------------------------
 
 GetPage get _getPage {
@@ -526,167 +462,40 @@ List<Quarter> get quartersList =>
             .map((q) => Quarter(surah: q['surah']!, ayah: q['ayah']!))
             .toList();
 
-/// Returns all 240 Rub el-Hizb (quarters) of the Holy Quran.
-List<Quarter> getQuarters() => quartersList;
-
 /// Fetches a specific [Ayah] by [surahNumber] and [ayahNumber].
 Ayah getAyah(int surahNumber, int ayahNumber) => allAyahs.firstWhere(
   (a) => a.surahNumber == surahNumber && a.ayahNumber == ayahNumber,
 );
 
-/// Returns the text of a specific verse.
-String getVerseText(int surahNumber, int ayahNumber) =>
-    getAyah(surahNumber, ayahNumber).text;
-
-/// Returns the list of [Ayah]s for [pageNumber] (1–604).
-List<Ayah> getPageAyahs(int pageNumber) {
-  if (pageNumber < 1 || pageNumber > totalPagesCount) {
-    throw 'Invalid page number ($pageNumber)';
-  }
-  return pages[pageNumber - 1].ayahs;
-}
-
-/// Returns all Surah numbers appearing on [pageNumber].
-List<int> getSurahsInPage(int pageNumber) {
-  final p = getPageData(pageNumber);
-  return p.map<int>((e) => e['surah'] as int).toList();
-}
-
-/// Returns the first Surah number appearing on [pageNumber].
-int getFirstSurahInPage(int pageNumber) {
-  return getPageData(pageNumber)[0]['surah'] as int;
-}
-
-/// Returns the last Surah number appearing on [pageNumber], or null if only one Surah is present.
-int? getLastSurahInPage(int pageNumber) {
-  final p = getPageData(pageNumber);
-  return p.length > 1 ? p.last['surah'] as int : null;
-}
-
-/// Returns the Juz number for the first verse on [pageNumber].
-int getJuzNumberByPage(int pageNumber) {
-  final p = getPageData(pageNumber);
-  return getJuzNumber(p[0]['surah'] as int, p[0]['start'] as int);
-}
-
-/// Returns the first page number for [juzNumber] (1–30).
-int getFirstPageNumByJuz(int juzNumber) =>
-    juzNumber == 1 ? 1 : (20 * (juzNumber - 1)) + 2;
-
-/// Returns the two Hizb numbers contained within [juzNumber] (1–30).
-List<int> getHizbNumbersByJuz(int juzNumber) {
-  final first = (juzNumber - 1) * 2 + 1;
-  return [first, first + 1];
-}
-
-/// Returns the 1-based Hizb number if [pageNumber] is the start of that Hizb, or null otherwise.
-int? calculateHizbNumber(int pageNumber) {
-  final hizbNumber = ((pageNumber - 1) ~/ 10) + 1;
-  final firstPageOfHizb = (hizbNumber - 1) * 10 + 1;
-  return pageNumber == firstPageOfHizb ? hizbNumber : null;
-}
-
-/// Returns 'مكية' for Makkah or 'مدنية' for Madinah for [surahNumber].
-String getPlaceOfRevelationArabic(int surahNumber) {
-  return getPlaceOfRevelation(surahNumber) == 'Makkah' ? 'مكية' : 'مدنية';
-}
-
-/// Splits page ayahs for Basmalah display between surahs on page.
-List<List<Ayah>> getPageAyahsSeparatedForBasmalah(int pageNumber) {
-  final pageAyahs = getPageAyahs(pageNumber);
-  final List<List<Ayah>> result = [];
-  List<Ayah> currentGroup = [];
-  for (int i = 0; i < pageAyahs.length; i++) {
-    if (i > 0 && pageAyahs[i].ayahNumber < pageAyahs[i - 1].ayahNumber) {
-      result.add(currentGroup);
-      currentGroup = [];
+/// Returns all 15 Sajdah (prostration of recitation) verses of the Holy Quran.
+List<Ayah> getSajdahVerses() {
+  final List<Ayah> sajdahAyahs = [];
+  for (final entry in sajdahVerses.entries) {
+    final surah = surahs.firstWhere((s) => s.surahNumber == entry.key);
+    for (final verseNumber in entry.value) {
+      final ayah = surah.ayahs.firstWhere((a) => a.ayahNumber == verseNumber);
+      sajdahAyahs.add(ayah);
     }
-    currentGroup.add(pageAyahs[i]);
   }
-  if (currentGroup.isNotEmpty) result.add(currentGroup);
-  return result;
+  return sajdahAyahs;
 }
 
-/// Finds the Surah containing the Ayah with global unique index [ayahUQNumber].
-Surah getSurahByAyahUQ(int ayahUQNumber) => surahs.firstWhere(
-  (s) => s.ayahs.any((a) => a.ayahUQNumber == ayahUQNumber),
-);
+// ---------------------------------------------------------------------------
+// 12. Private Validation & Formatting Helpers
+// ---------------------------------------------------------------------------
 
-/// Returns the Surah Arabic name for the Ayah with global unique index [ayahUQNumber].
-String getSurahNameByAyahUQ(int ayahUQNumber) =>
-    getSurahByAyahUQ(ayahUQNumber).arabicName;
-
-/// Finds the first Ayah on Mushaf [pageNumber] (1-based).
-Ayah getFirstAyahOnPage(int pageNumber) =>
-    allAyahs.firstWhere((a) => a.page == pageNumber);
-
-/// Searches Surahs by name in Arabic, English, or translated English name.
-List<int> searchSurahNames(String query, {List<Surah>? surahList}) {
-  final targetList = surahList ?? surahs;
-  final normalized = query.toLowerCase().trim();
-  return targetList
-      .where(
-        (s) =>
-            normalise(s.arabicName).contains(normalized) ||
-            s.englishName.toLowerCase().contains(normalized) ||
-            s.englishNameTranslation.toLowerCase().contains(normalized),
-      )
-      .map((s) => s.surahNumber)
-      .toList();
+void _validateSurah(int surahNumber) {
+  if (surahNumber < 1 || surahNumber > totalSurahCount) {
+    throw RangeError.range(surahNumber, 1, totalSurahCount, 'surahNumber');
+  }
 }
 
-/// Predefined page indexes where bookmark flags appear at the bottom.
-const List<int> downThePageIndex = [
-  75,
-  206,
-  330,
-  340,
-  348,
-  365,
-  375,
-  413,
-  416,
-  444,
-  451,
-  497,
-  505,
-  524,
-  547,
-  554,
-  556,
-  583,
-];
+void _validatePage(int pageNumber) {
+  if (pageNumber < 1 || pageNumber > totalPagesCount) {
+    throw RangeError.range(pageNumber, 1, totalPagesCount, 'pageNumber');
+  }
+}
 
-/// Predefined page indexes where bookmark flags appear at the top.
-const List<int> topOfThePageIndex = [
-  76,
-  207,
-  331,
-  341,
-  349,
-  366,
-  376,
-  414,
-  417,
-  435,
-  445,
-  452,
-  498,
-  506,
-  525,
-  548,
-  554,
-  555,
-  557,
-  583,
-  584,
-];
-
-// ---------------------------------------------------------------------------
-// Private helpers
-// ---------------------------------------------------------------------------
-
-/// Converts an integer to an Eastern Arabic numeral string.
 String _toArabicNumber(int n) {
   const map = {
     '0': '٠',
@@ -701,25 +510,4 @@ String _toArabicNumber(int n) {
     '9': '٩',
   };
   return n.toString().split('').map((c) => map[c] ?? c).join();
-}
-
-/// Validates that [surahNumber] is within the 1–114 range.
-void _validateSurah(int surahNumber) {
-  if (surahNumber < 1 || surahNumber > 114) {
-    throw 'No Surah found with given surahNumber ($surahNumber).';
-  }
-}
-
-/// Returns all 15 Sajdah (prostration of recitation) verses of the Holy Quran
-/// in sequential Mushaf order.
-List<Ayah> getSajdahVerses() {
-  final List<Ayah> sajdahAyahs = [];
-  for (final entry in sajdahVerses.entries) {
-    final surah = surahs.firstWhere((s) => s.surahNumber == entry.key);
-    for (final verseNumber in entry.value) {
-      final ayah = surah.ayahs.firstWhere((a) => a.ayahNumber == verseNumber);
-      sajdahAyahs.add(ayah);
-    }
-  }
-  return sajdahAyahs;
 }

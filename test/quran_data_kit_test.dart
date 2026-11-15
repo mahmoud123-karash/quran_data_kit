@@ -9,6 +9,8 @@ void main() {
       expect(totalPagesCount, 604);
       expect(totalVerseCount, 6236);
       expect(totalJuzCount, 30);
+      expect(totalHizbCount, 60);
+      expect(quartersCount, 240);
       expect(totalMakkiSurahsCount, 89);
       expect(totalMadaniSurahsCount, 25);
       expect(basmala, isNotEmpty);
@@ -23,6 +25,7 @@ void main() {
       expect(getSurahNameFrench(1), "L'ouverture");
       expect(getSurahNameRussian(1), 'Открывающая Коран');
       expect(getPlaceOfRevelation(1), 'Makkah');
+      expect(getPlaceOfRevelationArabic(1), 'مكية');
       expect(getVerseCount(1), 7);
       expect(getSurahPages(1), [1]);
     });
@@ -31,8 +34,17 @@ void main() {
       expect(getSurahName(2), 'Al Baqarah');
       expect(getSurahNameArabic(2), 'البقرة');
       expect(getPlaceOfRevelation(2), 'Madinah');
+      expect(getPlaceOfRevelationArabic(2), 'مدنية');
       expect(getVerseCount(2), 286);
       expect(getSurahPages(2).first, 2);
+    });
+
+    test('searchSurahNames finds matches', () {
+      final results = searchSurahNames('Baqarah');
+      expect(results, contains(2));
+
+      final arResults = searchSurahNames('البقرة');
+      expect(arResults, contains(2));
     });
   });
 
@@ -59,9 +71,13 @@ void main() {
       expect(qcfText, isNotEmpty);
     });
 
-    test('getVersesTextByPage retrieves verses for page 1', () {
-      final verses = getVersesTextByPage(1);
-      expect(verses.length, 7);
+    test('Page data lookups', () {
+      final surahsInPage1 = getSurahsInPage(1);
+      expect(surahsInPage1, [1]);
+      expect(getFirstSurahInPage(1), 1);
+
+      final ayahsPage1 = getPageAyahs(1);
+      expect(ayahsPage1.length, 7);
     });
   });
 
@@ -70,11 +86,16 @@ void main() {
       expect(getJuzNumber(1, 1), 1);
       expect(getJuzNumber(2, 255), 3);
       expect(getJuzNumber(114, 1), 30);
+      expect(getJuzNumberByPage(1), 1);
+      expect(getFirstPageNumByJuz(1), 1);
+      expect(getFirstPageNumByJuz(2), 22);
+      expect(getHizbNumbersByJuz(1), [1, 2]);
     });
 
     test('Quarter (Rub el-Hizb) lookup', () {
       expect(getQuarterNumber(1, 1), 1);
       expect(getQuarterNumber(2, 255), greaterThan(1));
+      expect(quartersList.length, 240);
     });
 
     test('Hizb label formatting', () {
@@ -100,22 +121,20 @@ void main() {
       final sajdahs = getSajdahVerses();
       expect(sajdahs.length, 15);
 
-      // Verify Surah Al-Hajj contains both sajdahs
       final hajjSajdahs =
           sajdahs.where((a) => a.surahNumber == 22).toList();
       expect(hajjSajdahs.length, 2);
       expect(hajjSajdahs[0].ayahNumber, 18);
       expect(hajjSajdahs[1].ayahNumber, 77);
 
-      // Verify each ayah in the list has sajda == true and clean Mushaf formatting
       for (final ayah in sajdahs) {
         expect(ayah.sajda, isTrue);
         expect(ayah.ayah, isNot(contains('۩۩')));
         expect(ayah.ayah, isNot(contains('ۤ۩')));
       }
 
-      // Verify Surah Al-A'raf 206 ends with single sajdah symbol
-      final araf206 = sajdahs.firstWhere((a) => a.surahNumber == 7 && a.ayahNumber == 206);
+      final araf206 =
+          sajdahs.firstWhere((a) => a.surahNumber == 7 && a.ayahNumber == 206);
       expect(araf206.ayah, contains('وَلَهُۥ يَسۡجُدُونَ ۩'));
     });
   });
@@ -203,7 +222,6 @@ void main() {
       expect(getPage.ayahs.length, 6236);
       expect(getPage.staticPages.length, 604);
 
-      // Verify convenience getters
       final fatiha = getPage.surahs.first;
       expect(fatiha.surahNumber, 1);
       expect(fatiha.arabicName, 'الفَاتِحة');
@@ -235,46 +253,6 @@ void main() {
       );
       expect(find.byType(BasmallahWidget), findsOneWidget);
       expect(find.text('齃𧻓𥳐𥉉'), findsOneWidget);
-    });
-
-    testWidgets('QuranSurahListView renders verses and headers', (tester) async {
-      int tappedSurah = 0;
-      int tappedVerse = 0;
-
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: QuranSurahListView(
-              surahNumber: 1,
-              highlights: [
-                HighlightVerse(
-                  surah: 1,
-                  verseNumber: 1,
-                  page: 1,
-                  color: Colors.amber,
-                ),
-              ],
-              translation: Translation.enSaheeh,
-              onAyahTap: (s, v) {
-                tappedSurah = s;
-                tappedVerse = v;
-              },
-            ),
-          ),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      expect(find.byType(QuranSurahListView), findsOneWidget);
-      expect(find.byType(SurahHeaderWidget), findsOneWidget);
-
-      // Tap on verse 1
-      final verseOneFinder = find.text('1');
-      expect(verseOneFinder, findsWidgets);
-
-      await tester.tap(verseOneFinder.first);
-      expect(tappedSurah, 1);
-      expect(tappedVerse, 1);
     });
   });
 }
