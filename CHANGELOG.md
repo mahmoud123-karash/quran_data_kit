@@ -9,6 +9,10 @@
   * In dark mode, `SurahHeaderWidget` automatically tints the banner linework with a soft, muted warm sand-bronze (`#A89680`) and Surah name text with white by default, blending gently with dark backgrounds and white verse text without harsh glare.
   * Updated Ayah number symbol rendering: replaced default colored Tajweed rosette with authentic Medina bronze/sand rosette medallion (`#814E13` light / `#A89680` dark) with transparent inner fill.
   * Added `ayahNumberBuilder` parameter across `QuranPageView`, `QuranSinglePageWidget`, and `QuranLine` for complete custom Ayah number widget rendering.
+  * Added `ayahSymbolPadding` and `ayahSymbolVerticalOffset` for fine-tuning Ayah medallion spacing.
+  * Enhanced Ayah medallion typographic alignment using alphabetic baseline alignment and synchronized `StrutStyle` with verse text.
+  * Refactored example app into clean modular tabs and screens.
+  * Updated README with new high-resolution screenshots for standard and Tajweed modes in light and dark themes.
 
 ## 1.0.0
 
