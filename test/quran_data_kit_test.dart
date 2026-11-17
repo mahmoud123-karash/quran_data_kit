@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:quran_data_kit/quran_data_kit.dart';
+import 'package:quran_data_kit/src/widgets/quran_line.dart';
 
 void main() {
   group('Quran Constants & Metadata Tests', () {
@@ -231,15 +232,58 @@ void main() {
   });
 
   group('UI Widgets Tests', () {
-    testWidgets('SurahHeaderWidget renders correctly', (tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(body: SurahHeaderWidget(surahNumber: 1)),
-        ),
-      );
-      expect(find.byType(SurahHeaderWidget), findsOneWidget);
-      expect(find.byType(SurahTextWidget), findsOneWidget);
-    });
+    testWidgets(
+      'SurahHeaderWidget renders correctly with default and custom styling',
+      (tester) async {
+        await tester.pumpWidget(
+          const MaterialApp(
+            home: Scaffold(body: SurahHeaderWidget(surahNumber: 1)),
+          ),
+        );
+        expect(find.byType(SurahHeaderWidget), findsOneWidget);
+        expect(find.byType(SurahTextWidget), findsOneWidget);
+
+        // Custom colors and dark mode
+        await tester.pumpWidget(
+          const MaterialApp(
+            home: Scaffold(
+              body: SurahHeaderWidget(
+                surahNumber: 2,
+                isDark: true,
+                bannerColor: Colors.amber,
+                textColor: Colors.white,
+                margin: EdgeInsets.all(8.0),
+              ),
+            ),
+          ),
+        );
+        expect(find.byType(SurahHeaderWidget), findsOneWidget);
+      },
+    );
+
+    test(
+      'Default colors match between banner and ayah symbol in both modes',
+      () {
+        expect(
+          QuranLine.defaultLightAyahSymbolColor,
+          SurahHeaderWidget.defaultLightBannerColor,
+        );
+        expect(QuranLine.defaultLightAyahSymbolColor, const Color(0xFF814E13));
+        expect(QdkFontLoader.ayahNumberLightColor, const Color(0xFF814E13));
+
+        expect(
+          QuranLine.defaultDarkAyahSymbolColor,
+          SurahHeaderWidget.defaultDarkBannerColor,
+        );
+        expect(QuranLine.defaultDarkAyahSymbolColor, const Color(0xFFA89680));
+        expect(QdkFontLoader.ayahNumberDarkColor, const Color(0xFFA89680));
+
+        expect(
+          QuranLine.defaultAyahSymbolPadding,
+          const EdgeInsets.symmetric(horizontal: 4.0),
+        );
+      },
+    );
 
     testWidgets('BasmallahWidget renders with correct text glyphs', (
       tester,

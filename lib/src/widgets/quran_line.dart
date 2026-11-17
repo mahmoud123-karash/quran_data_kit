@@ -1,25 +1,14 @@
 import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:quran_data_kit/src/widgets/quran_page/highlight_index.dart';
-import 'package:quran_data_kit/src/widgets/quran_page/parsed_quran_data.dart';
-import '../../quran_data_kit.dart';
+import 'package:quran_data_kit/quran_data_kit.dart';
 
+import 'quran_page/highlight_index.dart';
+import 'quran_page/parsed_quran_data.dart';
+
+/// Renders a single line of Quranic text with responsive font scaling,
+/// word-by-word tap recognizers, highlight overlays, and ornate Ayah medallions.
 class QuranLine extends StatefulWidget {
-  const QuranLine({
-    super.key,
-    required this.parsedAyahs,
-    required this.pageNumber,
-    this.wordHighlightIndex = WordHighlightIndex.empty,
-    this.bookmarkIndex = BookmarkIndex.empty,
-    this.boxFit = BoxFit.fill,
-    this.onLongPress,
-    this.onWordTap,
-    this.ayahStyle,
-    this.isTajweed = true,
-    this.isDark = false,
-  });
-
   final List<ParsedAyahData> parsedAyahs;
   final int pageNumber;
   final WordHighlightIndex wordHighlightIndex;
@@ -42,6 +31,57 @@ class QuranLine extends StatefulWidget {
   final bool isTajweed;
   final bool isDark;
 
+  /// Optional custom builder for Ayah number medallions.
+  final Widget Function(BuildContext context, int surahNumber, int ayahNumber)?
+  ayahNumberBuilder;
+
+  /// Color applied to the Ayah number medallion symbol.
+  final Color? ayahSymbolColor;
+
+  /// Custom color applied to the Ayah number medallion in light mode.
+  final Color? ayahSymbolLightColor;
+
+  /// Custom color applied to the Ayah number medallion in dark mode.
+  final Color? ayahSymbolDarkColor;
+
+  /// Optional vertical offset to fine-tune Ayah number medallion positioning.
+  final double? ayahSymbolVerticalOffset;
+
+  /// Optional padding around the Ayah number medallion (left and right spacing).
+  final EdgeInsetsGeometry? ayahSymbolPadding;
+
+  const QuranLine({
+    super.key,
+    required this.parsedAyahs,
+    required this.pageNumber,
+    this.wordHighlightIndex = WordHighlightIndex.empty,
+    this.bookmarkIndex = BookmarkIndex.empty,
+    this.boxFit = BoxFit.fill,
+    this.onLongPress,
+    this.onWordTap,
+    this.ayahStyle,
+    this.isTajweed = true,
+    this.isDark = false,
+    this.ayahNumberBuilder,
+    this.ayahSymbolColor,
+    this.ayahSymbolLightColor,
+    this.ayahSymbolDarkColor,
+    this.ayahSymbolVerticalOffset,
+    this.ayahSymbolPadding,
+  });
+
+  /// Default Ayah number medallion symbol color in light mode (matching banner).
+  static const Color defaultLightAyahSymbolColor =
+      SurahHeaderWidget.defaultLightBannerColor;
+
+  /// Default Ayah number medallion symbol color in dark mode (matching banner).
+  static const Color defaultDarkAyahSymbolColor =
+      SurahHeaderWidget.defaultDarkBannerColor;
+
+  /// Default horizontal padding around the Ayah number medallion symbol.
+  static const EdgeInsetsGeometry defaultAyahSymbolPadding =
+      EdgeInsets.symmetric(horizontal: 2.0);
+
   @override
   State<QuranLine> createState() => _QuranLineState();
 }
@@ -53,6 +93,7 @@ class _QuranLineState extends State<QuranLine> {
 
   late TextStyle _mainTextStyle;
   late TextStyle _numberTextStyle;
+  late StrutStyle _strutStyle;
 
   @override
   void initState() {
@@ -76,7 +117,13 @@ class _QuranLineState extends State<QuranLine> {
     }
     if (oldWidget.isDark != widget.isDark ||
         oldWidget.isTajweed != widget.isTajweed ||
-        oldWidget.ayahStyle != widget.ayahStyle) {
+        oldWidget.ayahStyle != widget.ayahStyle ||
+        oldWidget.ayahNumberBuilder != widget.ayahNumberBuilder ||
+        oldWidget.ayahSymbolColor != widget.ayahSymbolColor ||
+        oldWidget.ayahSymbolLightColor != widget.ayahSymbolLightColor ||
+        oldWidget.ayahSymbolDarkColor != widget.ayahSymbolDarkColor ||
+        oldWidget.ayahSymbolVerticalOffset != widget.ayahSymbolVerticalOffset ||
+        oldWidget.ayahSymbolPadding != widget.ayahSymbolPadding) {
       _buildStyles();
     }
   }
@@ -150,9 +197,13 @@ class _QuranLineState extends State<QuranLine> {
     _numberTextStyle = _mainTextStyle.copyWith(
       fontFamily: QuranTextStyles.getQcfFontFamily(
         pageNumber: widget.pageNumber,
-        isTajweed: true,
-        isDark: false,
+        isTajweed: widget.isTajweed,
+        isDark: widget.isDark,
       ),
+    );
+    _strutStyle = StrutStyle.fromTextStyle(
+      _mainTextStyle,
+      forceStrutHeight: true,
     );
   }
 
@@ -163,12 +214,73 @@ class _QuranLineState extends State<QuranLine> {
     super.dispose();
   }
 
+  InlineSpan _buildAyahSymbol(BuildContext context, ParsedAyahData ayahData) {
+    final EdgeInsetsGeometry effectivePadding =
+        widget.ayahSymbolPadding ?? QuranLine.defaultAyahSymbolPadding;
+
+    if (widget.ayahNumberBuilder != null) {
+      Widget customWidget = widget.ayahNumberBuilder!(
+        context,
+        ayahData.surahNumber,
+        ayahData.ayahNumber,
+      );
+      if (widget.ayahSymbolVerticalOffset != null &&
+          widget.ayahSymbolVerticalOffset != 0) {
+        customWidget = Transform.translate(
+          offset: Offset(0, widget.ayahSymbolVerticalOffset!),
+          child: customWidget,
+        );
+      }
+      customWidget = Padding(padding: effectivePadding, child: customWidget);
+      return WidgetSpan(
+        alignment: PlaceholderAlignment.baseline,
+        baseline: TextBaseline.alphabetic,
+        child: customWidget,
+      );
+    }
+
+    final Color effectiveSymbolColor =
+        widget.ayahSymbolColor ??
+        (widget.isDark
+            ? (widget.ayahSymbolDarkColor ??
+                QuranLine.defaultDarkAyahSymbolColor)
+            : (widget.ayahSymbolLightColor ??
+                QuranLine.defaultLightAyahSymbolColor));
+
+    Widget symbolChild = ColorFiltered(
+      colorFilter: ColorFilter.mode(effectiveSymbolColor, BlendMode.srcIn),
+      child: Text(
+        ayahData.glyph!,
+        style: _numberTextStyle,
+        strutStyle: _strutStyle,
+        textDirection: TextDirection.rtl,
+      ),
+    );
+
+    if (widget.ayahSymbolVerticalOffset != null &&
+        widget.ayahSymbolVerticalOffset != 0) {
+      symbolChild = Transform.translate(
+        offset: Offset(0, widget.ayahSymbolVerticalOffset!),
+        child: symbolChild,
+      );
+    }
+
+    symbolChild = Padding(padding: effectivePadding, child: symbolChild);
+
+    return WidgetSpan(
+      alignment: PlaceholderAlignment.baseline,
+      baseline: TextBaseline.alphabetic,
+      child: symbolChild,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.parsedAyahs.isEmpty) return const SizedBox.shrink();
 
     final textWidget = RichText(
       textDirection: TextDirection.rtl,
+      strutStyle: _strutStyle,
       text: TextSpan(
         style: _mainTextStyle,
         children: List.generate(widget.parsedAyahs.length, (ayahIdx) {
@@ -219,19 +331,16 @@ class _QuranLineState extends State<QuranLine> {
           }
 
           if (ayahData.glyph != null) {
-            wordSpans.add(
-              TextSpan(text: ayahData.glyph, style: _numberTextStyle),
-            );
+            wordSpans.add(_buildAyahSymbol(context, ayahData));
           }
 
           return WidgetSpan(
-            alignment: PlaceholderAlignment.middle,
+            alignment: PlaceholderAlignment.baseline,
+            baseline: TextBaseline.alphabetic,
             child: Builder(
               builder: (innerCtx) {
                 return GestureDetector(
                   onLongPressStart: (details) {
-                    // Resolve the actual rendered bottom of this ayah widget
-                    // so the overlay anchor is placed precisely below the line.
                     final box = innerCtx.findRenderObject() as RenderBox?;
                     final double bottomY =
                         box != null
@@ -258,8 +367,9 @@ class _QuranLineState extends State<QuranLine> {
                               : null,
                     ),
                     child: Text.rich(
-                      TextSpan(children: wordSpans),
+                      TextSpan(style: _mainTextStyle, children: wordSpans),
                       textDirection: TextDirection.rtl,
+                      strutStyle: _strutStyle,
                     ),
                   ),
                 );

@@ -19,6 +19,12 @@ class QdkFontLoader {
 
   static const int totalPages = 604;
 
+  /// Default color applied to Ayah number medallions in light mode (Amber bronze matching banner).
+  static Color ayahNumberLightColor = const Color(0xFF814E13);
+
+  /// Default color applied to Ayah number medallions in dark mode (Muted warm sand-bronze matching dark banner).
+  static Color ayahNumberDarkColor = const Color(0xFFA89680);
+
   static Directory? _fontDirCache;
   static int _generation = 0;
 
@@ -287,26 +293,50 @@ class QdkFontLoader {
       fontBytes = await _decompressInIsolate(gzipBytes);
     }
 
-    await _registerFont(fontBytes, getTajweedLightFamily(pageNumber));
+    final lightTajweedBytes = _modifyCpalAyahNumberColor(
+      Uint8List.fromList(fontBytes),
+      rimColor: ayahNumberLightColor,
+      accentColor: ayahNumberLightColor,
+      fillColor: const Color(0x00000000),
+    );
+    await _registerFont(lightTajweedBytes, getTajweedLightFamily(pageNumber));
 
-    final darkBytes = _modifyCpalBaseColor(
+    var darkBytes = _modifyCpalBaseColor(
       Uint8List.fromList(fontBytes),
       const Color(0xFFFFFFFF),
     );
+    darkBytes = _modifyCpalAyahNumberColor(
+      darkBytes,
+      rimColor: ayahNumberDarkColor,
+      accentColor: ayahNumberDarkColor,
+      fillColor: const Color(0x00000000),
+    );
     await _registerFont(darkBytes, getTajweedDarkFamily(pageNumber));
 
-    final noTajweedLightBytes = _modifyCpalAllColors(
+    var noTajweedLightBytes = _modifyCpalAllColors(
       Uint8List.fromList(fontBytes),
       const Color(0xFF000000),
+    );
+    noTajweedLightBytes = _modifyCpalAyahNumberColor(
+      noTajweedLightBytes,
+      rimColor: ayahNumberLightColor,
+      accentColor: ayahNumberLightColor,
+      fillColor: const Color(0x00000000),
     );
     await _registerFont(
       noTajweedLightBytes,
       getNoTajweedLightFamily(pageNumber),
     );
 
-    final noTajweedDarkBytes = _modifyCpalAllColors(
+    var noTajweedDarkBytes = _modifyCpalAllColors(
       Uint8List.fromList(fontBytes),
       const Color(0xFFFFFFFF),
+    );
+    noTajweedDarkBytes = _modifyCpalAyahNumberColor(
+      noTajweedDarkBytes,
+      rimColor: ayahNumberDarkColor,
+      accentColor: ayahNumberDarkColor,
+      fillColor: const Color(0x00000000),
     );
     await _registerFont(noTajweedDarkBytes, getNoTajweedDarkFamily(pageNumber));
 
@@ -712,6 +742,89 @@ class QdkFontLoader {
       fontBytes[colorOffset + 1] = newG;
       fontBytes[colorOffset + 2] = newR;
       fontBytes[colorOffset + 3] = newA;
+    }
+
+    return fontBytes;
+  }
+
+  /// Recolors Ayah number medallion entries in the font to match Medina Mushaf ornamentation.
+  static Uint8List _modifyCpalAyahNumberColor(
+    Uint8List fontBytes, {
+    required Color rimColor,
+    Color? accentColor,
+    Color fillColor = const Color(0x00000000),
+  }) {
+    if (fontBytes.length < 12) return fontBytes;
+
+    final bd = ByteData.view(
+      fontBytes.buffer,
+      fontBytes.offsetInBytes,
+      fontBytes.lengthInBytes,
+    );
+    final numTables = bd.getUint16(4);
+    int? cpalOffset;
+    int? cpalLength;
+    const cpalTag = 0x4350414C;
+
+    for (int i = 0; i < numTables; i++) {
+      final recordOffset = 12 + i * 16;
+      if (recordOffset + 16 > fontBytes.length) break;
+      final tag = bd.getUint32(recordOffset);
+      if (tag == cpalTag) {
+        cpalOffset = bd.getUint32(recordOffset + 8);
+        cpalLength = bd.getUint32(recordOffset + 12);
+        break;
+      }
+    }
+
+    if (cpalOffset == null || cpalLength == null) return fontBytes;
+    if (cpalOffset + cpalLength > fontBytes.length) return fontBytes;
+    if (cpalOffset + 12 > fontBytes.length) return fontBytes;
+
+    final numPaletteEntries = bd.getUint16(cpalOffset + 2);
+    final numPalettes = bd.getUint16(cpalOffset + 4);
+    final colorRecordsArrayOffset = bd.getUint32(cpalOffset + 8);
+    final absoluteOffset = cpalOffset + colorRecordsArrayOffset;
+
+    final actualAccent = accentColor ?? rimColor;
+
+    final rimR = (rimColor.r * 255).round();
+    final rimG = (rimColor.g * 255).round();
+    final rimB = (rimColor.b * 255).round();
+    final rimA = (rimColor.a * 255).round();
+
+    final accR = (actualAccent.r * 255).round();
+    final accG = (actualAccent.g * 255).round();
+    final accB = (actualAccent.b * 255).round();
+    final accA = (actualAccent.a * 255).round();
+
+    final fillR = (fillColor.r * 255).round();
+    final fillG = (fillColor.g * 255).round();
+    final fillB = (fillColor.b * 255).round();
+    final fillA = (fillColor.a * 255).round();
+
+    void setColor(int recordIndex, int r, int g, int b, int a) {
+      final offset = absoluteOffset + recordIndex * 4;
+      if (offset + 4 <= fontBytes.length) {
+        fontBytes[offset] = b;
+        fontBytes[offset + 1] = g;
+        fontBytes[offset + 2] = r;
+        fontBytes[offset + 3] = a;
+      }
+    }
+
+    for (int p = 0; p < numPalettes; p++) {
+      final baseIdx = p * numPaletteEntries;
+      if (numPaletteEntries >= 14) {
+        // Index 10: accent dots
+        setColor(baseIdx + 10, accR, accG, accB, accA);
+        // Index 11: outer ornaments / floral tips
+        setColor(baseIdx + 11, accR, accG, accB, accA);
+        // Index 12: inner medallion background fill
+        setColor(baseIdx + 12, fillR, fillG, fillB, fillA);
+        // Index 13: outer circle rim and Arabic numeral
+        setColor(baseIdx + 13, rimR, rimG, rimB, rimA);
+      }
     }
 
     return fontBytes;

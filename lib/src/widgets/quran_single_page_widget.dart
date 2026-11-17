@@ -57,6 +57,43 @@ class QuranSinglePageWidget extends StatefulWidget {
   /// Custom builder for the header of the page (e.g. Juz / Hizb / Page markers).
   final Widget Function(BuildContext context, int pageIndex)? pageHeaderBuilder;
 
+  /// Custom builder for Ayah number medallions.
+  final Widget Function(BuildContext context, int surahNumber, int ayahNumber)?
+  ayahNumberBuilder;
+
+  /// General color applied to the Surah header banner and text.
+  final Color? surahHeaderColor;
+
+  /// Custom color applied to the Surah header banner in light mode.
+  final Color? surahHeaderLightColor;
+
+  /// Custom color applied to the Surah header banner in dark mode.
+  final Color? surahHeaderDarkColor;
+
+  /// Custom color applied to the Surah title text inside the banner.
+  final Color? surahHeaderTextColor;
+
+  /// Bottom padding placed after the Surah header before the Basmallah.
+  final double? surahHeaderBottomPadding;
+
+  /// Color applied to the Basmallah text.
+  final Color? basmallahColor;
+
+  /// Color applied to the Ayah number medallion symbol.
+  final Color? ayahSymbolColor;
+
+  /// Custom color applied to the Ayah number medallion in light mode.
+  final Color? ayahSymbolLightColor;
+
+  /// Custom color applied to the Ayah number medallion in dark mode.
+  final Color? ayahSymbolDarkColor;
+
+  /// Optional vertical offset to fine-tune Ayah number medallion positioning.
+  final double? ayahSymbolVerticalOffset;
+
+  /// Optional padding around the Ayah number medallion (left and right spacing).
+  final EdgeInsetsGeometry? ayahSymbolPadding;
+
   /// Custom text style applied to the verses.
   final TextStyle? ayahStyle;
 
@@ -90,6 +127,18 @@ class QuranSinglePageWidget extends StatefulWidget {
     this.surahHeaderBuilder,
     this.basmallahBuilder,
     this.pageHeaderBuilder,
+    this.ayahNumberBuilder,
+    this.surahHeaderColor,
+    this.surahHeaderLightColor,
+    this.surahHeaderDarkColor,
+    this.surahHeaderTextColor,
+    this.surahHeaderBottomPadding,
+    this.basmallahColor,
+    this.ayahSymbolColor,
+    this.ayahSymbolLightColor,
+    this.ayahSymbolDarkColor,
+    this.ayahSymbolVerticalOffset,
+    this.ayahSymbolPadding,
     this.ayahStyle,
     required this.isDark,
     this.isTajweed = true,
@@ -303,7 +352,14 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
   ) {
     final Widget header =
         widget.surahHeaderBuilder?.call(context, surahNumber) ??
-        SurahHeaderWidget(surahNumber: surahNumber, isDark: widget.isDark);
+        SurahHeaderWidget(
+          surahNumber: surahNumber,
+          isDark: widget.isDark,
+          color: widget.surahHeaderColor,
+          lightBannerColor: widget.surahHeaderLightColor,
+          darkBannerColor: widget.surahHeaderDarkColor,
+          textColor: widget.surahHeaderTextColor,
+        );
     return shouldFit ? Expanded(child: Center(child: header)) : header;
   }
 
@@ -314,7 +370,11 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
   ) {
     final Widget basmallah =
         widget.basmallahBuilder?.call(context, surahNumber) ??
-        BasmallahWidget(surahNumber, isDark: widget.isDark);
+        BasmallahWidget(
+          surahNumber,
+          isDark: widget.isDark,
+          color: widget.basmallahColor,
+        );
     return shouldFit ? Expanded(child: Center(child: basmallah)) : basmallah;
   }
 
@@ -337,17 +397,19 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
       );
     }
 
-    int flexCount = 0;
     final List<Widget> flexChildren = [];
 
     if (widget.page.ayahs.isNotEmpty) {
       final int firstSurah = widget.page.ayahs[0].surahNumber;
       flexChildren.add(_buildSurahHeaderWidget(context, firstSurah, shouldFit));
-      flexCount++;
+
+      final double spacing = widget.surahHeaderBottomPadding ?? 16.0;
+      if (spacing > 0) {
+        flexChildren.add(SizedBox(height: spacing));
+      }
 
       if (widget.pageIndex == 2) {
         flexChildren.add(_buildBasmallahWidget(context, firstSurah, shouldFit));
-        flexCount++;
       }
     }
 
@@ -379,10 +441,10 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
               child: wrappedLine,
             ),
       );
-      flexCount++;
     }
 
     if (shouldFit) {
+      final int flexCount = flexChildren.whereType<Expanded>().length;
       final int emptyFlex = (_standardLinesPerPage - flexCount).clamp(
         0,
         _standardLinesPerPage,
@@ -442,6 +504,11 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
       if (isFirstAyahInSurah && line.ayahs.isNotEmpty) {
         final int surahNumber = line.ayahs[0].surahNumber;
         children.add(_buildSurahHeaderWidget(context, surahNumber, shouldFit));
+
+        final double spacing = widget.surahHeaderBottomPadding ?? 12.0;
+        if (spacing > 0) {
+          children.add(SizedBox(height: spacing));
+        }
 
         if (surahNumber != 9) {
           children.add(_buildBasmallahWidget(context, surahNumber, shouldFit));
@@ -575,6 +642,14 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
       ayahStyle: fixedStyle,
       isTajweed: widget.isTajweed,
       isDark: widget.isDark,
+      ayahNumberBuilder: widget.ayahNumberBuilder,
+      ayahSymbolColor: widget.ayahSymbolColor ?? widget.surahHeaderColor,
+      ayahSymbolLightColor:
+          widget.ayahSymbolLightColor ?? widget.surahHeaderLightColor,
+      ayahSymbolDarkColor:
+          widget.ayahSymbolDarkColor ?? widget.surahHeaderDarkColor,
+      ayahSymbolVerticalOffset: widget.ayahSymbolVerticalOffset,
+      ayahSymbolPadding: widget.ayahSymbolPadding,
     );
   }
 }

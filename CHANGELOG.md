@@ -1,3 +1,15 @@
+## 1.0.1
+
+* **Medina Mushaf Styling & Customization**:
+  * Unified Surah header banner to a single transparent-background Medina ornament (`assets/surah_banner.png`) for both light and dark modes, allowing the underlying page theme to show through seamlessly.
+  * Added granular color customization for Surah header and Ayah number medallions:
+    * `surahHeaderColor`, `surahHeaderLightColor`, `surahHeaderDarkColor`, and `surahHeaderTextColor`.
+    * `ayahSymbolColor`, `ayahSymbolLightColor`, and `ayahSymbolDarkColor`.
+    * `surahHeaderBottomPadding` to control spacing between the Surah header banner and the Basmallah.
+  * In dark mode, `SurahHeaderWidget` automatically tints the banner linework with a soft, muted warm sand-bronze (`#A89680`) and Surah name text with white by default, blending gently with dark backgrounds and white verse text without harsh glare.
+  * Updated Ayah number symbol rendering: replaced default colored Tajweed rosette with authentic Medina bronze/sand rosette medallion (`#814E13` light / `#A89680` dark) with transparent inner fill.
+  * Added `ayahNumberBuilder` parameter across `QuranPageView`, `QuranSinglePageWidget`, and `QuranLine` for complete custom Ayah number widget rendering.
+
 ## 1.0.0
 
 * **Initial Release of `quran_data_kit`**:

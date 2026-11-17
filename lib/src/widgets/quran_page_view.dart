@@ -73,6 +73,43 @@ class QuranPageView extends StatefulWidget {
   /// Custom builder for the page header (e.g. displaying Juz name or page number).
   final Widget Function(BuildContext context, int pageIndex)? pageHeaderBuilder;
 
+  /// Custom builder for Ayah number medallions.
+  final Widget Function(BuildContext context, int surahNumber, int ayahNumber)?
+  ayahNumberBuilder;
+
+  /// General color applied to the Surah header banner and text.
+  final Color? surahHeaderColor;
+
+  /// Custom color applied to the Surah header banner in light mode.
+  final Color? surahHeaderLightColor;
+
+  /// Custom color applied to the Surah header banner in dark mode.
+  final Color? surahHeaderDarkColor;
+
+  /// Custom color applied to the Surah title text inside the banner.
+  final Color? surahHeaderTextColor;
+
+  /// Bottom padding placed after the Surah header before the Basmallah.
+  final double? surahHeaderBottomPadding;
+
+  /// Color applied to the Basmallah text.
+  final Color? basmallahColor;
+
+  /// Color applied to the Ayah number medallion symbol.
+  final Color? ayahSymbolColor;
+
+  /// Custom color applied to the Ayah number medallion in light mode.
+  final Color? ayahSymbolLightColor;
+
+  /// Custom color applied to the Ayah number medallion in dark mode.
+  final Color? ayahSymbolDarkColor;
+
+  /// Optional vertical offset to fine-tune Ayah number medallion positioning.
+  final double? ayahSymbolVerticalOffset;
+
+  /// Optional padding around the Ayah number medallion (left and right spacing).
+  final EdgeInsetsGeometry? ayahSymbolPadding;
+
   /// Indicates whether dark mode styling is enabled.
   final bool isDarkMode;
 
@@ -111,6 +148,18 @@ class QuranPageView extends StatefulWidget {
     this.surahHeaderBuilder,
     this.basmallahBuilder,
     this.pageHeaderBuilder,
+    this.ayahNumberBuilder,
+    this.surahHeaderColor,
+    this.surahHeaderLightColor,
+    this.surahHeaderDarkColor,
+    this.surahHeaderTextColor,
+    this.surahHeaderBottomPadding,
+    this.basmallahColor,
+    this.ayahSymbolColor,
+    this.ayahSymbolLightColor,
+    this.ayahSymbolDarkColor,
+    this.ayahSymbolVerticalOffset,
+    this.ayahSymbolPadding,
     this.ayahStyle,
     this.pageBackgroundColor,
     this.isTajweed = true,
@@ -401,8 +450,22 @@ class _QuranPageViewState extends State<QuranPageView> {
       onLongPress: widget.onLongPress,
       pageController: widget.pageController,
       surahHeaderBuilder: widget.surahHeaderBuilder,
+      surahHeaderColor: widget.surahHeaderColor,
+      surahHeaderLightColor: widget.surahHeaderLightColor,
+      surahHeaderDarkColor: widget.surahHeaderDarkColor,
+      surahHeaderTextColor: widget.surahHeaderTextColor,
+      surahHeaderBottomPadding: widget.surahHeaderBottomPadding,
       basmallahBuilder: widget.basmallahBuilder,
+      basmallahColor: widget.basmallahColor,
       pageHeaderBuilder: widget.pageHeaderBuilder,
+      ayahNumberBuilder: widget.ayahNumberBuilder,
+      ayahSymbolColor: widget.ayahSymbolColor ?? widget.surahHeaderColor,
+      ayahSymbolLightColor:
+          widget.ayahSymbolLightColor ?? widget.surahHeaderLightColor,
+      ayahSymbolDarkColor:
+          widget.ayahSymbolDarkColor ?? widget.surahHeaderDarkColor,
+      ayahSymbolVerticalOffset: widget.ayahSymbolVerticalOffset,
+      ayahSymbolPadding: widget.ayahSymbolPadding,
       ayahStyle: widget.ayahStyle,
       isTajweed: widget.isTajweed,
       isDark: widget.isDarkMode,
