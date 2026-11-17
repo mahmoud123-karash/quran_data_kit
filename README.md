@@ -12,9 +12,9 @@ A modern, comprehensive, and high-performance Flutter/Dart package for Holy Qura
 
 ## 📱 Screenshots
 
-| Standard (Light) | Standard (Dark) | Tajweed Mode |
-| :---: | :---: | :---: |
-| <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/standard_mode.jpg" width="250" alt="Standard (Light)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/dark_mode.jpg" width="250" alt="Standard (Dark)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/tajweed_mode.jpg" width="250" alt="Tajweed Mode" /> |
+| Standard (Light) | Standard (Dark) | Tajweed (Light) | Tajweed (Dark) |
+| :---: | :---: | :---: | :---: |
+| <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/standard_light.jpeg" width="220" alt="Standard (Light)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/standard_dark.jpeg" width="220" alt="Standard (Dark)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/tajweed_light.jpeg" width="220" alt="Tajweed (Light)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/tajweed_dark.jpeg" width="220" alt="Tajweed (Dark)" /> |
 
 ---
 
