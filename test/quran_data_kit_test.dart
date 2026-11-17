@@ -93,6 +93,21 @@ void main() {
       expect(getHizbNumbersByJuz(1), [1, 2]);
     });
 
+    test('Juz name formatting', () {
+      expect(getJuzNameArabic(1), 'الجزء الأول');
+      expect(getJuzNameArabic(1, showJuzText: false), 'الأول');
+      expect(getJuzNameArabic(30), 'الجزء الثلاثون');
+
+      expect(getJuzNameEnglish(1), 'First Juz');
+      expect(getJuzNameEnglish(1, showJuzText: false), 'First');
+      expect(getJuzNameEnglish(30), 'Thirtieth Juz');
+
+      expect(getJuzName(1, isArabic: true), 'الجزء الأول');
+      expect(getJuzName(1, isArabic: false), 'First Juz');
+      expect(getJuzNameByPage(1, isArabic: true), 'الجزء الأول');
+      expect(getJuzNameByPage(1, isArabic: false), 'First Juz');
+    });
+
     test('Quarter (Rub el-Hizb) lookup', () {
       expect(getQuarterNumber(1, 1), 1);
       expect(getQuarterNumber(2, 255), greaterThan(1));

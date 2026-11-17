@@ -320,6 +320,54 @@ List<int> getHizbNumbersByJuz(int juzNumber) {
   return [first, first + 1];
 }
 
+/// Returns the Arabic name of [juzNumber] (1–30).
+///
+/// When [showJuzText] is `true` (default), prepends 'الجزء ' (e.g. 'الجزء الأول').
+/// When `false`, returns only the ordinal (e.g. 'الأول').
+String getJuzNameArabic(int juzNumber, {bool showJuzText = true}) {
+  if (juzNumber < 1 || juzNumber > totalJuzCount) {
+    throw RangeError.range(juzNumber, 1, totalJuzCount, 'juzNumber');
+  }
+  final name = juzNamesArabic[juzNumber - 1];
+  return showJuzText ? 'الجزء $name' : name;
+}
+
+/// Returns the English name of [juzNumber] (1–30).
+///
+/// When [showJuzText] is `true` (default), appends ' Juz' (e.g. 'First Juz').
+/// When `false`, returns only the ordinal (e.g. 'First').
+String getJuzNameEnglish(int juzNumber, {bool showJuzText = true}) {
+  if (juzNumber < 1 || juzNumber > totalJuzCount) {
+    throw RangeError.range(juzNumber, 1, totalJuzCount, 'juzNumber');
+  }
+  final name = juzNamesEnglish[juzNumber - 1];
+  return showJuzText ? '$name Juz' : name;
+}
+
+/// Returns the localized name of [juzNumber] (1–30).
+///
+/// When [isArabic] is `true` (default), returns the Arabic name (e.g. 'الجزء الأول').
+/// When `false`, returns the English name (e.g. 'First Juz').
+String getJuzName(
+  int juzNumber, {
+  bool isArabic = true,
+  bool showJuzText = true,
+}) {
+  return isArabic
+      ? getJuzNameArabic(juzNumber, showJuzText: showJuzText)
+      : getJuzNameEnglish(juzNumber, showJuzText: showJuzText);
+}
+
+/// Returns the localized Juz name for the first verse on [pageNumber].
+String getJuzNameByPage(
+  int pageNumber, {
+  bool isArabic = true,
+  bool showJuzText = true,
+}) {
+  final juzNumber = getJuzNumberByPage(pageNumber);
+  return getJuzName(juzNumber, isArabic: isArabic, showJuzText: showJuzText);
+}
+
 /// Returns the Rub el-Hizb (quarter) number (1–240) for [surahNumber]/[ayaNo].
 int getQuarterNumber(int surahNumber, int ayaNo) {
   int current = 1;
