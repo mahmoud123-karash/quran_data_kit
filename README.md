@@ -12,8 +12,8 @@ A modern, comprehensive, and high-performance Flutter/Dart package for Holy Qura
 
 ## 📱 Screenshots
 
-| Standard (Light) | Standard (Dark) | Tajweed (Light) | Tajweed (Dark) |
-| :---: | :---: | :---: | :---: |
+|                                                                     Standard (Light)                                                                     |                                                                    Standard (Dark)                                                                     |                                                                    Tajweed (Light)                                                                     |                                                                    Tajweed (Dark)                                                                    |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
 | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/standard_light.jpeg" width="220" alt="Standard (Light)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/standard_dark.jpeg" width="220" alt="Standard (Dark)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/tajweed_light.jpeg" width="220" alt="Tajweed (Light)" /> | <img src="https://raw.githubusercontent.com/mahmoud123-karash/quran_data_kit/main/screenshots/tajweed_dark.jpeg" width="220" alt="Tajweed (Dark)" /> |
 
 ---
@@ -60,7 +60,7 @@ flutter pub get
 ### 1. Rendering a Full Mushaf Page (`QuranPageView`)
 
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:quran_data_kit/quran_data_kit.dart';
 
 class MushafScreen extends StatefulWidget {
@@ -121,7 +121,7 @@ You don't need to write any extra code to load fonts. When `QuranPageView` or `Q
 To allow users to download all 604 page fonts upfront (~74.5 MB total) so the app works 100% offline without needing internet:
 
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:quran_data_kit/quran_data_kit.dart';
 
 Future<void> downloadQuranFonts({

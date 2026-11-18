@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../utils/quran_text_styles.dart';
 
 class BasmallahWidget extends StatelessWidget {

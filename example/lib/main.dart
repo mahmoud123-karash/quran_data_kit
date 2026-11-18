@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'screens/example_home_screen.dart';
 
 const Color primayColor = Color(0xFFDDB668);

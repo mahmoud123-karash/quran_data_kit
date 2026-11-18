@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../tabs/mushaf_reader_tab.dart';
 import '../tabs/quran_metadata_tab.dart';
 

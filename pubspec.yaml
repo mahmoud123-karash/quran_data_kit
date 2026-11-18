@@ -1,5 +1,7 @@
 name: quran_data_kit
-description: A comprehensive Flutter package for the Holy Quran with QCF Tajweed font rendering, rich metadata, 16 translations, audio URLs, and Arabic text utilities.
+description: A comprehensive Flutter package for the Holy Quran with QCF Tajweed
+  font rendering, rich metadata, 16 translations, audio URLs, and Arabic text
+  utilities.
 version: 1.0.1
 homepage: https://github.com/mahmoud123-karash/quran_data_kit
 repository: https://github.com/mahmoud123-karash/quran_data_kit
@@ -20,12 +22,13 @@ dependencies:
   archive: ^4.0.9
   flutter:
     sdk: flutter
+  material_ui: ^1.11.1
   path_provider: ^2.1.5
 
 dev_dependencies:
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
 
 flutter:
   assets:

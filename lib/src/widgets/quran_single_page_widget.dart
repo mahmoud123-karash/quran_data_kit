@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../models/quran_page.dart';
 import '../utils/font_loader_service.dart';
