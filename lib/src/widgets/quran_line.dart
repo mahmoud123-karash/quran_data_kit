@@ -195,6 +195,7 @@ class _QuranLineState extends State<QuranLine> {
 
     _mainTextStyle = defaultStyle.copyWith(height: null, color: null);
     _numberTextStyle = _mainTextStyle.copyWith(
+      fontSize: _mainTextStyle.fontSize,
       fontFamily: QuranTextStyles.getQcfFontFamily(
         pageNumber: widget.pageNumber,
         isTajweed: widget.isTajweed,

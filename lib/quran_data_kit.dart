@@ -24,6 +24,8 @@ export 'src/widgets/quran_single_page_widget.dart';
 export 'src/widgets/surah_header_widget.dart';
 export 'src/widgets/surah_text_widget.dart';
 export 'src/widgets/basmallah_widget.dart';
+export 'src/widgets/loading_page_widget.dart';
+export 'src/widgets/error_load_page_widget.dart';
 
 // ---------------------------------------------------------------------------
 // 2. Models
@@ -443,17 +445,29 @@ String normalizeArabicText(String text) {
 /// results are found. Returns up to [limit] results (default 50).
 Map<String, dynamic> searchWords(String query, {int limit = 50}) {
   if (query.trim().isEmpty) {
-    return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
+    return {
+      'occurences': 0,
+      'occurrences': 0,
+      'result': <Map<String, dynamic>>[],
+    };
   }
 
   final normalized = normalizeArabicText(query.toLowerCase());
   if (normalized.isEmpty) {
-    return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
+    return {
+      'occurences': 0,
+      'occurrences': 0,
+      'result': <Map<String, dynamic>>[],
+    };
   }
 
   final searchQuery = normalized.replaceAll(RegExp(r'\s+'), '');
   if (searchQuery.isEmpty) {
-    return {'occurences': 0, 'result': <Map<String, dynamic>>[]};
+    return {
+      'occurences': 0,
+      'occurrences': 0,
+      'result': <Map<String, dynamic>>[],
+    };
   }
 
   bool contains(String text) {
@@ -496,7 +510,11 @@ Map<String, dynamic> searchWords(String query, {int limit = 50}) {
     }
   }
 
-  return {'occurences': result.length, 'result': result};
+  return {
+    'occurences': result.length,
+    'occurrences': result.length,
+    'result': result,
+  };
 }
 
 // ---------------------------------------------------------------------------

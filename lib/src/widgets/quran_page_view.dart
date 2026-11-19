@@ -73,6 +73,9 @@ class QuranPageView extends StatefulWidget {
   /// Custom builder for the page header (e.g. displaying Juz name or page number).
   final Widget Function(BuildContext context, int pageIndex)? pageHeaderBuilder;
 
+  /// Custom builder for the page footer (e.g. displaying page number or Juz name).
+  final Widget Function(BuildContext context, int pageIndex)? pageFooterBuilder;
+
   /// Custom builder for Ayah number medallions.
   final Widget Function(BuildContext context, int surahNumber, int ayahNumber)?
   ayahNumberBuilder;
@@ -148,6 +151,7 @@ class QuranPageView extends StatefulWidget {
     this.surahHeaderBuilder,
     this.basmallahBuilder,
     this.pageHeaderBuilder,
+    this.pageFooterBuilder,
     this.ayahNumberBuilder,
     this.surahHeaderColor,
     this.surahHeaderLightColor,
@@ -219,6 +223,11 @@ class _QuranPageViewState extends State<QuranPageView> {
 
     _wordHighlightIndex = _wordHighlightIndexer.refresh(widget.wordHighlights);
     _bookmarkIndex = _bookmarkIndexer.refresh(widget.highlights);
+
+    if (oldWidget.pageController != widget.pageController) {
+      oldWidget.pageController.removeListener(_syncExternalToInternal);
+      widget.pageController.addListener(_syncExternalToInternal);
+    }
 
     if (oldWidget.enableTwoPageLayout != widget.enableTwoPageLayout) {
       final int currentPage =
@@ -458,6 +467,7 @@ class _QuranPageViewState extends State<QuranPageView> {
       basmallahBuilder: widget.basmallahBuilder,
       basmallahColor: widget.basmallahColor,
       pageHeaderBuilder: widget.pageHeaderBuilder,
+      pageFooterBuilder: widget.pageFooterBuilder,
       ayahNumberBuilder: widget.ayahNumberBuilder,
       ayahSymbolColor: widget.ayahSymbolColor ?? widget.surahHeaderColor,
       ayahSymbolLightColor:

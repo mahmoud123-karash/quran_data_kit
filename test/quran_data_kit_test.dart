@@ -295,7 +295,7 @@ void main() {
 
         expect(
           QuranLine.defaultAyahSymbolPadding,
-          const EdgeInsets.symmetric(horizontal: 4.0),
+          const EdgeInsets.symmetric(horizontal: 2.0),
         );
       },
     );
@@ -308,6 +308,63 @@ void main() {
       );
       expect(find.byType(BasmallahWidget), findsOneWidget);
       expect(find.text('齃𧻓𥳐𥉉'), findsOneWidget);
+    });
+
+    test('QuranPageView and QuranSinglePageWidget accept pageFooterBuilder and pageHeaderBuilder', () {
+      final controller = PageController();
+      final pageView = QuranPageView(
+        pageController: controller,
+        isDarkMode: false,
+        pageHeaderBuilder: (ctx, idx) => Text('Header $idx'),
+        pageFooterBuilder: (ctx, idx) => Text('Footer $idx'),
+      );
+      expect(pageView.pageFooterBuilder, isNotNull);
+      expect(pageView.pageHeaderBuilder, isNotNull);
+
+      final page = QuranPage(pageNumber: 1, ayahs: [], lines: []);
+      final singlePage = QuranSinglePageWidget(
+        page: page,
+        pageIndex: 1,
+        isDark: false,
+        lineOffsets: const {},
+        forceFitConstraints: false,
+        pageHeaderBuilder: (ctx, idx) => Text('Header $idx'),
+        pageFooterBuilder: (ctx, idx) => Text('Footer $idx'),
+      );
+      expect(singlePage.pageHeaderBuilder, isNotNull);
+      expect(singlePage.pageFooterBuilder, isNotNull);
+    });
+
+    testWidgets('LoadingPageWidget and ErrorLoadPageWidget render properly', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: LoadingPageWidget(pageIndex: 1, isDark: false),
+          ),
+        ),
+      );
+      expect(find.byType(LoadingPageWidget), findsOneWidget);
+      expect(find.text('جاري تحميل الصفحة 1...'), findsOneWidget);
+
+      bool retried = false;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ErrorLoadPageWidget(
+              pageIndex: 1,
+              isDark: false,
+              onError: () => retried = true,
+            ),
+          ),
+        ),
+      );
+      expect(find.byType(ErrorLoadPageWidget), findsOneWidget);
+      expect(find.text('تعذر تحميل خط الصفحة (page: 1)'), findsOneWidget);
+
+      await tester.tap(find.text('إعادة المحاولة'));
+      expect(retried, isTrue);
     });
   });
 }

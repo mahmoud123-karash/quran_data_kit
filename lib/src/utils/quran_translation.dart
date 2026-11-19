@@ -93,7 +93,9 @@ String getVerseTranslation(
   }
 
   if (verse.isEmpty) {
-    throw 'No verse found with given surahNumber and verseNumber.';
+    throw ArgumentError(
+      'No verse found with given surahNumber: $surahNumber and verseNumber: $verseNumber.',
+    );
   }
 
   return verse + (verseEndSymbol ? _getVerseEndSymbolLatin(verseNumber) : '');
@@ -162,5 +164,9 @@ Map<String, dynamic> searchWordsInTranslation(
     }
   }
 
-  return {'occurences': result.length, 'result': result};
+  return {
+    'occurences': result.length,
+    'occurrences': result.length,
+    'result': result,
+  };
 }

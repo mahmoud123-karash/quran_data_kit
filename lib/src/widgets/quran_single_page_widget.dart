@@ -1,4 +1,6 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:quran_data_kit/src/widgets/error_load_page_widget.dart';
+import 'package:quran_data_kit/src/widgets/loading_page_widget.dart';
 
 import '../models/quran_page.dart';
 import '../utils/font_loader_service.dart';
@@ -56,6 +58,9 @@ class QuranSinglePageWidget extends StatefulWidget {
 
   /// Custom builder for the header of the page (e.g. Juz / Hizb / Page markers).
   final Widget Function(BuildContext context, int pageIndex)? pageHeaderBuilder;
+
+  /// Custom builder for the footer of the page (e.g. Juz / Hizb / Page markers).
+  final Widget Function(BuildContext context, int pageIndex)? pageFooterBuilder;
 
   /// Custom builder for Ayah number medallions.
   final Widget Function(BuildContext context, int surahNumber, int ayahNumber)?
@@ -119,14 +124,15 @@ class QuranSinglePageWidget extends StatefulWidget {
     super.key,
     required this.page,
     required this.pageIndex,
-    required this.wordHighlightIndex,
-    required this.bookmarkIndex,
+    this.wordHighlightIndex = WordHighlightIndex.empty,
+    this.bookmarkIndex = BookmarkIndex.empty,
     this.onLongPress,
     this.onWordTap,
     this.pageController,
     this.surahHeaderBuilder,
     this.basmallahBuilder,
     this.pageHeaderBuilder,
+    this.pageFooterBuilder,
     this.ayahNumberBuilder,
     this.surahHeaderColor,
     this.surahHeaderLightColor,
@@ -287,25 +293,9 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
     if (widget.loadingBuilder != null) {
       return widget.loadingBuilder!;
     }
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          width: 28,
-          height: 28,
-          child: CircularProgressIndicator(strokeWidth: 3),
-        ),
-        const SizedBox(height: 16),
-
-        Text(
-          'جاري تحميل الصفحة ${widget.pageIndex}...',
-          style: TextStyle(
-            fontSize: 13,
-            color: widget.isDark ? Colors.white70 : Colors.black54,
-          ),
-        ),
-      ],
+    return LoadingPageWidget(
+      pageIndex: widget.pageIndex,
+      isDark: widget.isDark,
     );
   }
 
@@ -317,31 +307,13 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
       });
     }
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Icon(Icons.info_outline_rounded, size: 42, color: Colors.grey),
-        const SizedBox(height: 16),
-
-        Text(
-          'تعذر تحميل خط الصفحة (page: ${widget.pageIndex})',
-          style: TextStyle(
-            fontSize: 13,
-            color: widget.isDark ? Colors.white70 : Colors.black87,
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        TextButton.icon(
-          onPressed: () {
-            setState(() => _fontError = false);
-            _checkFont();
-          },
-          icon: const Icon(Icons.refresh_rounded, size: 18),
-          label: const Text('إعادة المحاولة'),
-        ),
-      ],
+    return ErrorLoadPageWidget(
+      pageIndex: widget.pageIndex,
+      isDark: widget.isDark,
+      onError: () {
+        setState(() => _fontError = false);
+        _checkFont();
+      },
     );
   }
 
@@ -415,11 +387,9 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
 
     for (int i = 0; i < widget.page.lines.length; i++) {
       final line = widget.page.lines[i];
-      final bool isCentered = line.ayahs.isNotEmpty && line.ayahs.last.centered;
-      final BoxFit fit =
-          isCentered
-              ? BoxFit.scaleDown
-              : (shouldFit ? BoxFit.contain : BoxFit.fitWidth);
+
+      const bool isCentered = true;
+      final BoxFit fit = BoxFit.scaleDown;
 
       final lineKey = _lineKeys.putIfAbsent(i, () => GlobalKey());
       final lineWidget = _buildQuranLine(
@@ -460,6 +430,10 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
       }
     } else {
       children.addAll(flexChildren);
+    }
+
+    if (widget.pageFooterBuilder != null) {
+      children.add(widget.pageFooterBuilder!(context, widget.pageIndex));
     }
 
     return _wrapPageContent(
@@ -561,6 +535,10 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
       }
     }
 
+    if (widget.pageFooterBuilder != null) {
+      children.add(widget.pageFooterBuilder!(context, widget.pageIndex));
+    }
+
     return _wrapPageContent(
       children,
       shouldFit: shouldFit,
@@ -622,9 +600,8 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
 
     double fontSize = 45.0;
 
-    // Scale down the font size for centered lines on smaller screens to prevent overflow.
     if (isCentered && deviceSize.width < 600) {
-      fontSize = deviceSize.width * 0.055;
+      fontSize = (deviceSize.width * 0.055).clamp(24.0, 44.0);
     }
 
     final TextStyle fixedStyle = baseStyle.copyWith(fontSize: fontSize);

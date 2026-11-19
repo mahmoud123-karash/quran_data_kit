@@ -1,4 +1,4 @@
-# 📖 Quran Data Kit (`quran_data_kit`)
+# 📖 Quran Data Kit
 
 A modern, comprehensive, and high-performance Flutter/Dart package for Holy Quran applications.
 
@@ -44,7 +44,7 @@ Add `quran_data_kit` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  quran_data_kit: ^1.0.0
+  quran_data_kit: ^1.0.2
 ```
 
 Then run:
