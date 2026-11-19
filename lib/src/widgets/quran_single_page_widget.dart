@@ -1,15 +1,9 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:quran_data_kit/src/widgets/error_load_page_widget.dart';
-import 'package:quran_data_kit/src/widgets/loading_page_widget.dart';
+import 'package:quran_data_kit/quran_data_kit.dart';
 
-import '../models/quran_page.dart';
-import '../utils/font_loader_service.dart';
-import '../utils/quran_text_styles.dart';
-import 'basmallah_widget.dart';
 import 'quran_line.dart';
 import 'quran_page/highlight_index.dart';
 import 'quran_page/parsed_quran_data.dart';
-import 'surah_header_widget.dart';
 
 /// Renders a single page of the Quran, including Surah headers, Basmallah,
 /// and line-by-line verse text with responsive layout and Tajweed support.

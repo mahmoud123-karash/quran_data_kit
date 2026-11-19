@@ -1,5 +1,5 @@
 import 'package:material_ui/material_ui.dart';
-import '../utils/quran_text_styles.dart';
+import 'package:quran_data_kit/quran_data_kit.dart';
 
 class BasmallahWidget extends StatelessWidget {
   const BasmallahWidget(

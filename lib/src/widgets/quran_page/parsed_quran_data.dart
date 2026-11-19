@@ -1,4 +1,4 @@
-import '../../../quran_data_kit.dart';
+import 'package:quran_data_kit/quran_data_kit.dart';
 
 /// Matches Quranic symbols used in the normalized text representation.
 final _symbolRegex = RegExp(r'[\u06D6-\u06DC\u06DE\u06E9]');

@@ -1,12 +1,8 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:quran_data_kit/quran_data_kit.dart';
 
-import '../models/highlight_verse.dart';
-import '../models/highlight_word.dart';
-import '../models/quran_page.dart';
-import '../utils/font_loader_service.dart';
 import 'quran_page/highlight_index.dart';
 import 'quran_page/quran_repository.dart';
-import 'quran_single_page_widget.dart';
 
 /// Renders the Holy Quran in either a standard single-page view or an automatic
 /// dual-page side-by-side view on wide screens (tablets, foldables, and desktops).

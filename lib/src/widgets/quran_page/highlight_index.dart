@@ -1,4 +1,4 @@
-import '../../../quran_data_kit.dart';
+import 'package:quran_data_kit/quran_data_kit.dart';
 
 /// ---------------------------------------------------------------------
 /// WordHighlightIndex / BookmarkIndex   (section E)

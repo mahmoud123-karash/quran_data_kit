@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import '../../../quran_data_kit.dart';
+import 'package:quran_data_kit/quran_data_kit.dart';
 
 /// Repository responsible for loading Quran page models and precomputing
 /// the word offsets used to map ayahs across page and line layouts.
