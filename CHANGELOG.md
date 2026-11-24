@@ -5,11 +5,6 @@
 - **Typographic Consistency & Ayah Medallions**:
   - Unified Ayah number symbol size and baseline alignment across all pages, ensuring pages 1 and 2 (Al-Fatiha and Al-Baqarah) match standard body pages in rosette scale.
   - Improved vertical alignment and spacing between Ayah symbols and verse glyphs.
-- **Bug Fixes & Exports**:
-  - Exported `LoadingPageWidget` and `ErrorLoadPageWidget` in the main library index.
-  - Fixed typo in `LoadingPageWidget` status text.
-  - Fixed `PageController` listener lifecycle in `QuranPageView.didUpdateWidget` to prevent potential memory leaks when switching controllers dynamically.
-  - Standardized exception handling in `QuranTranslation` using `ArgumentError` and added backward-compatible translation search occurrences keys.
 
 ## 1.0.1
 

@@ -1,7 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'screens/example_home_screen.dart';
 
-const Color primayColor = Color(0xFFDDB668);
+const Color primayColor = Color(0xFF7C4A1E);
 
 const Color lightBackgroundColor = Color(0xFFFAF5E8);
 

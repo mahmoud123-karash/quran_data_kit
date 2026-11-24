@@ -296,7 +296,7 @@ class _QuranPageViewState extends State<QuranPageView> {
   @override
   Widget build(BuildContext context) {
     if (!_dataReady) {
-      return const Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator());
     }
 
     final ScrollPhysics physics =

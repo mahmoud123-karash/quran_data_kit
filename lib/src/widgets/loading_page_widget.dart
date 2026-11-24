@@ -15,13 +15,13 @@ class LoadingPageWidget extends StatelessWidget {
       fit: BoxFit.scaleDown,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(
+          SizedBox(
             width: 28,
             height: 28,
             child: CircularProgressIndicator(strokeWidth: 3),
           ),
+
           const SizedBox(height: 16),
 
           Text(
@@ -29,6 +29,7 @@ class LoadingPageWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 13,
               color: isDark ? Colors.white70 : Colors.black54,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],
