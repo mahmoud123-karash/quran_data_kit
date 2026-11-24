@@ -357,7 +357,7 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
     if (widget.pageHeaderBuilder != null) {
       children.add(
         Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: const EdgeInsets.only(bottom: 10.0),
           child: widget.pageHeaderBuilder!(context, widget.pageIndex),
         ),
       );
@@ -427,7 +427,12 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
     }
 
     if (widget.pageFooterBuilder != null) {
-      children.add(widget.pageFooterBuilder!(context, widget.pageIndex));
+      children.add(
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          child: widget.pageFooterBuilder!(context, widget.pageIndex),
+        ),
+      );
     }
 
     return _wrapPageContent(
@@ -451,7 +456,7 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
     if (widget.pageHeaderBuilder != null) {
       children.add(
         Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: const EdgeInsets.only(bottom: 10.0),
           child: widget.pageHeaderBuilder!(context, widget.pageIndex),
         ),
       );
@@ -530,7 +535,12 @@ class _QuranSinglePageWidgetState extends State<QuranSinglePageWidget> {
     }
 
     if (widget.pageFooterBuilder != null) {
-      children.add(widget.pageFooterBuilder!(context, widget.pageIndex));
+      children.add(
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          child: widget.pageFooterBuilder!(context, widget.pageIndex),
+        ),
+      );
     }
 
     return _wrapPageContent(
